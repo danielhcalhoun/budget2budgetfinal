@@ -1,5 +1,7 @@
 const express = require("express");
 const mongoose = require("mongoose");
+const users = require("./routes/api/users");
+
 const bodyParser = require("body-parser");
 const passport = require("passport");
 
@@ -14,6 +16,9 @@ mongoose
   .catch(err => console.log(err));
 
 app.get("/", (req, res) => res.send("Hello world"));
+
+//Use Routes
+app.use("/api/users", users);
 
 const port = process.env.PORT || 5000;
 

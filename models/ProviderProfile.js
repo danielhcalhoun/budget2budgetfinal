@@ -2,7 +2,7 @@ const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
 
 //Create Schema
-const ProfileSchema = new Schema({
+const ProviderProfileSchema = new Schema({
   user: {
     type: Schema.Types.ObjectId,
     ref: "users"
@@ -19,9 +19,6 @@ const ProfileSchema = new Schema({
   status: {
     type: String
   },
-  skills: {
-    type: [String]
-  },
   bio: {
     type: String
   },
@@ -31,13 +28,19 @@ const ProfileSchema = new Schema({
   height: {
     type: String
   },
-  bodyType: {
-    type: String
-  },
-  tattoos: {
+  weight: {
     type: String
   },
   ethnicity: {
+    type: String
+  },
+  bodyType: {
+    type: String
+  },
+  skills: {
+    type: [String]
+  },
+  tattoos: {
     type: String
   },
   hairColor: {
@@ -58,4 +61,7 @@ const ProfileSchema = new Schema({
   }
 });
 
-module.exports = Profile = mongoose.model("profile", ProfileSchema);
+module.exports = ProviderProfile = mongoose.model(
+  "providerprofile",
+  ProviderProfileSchema
+);
