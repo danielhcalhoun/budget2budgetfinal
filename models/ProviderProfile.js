@@ -13,8 +13,7 @@ const ProviderProfileSchema = new Schema({
     max: 40
   },
   location: {
-    type: String,
-    required: true
+    type: String
   },
   status: {
     type: String
