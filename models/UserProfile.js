@@ -10,6 +10,7 @@ const UserProfileSchema = new Schema({
   handle: {
     type: String,
     required: true,
+    unique: true,
     max: 40
   },
   location: {
@@ -22,12 +23,6 @@ const UserProfileSchema = new Schema({
     type: String
   },
   age: {
-    type: String
-  },
-  height: {
-    type: String
-  },
-  weight: {
     type: String
   },
   ethnicity: {
