@@ -10,27 +10,19 @@ const UserProfileSchema = new Schema({
   handle: {
     type: String,
     required: true,
-    unique: true,
     max: 40
-  },
-  location: {
-    type: String
-  },
-  status: {
-    type: String
   },
   bio: {
     type: String
   },
   age: {
-    type: String
+    type: Number
   },
   ethnicity: {
     type: String
   },
-  date: {
-    type: Date,
-    default: Date.now
+  avatar: {
+    type: String
   }
 });
 
