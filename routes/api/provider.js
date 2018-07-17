@@ -78,4 +78,22 @@ router.post(
   }
 );
 
+// @route   GET api/provider/all
+// @desc    Get all providers
+// @access  Public
+router.get("/all", (req, res) => {
+  const errors = {};
+
+  ProviderProfile.find()
+    .populate("user", ["name"])
+    .then(providers => {
+      if (!providers) {
+        errors.noprofile = "There are no providers";
+        return res.status(404).json(errors);
+      }
+
+      res.json(providers);
+    });
+});
+
 module.exports = router;
