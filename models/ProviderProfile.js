@@ -12,6 +12,12 @@ const ProviderProfileSchema = new Schema({
     required: true,
     max: 40
   },
+  phone: {
+    type: String
+  },
+  gender: {
+    type: String
+  },
   location: {
     type: String
   },
@@ -19,7 +25,8 @@ const ProviderProfileSchema = new Schema({
     type: String
   },
   bio: {
-    type: String
+    type: String,
+    max: 140
   },
   age: {
     type: String
@@ -36,7 +43,10 @@ const ProviderProfileSchema = new Schema({
   bodyType: {
     type: String
   },
-  skills: {
+  likes: {
+    type: [String]
+  },
+  dislikes: {
     type: [String]
   },
   tattoos: {
@@ -57,6 +67,15 @@ const ProviderProfileSchema = new Schema({
   date: {
     type: Date,
     default: Date.now
+  },
+  avatar: {
+    type: String
+  },
+  photos: {
+    type: [String]
+  },
+  rating: {
+    type: Number
   }
 });
 

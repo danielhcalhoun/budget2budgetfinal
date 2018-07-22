@@ -38,6 +38,8 @@ router.post(
     // Get fields
     const {
       handle,
+      phone,
+      gender,
       location,
       status,
       bio,
@@ -46,17 +48,33 @@ router.post(
       weight,
       ethnicity,
       bodyType,
-      skills,
       tattoos,
       hairColor,
       eyeColor,
       cupSize,
-      education
+      education,
+      date,
+      avatar,
+      rating
     } = req.body;
+
     const providerFields = {
       ...req.body,
       user: req.user.id
     };
+
+    // Skills - Spilt into array
+    if (typeof req.body.likes !== "undefined") {
+      providerFields.likes = req.body.likes.split(",");
+    }
+
+    if (typeof req.body.dislikes !== "undefined") {
+      providerFields.dislikes = req.body.dislikes.split(",");
+    }
+
+    if (typeof req.body.photos !== "undefined") {
+      providerFields.photos = req.body.photos.split(",");
+    }
 
     //Check if handle exists
     ProviderProfile.findOne({ user: req.user.id }).then(provider => {

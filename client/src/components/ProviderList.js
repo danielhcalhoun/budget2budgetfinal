@@ -10,14 +10,15 @@ class ProviderList extends Component {
   renderProviders() {
     const reversedProviders = [...this.props.providers].reverse();
     return reversedProviders.map(provider => {
+      console.log(provider);
       return (
         <div className="card darken-1" key={provider._id}>
           <div className="card-content">
-            <span className="card-title">{provider.title}</span>
-            <p>{provider.body}</p>
-            <p className="right">
-              Sent On: {new Date(provider.dateSent).toLocaleDateString()}
-            </p>
+            <img src={provider.avatar} />
+            <br />
+            <span className="card-title">{provider.handle}</span>
+            <p>{provider.status}</p>
+            <p className="right" />
           </div>
         </div>
       );

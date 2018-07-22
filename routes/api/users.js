@@ -24,13 +24,12 @@ router.post("/register", async (req, res) => {
 
   //find a record that has an email that matches the users email
 
-  User.findOne({ name: req.body.name }).then(user => {
+  User.findOne({ name: req.body.email }).then(user => {
     if (user) {
-      errors.name = "Username already exists";
+      errors.email = "Email already exists";
       return res.status(400).json(errors);
     } else {
       const newUser = new User({
-        name: req.body.name,
         email: req.body.email,
         password: req.body.password
       });
@@ -59,11 +58,11 @@ router.post("/login", async (req, res) => {
     return res.status(400).json(errors);
   }
 
-  const name = req.body.name;
+  const email = req.body.email;
   const password = req.body.password;
 
   //Find user by email
-  User.findOne({ name }).then(user => {
+  User.findOne({ email }).then(user => {
     //Check for user
     if (!user) {
       return res.status(404).json(errors);
@@ -77,7 +76,7 @@ router.post("/login", async (req, res) => {
         //Create JWT payload
         const payload = {
           id: user.id,
-          name: user.name
+          email: user.email
         };
 
         //Sign Token
@@ -109,7 +108,6 @@ router.get(
   (req, res) => {
     res.json({
       id: req.user.id,
-      name: req.user.name,
       email: req.user.email
     });
   }
