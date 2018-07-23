@@ -1,7 +1,7 @@
 import _ from "lodash";
 import React, { Component } from "react";
 import { reduxForm, Field } from "redux-form";
-import validateEmails from "../../utils/validateEmails";
+import validateEmails from "../../../utils/validateEmails";
 import formFields from "./registerFields";
 import { Button, Form } from "semantic-ui-react";
 
@@ -35,7 +35,7 @@ class RegisterForm extends Component {
   render() {
     return (
       <div>
-        <Form onSubmit={this.props.handleSubmit(this.props.onSurveySubmit)}>
+        <Form onSubmit={this.props.handleSubmit(this.props.onRegisterSubmit)}>
           {this.renderFields()}
           <Button type="submit">Submit</Button>
         </Form>
@@ -47,7 +47,7 @@ class RegisterForm extends Component {
 function validate(values) {
   const errors = {};
 
-  errors.recipients = validateEmails(values.recipients || "");
+  errors.email = validateEmails(values.email || "");
 
   _.each(formFields, ({ name }) => {
     if (!values[name]) {
@@ -62,4 +62,4 @@ export default reduxForm({
   validate,
   form: "RegisterForm",
   destroyOnUnmount: false
-})(DefaultForm);
+})(RegisterForm);

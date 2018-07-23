@@ -10,7 +10,6 @@ class ProviderList extends Component {
   renderProviders() {
     const reversedProviders = [...this.props.providers].reverse();
     return reversedProviders.map(provider => {
-      console.log(provider);
       return (
         <div className="card darken-1" key={provider._id}>
           <div className="card-content">

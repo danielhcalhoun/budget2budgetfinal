@@ -33,7 +33,7 @@ const FormReview = ({ onCancel, formValues, submitTweet, history }) => {
 };
 
 function mapStateToProps(state) {
-  return { formValues: state.form.DefaultForm.values };
+  return { formValues: state.form.RegisterForm.values };
 }
 
 export default connect(mapStateToProps, actions)(withRouter(FormReview));
