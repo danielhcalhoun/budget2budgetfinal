@@ -1,7 +1,5 @@
 import React, { Component } from "react";
-import PropTypes from "prop-types";
 import RegisterForm from "./RegisterForm";
-import * as actions from "../../../actions/index";
 import { reduxForm } from "redux-form";
 import RegisterSuccess from "./RegisterSuccess";
 class Register extends Component {

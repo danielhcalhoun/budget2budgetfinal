@@ -13,7 +13,7 @@ class ProviderList extends Component {
       return (
         <div className="card darken-1" key={provider._id}>
           <div className="card-content">
-            <img src={provider.avatar} />
+            <img src={provider.avatar} alt={provider.handle} />
             <br />
             <span className="card-title">{provider.handle}</span>
             <p>{provider.status}</p>

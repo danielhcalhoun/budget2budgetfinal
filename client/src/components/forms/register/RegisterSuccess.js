@@ -1,12 +1,18 @@
-import _ from "lodash";
 import React from "react";
 import { connect } from "react-redux";
 import { withRouter } from "react-router";
 import * as actions from "../../../actions";
+import Button from "semantic-ui-react/dist/es/elements/Button/Button";
 
-const RegisterSuccess = ({ onCancel, formValues, registerUser, history }) => {
+const RegisterSuccess = ({
+  onCancel,
+  formValues,
+  registerUser,
+  testUser,
+  history
+}) => {
+  console.log(formValues);
   registerUser(formValues);
-
   return <div>Success!</div>;
 };
 
