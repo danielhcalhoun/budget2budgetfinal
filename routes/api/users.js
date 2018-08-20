@@ -12,6 +12,15 @@ const validateLoginInput = require("../../validation/login");
 //Load User model
 const User = require("../../models/User");
 
+//@route GET api/users/current
+//@desc Return current user
+//@access Private
+router.post("/test", (req, res) =>
+  res.json({
+    msg: "Post user works"
+  })
+);
+
 // @route   POST api/users/register
 // @desc    Register user
 // @access  Public
@@ -24,7 +33,7 @@ router.post("/register", async (req, res) => {
 
   //find a record that has an email that matches the users email
 
-  User.findOne({ name: req.body.email }).then(user => {
+  User.findOne({ email: req.body.email }).then(user => {
     if (user) {
       errors.email = "Email already exists";
       return res.status(400).json(errors);

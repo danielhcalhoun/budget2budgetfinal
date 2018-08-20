@@ -16,10 +16,13 @@ export const loginUser = () => async dispatch => {
   dispatch({ type: LOGIN_USER, payload: res.data });
 };
 
-export const registerUser = () => async dispatch => {
-  const res = await axios.post("/api/users/register");
-  console.log(res);
-  dispatch({ type: REGISTER_USER, payload: res.data });
+export const registerUser = values => async dispatch => {
+  try {
+    const res = await axios.post("/api/users/register", values);
+    dispatch({ type: REGISTER_USER, payload: res.data });
+  } catch (err) {
+    console.log(err.response.data);
+  }
 };
 
 export const testUser = () => async dispatch => {
