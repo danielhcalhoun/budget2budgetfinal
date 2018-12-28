@@ -3,7 +3,7 @@ import React, { Component } from "react";
 import { reduxForm, Field } from "redux-form";
 import validateEmails from "../../../utils/validateEmails";
 import formFields from "./loginFields";
-import { Button, Form } from "semantic-ui-react";
+import { Button, Form, Message } from "semantic-ui-react";
 import validatePasswords from "../../../utils/validatePasswords";
 
 const FormField = ({ input, label, meta: { error, touched } }) => {
@@ -11,21 +11,21 @@ const FormField = ({ input, label, meta: { error, touched } }) => {
     <div>
       <label>{label}</label>
       <input {...input} style={{ marginBottom: "5px" }} />
-      <div className="error red-text" style={{ marginBottom: "5px" }}>
+      <Message error style={{ marginBottom: "5px" }}>
         {touched && error}
-      </div>
+      </Message>
     </div>
   );
 };
 
 class LoginForm extends Component {
   renderFields() {
-    return _.map(formFields, ({ label, name }) => {
+    return _.map(formFields, ({ label, name, type }) => {
       return (
         <Field
           key={name}
           component={FormField}
-          type="text"
+          type={`${type ? type : "text"}`}
           label={label}
           name={name}
         />
@@ -36,7 +36,10 @@ class LoginForm extends Component {
   render() {
     return (
       <div>
-        <Form onSubmit={this.props.handleSubmit(this.props.onLoginSubmit)}>
+        <Form
+          className={`ui form ${this.props.valid ? "" : "error"}`}
+          onSubmit={this.props.handleSubmit(this.props.onLoginSubmit)}
+        >
           {this.renderFields()}
           <Button type="submit">Submit</Button>
         </Form>
