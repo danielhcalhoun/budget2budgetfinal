@@ -5,18 +5,7 @@ import validateEmails from "../../../utils/validateEmails";
 import formFields from "./loginFields";
 import { Button, Form, Message } from "semantic-ui-react";
 import validatePasswords from "../../../utils/validatePasswords";
-
-const FormField = ({ input, label, meta: { error, touched } }) => {
-  return (
-    <div>
-      <label>{label}</label>
-      <input {...input} style={{ marginBottom: "5px" }} />
-      <Message error style={{ marginBottom: "5px" }}>
-        {touched && error}
-      </Message>
-    </div>
-  );
-};
+import FormField from "../FormField";
 
 class LoginForm extends Component {
   renderFields() {
@@ -25,7 +14,7 @@ class LoginForm extends Component {
         <Field
           key={name}
           component={FormField}
-          type={`${type ? type : "text"}`}
+          type={type}
           label={label}
           name={name}
         />
