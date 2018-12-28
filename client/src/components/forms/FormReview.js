@@ -1,7 +1,7 @@
 import _ from "lodash";
 import React from "react";
 import { connect } from "react-redux";
-import formFields from "./loginFields";
+import formFields from "./login/loginFields";
 import { withRouter } from "react-router";
 import * as actions from "../../actions";
 import { Button } from "semantic-ui-react";

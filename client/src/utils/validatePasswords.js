@@ -2,7 +2,7 @@ export default (passwords, otherpasswords) => {
   const invalidPasswordLength = passwords
     .split(",")
     .map(password => password.trim())
-    .filter(password => password.length < 6 === true);
+    .filter(password => password.length < 6);
 
   const nonMatchingPasswords = passwords
     .split(",")

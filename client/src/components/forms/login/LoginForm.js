@@ -1,9 +1,10 @@
 import _ from "lodash";
 import React, { Component } from "react";
 import { reduxForm, Field } from "redux-form";
-import validateEmails from "../../utils/validateEmails";
+import validateEmails from "../../../utils/validateEmails";
 import formFields from "./loginFields";
 import { Button, Form } from "semantic-ui-react";
+import validatePasswords from "../../../utils/validatePasswords";
 
 const FormField = ({ input, label, meta: { error, touched } }) => {
   return (
@@ -17,7 +18,7 @@ const FormField = ({ input, label, meta: { error, touched } }) => {
   );
 };
 
-class DefaultForm extends Component {
+class LoginForm extends Component {
   renderFields() {
     return _.map(formFields, ({ label, name }) => {
       return (
@@ -35,7 +36,7 @@ class DefaultForm extends Component {
   render() {
     return (
       <div>
-        <Form onSubmit={this.props.handleSubmit(this.props.onSurveySubmit)}>
+        <Form onSubmit={this.props.handleSubmit(this.props.onLoginSubmit)}>
           {this.renderFields()}
           <Button type="submit">Submit</Button>
         </Form>
@@ -47,7 +48,9 @@ class DefaultForm extends Component {
 function validate(values) {
   const errors = {};
 
-  errors.recipients = validateEmails(values.recipients || "");
+  errors.email = validateEmails(values.email || "");
+
+  errors.password = validatePasswords(values.password || "");
 
   _.each(formFields, ({ name }) => {
     if (!values[name]) {
@@ -62,4 +65,4 @@ export default reduxForm({
   validate,
   form: "LoginForm",
   destroyOnUnmount: false
-})(DefaultForm);
+})(LoginForm);

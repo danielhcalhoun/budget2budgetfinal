@@ -9,9 +9,11 @@ class ModalContainer extends Component {
   handleClose = () => this.setState({ modalOpen: false });
 
   render() {
+    const { modalText } = this.props;
+
     return (
       <Modal
-        trigger={<Button onClick={this.handleOpen}>Show Modal</Button>}
+        trigger={<Button onClick={this.handleOpen}>{modalText}</Button>}
         open={this.state.modalOpen}
         onClose={this.handleClose}
         closeIcon
