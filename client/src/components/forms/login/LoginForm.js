@@ -3,7 +3,7 @@ import React, { Component } from "react";
 import { reduxForm, Field } from "redux-form";
 import validateEmails from "../../../utils/validateEmails";
 import formFields from "./loginFields";
-import { Button, Form, Message } from "semantic-ui-react";
+import { Button, Form } from "semantic-ui-react";
 import validatePasswords from "../../../utils/validatePasswords";
 import FormField from "../FormField";
 

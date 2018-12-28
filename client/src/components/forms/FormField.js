@@ -1,10 +1,9 @@
 import React from "react";
-import { Message } from "semantic-ui-react";
-import { Form } from "semantic-ui-react/dist/commonjs/collections/Form/Form";
+import { Message, Form } from "semantic-ui-react";
 
 export default ({ input, label, type, meta: { error, touched } }) => {
   return (
-    <div>
+    <Form.Field>
       <label>{label}</label>
       <input
         type={type ? type : "text"}
@@ -14,6 +13,6 @@ export default ({ input, label, type, meta: { error, touched } }) => {
       <Message error style={{ marginBottom: "5px" }}>
         {touched && error}
       </Message>
-    </div>
+    </Form.Field>
   );
 };
