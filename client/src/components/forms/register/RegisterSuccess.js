@@ -1,17 +1,9 @@
 import React from "react";
 import { connect } from "react-redux";
 import { withRouter } from "react-router";
-import * as actions from "../../../actions";
-import Button from "semantic-ui-react/dist/es/elements/Button/Button";
+import { registerUser } from "../../../actions";
 
-const RegisterSuccess = ({
-  onCancel,
-  formValues,
-  registerUser,
-  testUser,
-  history
-}) => {
-  console.log(formValues);
+const RegisterSuccess = ({ onCancel, formValues, registerUser }) => {
   registerUser(formValues);
   return <div>Success!</div>;
 };
@@ -20,4 +12,6 @@ function mapStateToProps(state) {
   return { formValues: state.form.RegisterForm.values };
 }
 
-export default connect(mapStateToProps, actions)(withRouter(RegisterSuccess));
+export default connect(mapStateToProps, { registerUser })(
+  withRouter(RegisterSuccess)
+);

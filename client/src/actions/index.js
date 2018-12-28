@@ -4,7 +4,7 @@ import { LOGIN_USER } from "./types";
 import { REGISTER_USER } from "./types";
 import { TEST_USER } from "./types";
 
-export const fetchProviders = () => async dispatch => {
+export const fetchExpenses = () => async dispatch => {
   const res = await axios.get("/api/provider/all");
 
   dispatch({ type: FETCH_PROVIDERS, payload: res.data });

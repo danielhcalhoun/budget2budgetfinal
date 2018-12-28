@@ -7,7 +7,7 @@ import testReducer from "./testReducer";
 
 export default combineReducers({
   form: reduxForm,
-  providers: providerReducer,
+  expenses: providerReducer,
   login: loginReducer,
   register: registerReducer,
   test: testReducer
