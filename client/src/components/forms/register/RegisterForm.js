@@ -2,6 +2,7 @@ import _ from "lodash";
 import React, { Component } from "react";
 import { reduxForm, Field } from "redux-form";
 import validateEmails from "../../../utils/validateEmails";
+import validatePasswords from "../../../utils/validatePasswords";
 import formFields from "./registerFields";
 import { Button, Form } from "semantic-ui-react";
 
@@ -48,6 +49,13 @@ function validate(values) {
   const errors = {};
 
   errors.email = validateEmails(values.email || "");
+
+  errors.password = validatePasswords(values.password || "");
+
+  errors.password2 = validatePasswords(
+    values.password2 || "",
+    values.password || ""
+  );
 
   _.each(formFields, ({ name }) => {
     if (!values[name]) {
