@@ -14,10 +14,6 @@ const UserSchema = new Schema({
   date: {
     type: Date,
     default: Date.now
-  },
-  isProvider: {
-    type: Boolean,
-    default: false
   }
 });
 

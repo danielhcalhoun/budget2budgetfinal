@@ -7,9 +7,7 @@ class Landing extends Component {
   render() {
     return (
       <div>
-        <Modal>
-          <Register />
-        </Modal>
+        <Register />
       </div>
     );
   }
