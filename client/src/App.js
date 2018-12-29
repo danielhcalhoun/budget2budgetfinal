@@ -4,7 +4,7 @@ import "./App.css";
 import Landing from "./components/routes/Landing";
 import { Grid } from "semantic-ui-react";
 import Calendars from "./components/routes/Calendars";
-import Navigation from "./components/Navigation";
+import Navigation from "./components/nav/Navigation";
 
 class App extends Component {
   render() {
