@@ -1,5 +1,8 @@
 import axios from "axios";
 import * as types from "./types";
+import setAuthToken from "../utils/setAuthToken";
+import jwt_decode from "jwt-decode";
+import { GET_ERRORS } from "./types";
 
 export const fetchExpenses = () => async dispatch => {
   const res = await axios.get("/api/provider/all");
@@ -13,12 +16,34 @@ export const fetchUser = () => async dispatch => {
 
 export const loginUser = (values, history) => async dispatch => {
   try {
-    const res = await axios.post("/api/users/login", values);
-    dispatch({ type: types.LOGIN_USER, payload: res.data });
+    await axios.post("/api/users/login", values).then(res => {
+      //save to local storage
+      const { token } = res.data;
+      localStorage.setItem("jwtToken", token);
+      //set token to Auth header
+      setAuthToken(token);
+      //Decode token to get user data
+      const decoded = jwt_decode(token);
+      //Set current user
+      dispatch(setCurrentUser(decoded, history));
+    });
+    // dispatch({ type: types.LOGIN_USER, payload: res.data });
+    // dispatch(navigateTo("/calendar"));
+    // history.push("/calendar");
   } catch (err) {
-    console.log(err.response.data);
+    dispatch({
+      type: GET_ERRORS,
+      payload: err.response.data
+    });
   }
+};
 
+//Set Logged in User
+export const setCurrentUser = (decoded, history) => async dispatch => {
+  dispatch({
+    type: types.SET_CURRENT_USER,
+    PAYLOAD: decoded
+  });
   dispatch(navigateTo("/calendar"));
   history.push("/calendar");
 };
@@ -27,12 +52,14 @@ export const registerUser = (values, history) => async dispatch => {
   try {
     const res = await axios.post("/api/users/register", values);
     dispatch({ type: types.REGISTER_USER, payload: res.data });
+    dispatch(navigateTo("/calendar"));
+    history.push("/calendar");
   } catch (err) {
-    console.log(err.response.data);
+    dispatch({
+      type: GET_ERRORS,
+      payload: err.response.data
+    });
   }
-
-  dispatch(navigateTo("/calendar"));
-  history.push("/calendar");
 };
 
 // export const testUser = () => async dispatch => {

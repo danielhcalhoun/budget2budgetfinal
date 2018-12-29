@@ -15,7 +15,7 @@ class Landing extends Component {
       switch (this.props.auth) {
         case null:
           return "Still deciding";
-        case false:
+        default:
           return (
             <Container>
               <Card>
@@ -35,12 +35,6 @@ class Landing extends Component {
                   </Card.Content>
                 </Card>
               </Modal>
-            </Container>
-          );
-        default:
-          return (
-            <Container>
-              <h1>Hello</h1>
             </Container>
           );
       }
