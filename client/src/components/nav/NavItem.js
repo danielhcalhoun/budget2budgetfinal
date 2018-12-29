@@ -1,17 +1,26 @@
 import { NavLink } from "react-router-dom";
-import React from "react";
+import React, { Component } from "react";
 import { Menu, Icon } from "semantic-ui-react";
+import { connect } from "react-redux";
+import { navigateTo } from "../../actions";
 
 const ProfileIcon = () => {
   return <Icon name="user" />;
 };
 
-export default ({ to, text, icon, id, target }) => {
-  console.log(text);
+class NavItem extends Component {
+  handleClick = to => {
+    this.props.navigateTo(to);
+  };
 
-  return (
-    <NavLink target={target} to={to}>
-      <Menu.Item key={id}>{icon ? ProfileIcon() : text}</Menu.Item>
-    </NavLink>
-  );
-};
+  render() {
+    const { to, text, icon, id, target } = this.props;
+    return (
+      <NavLink target={target} to={to} onClick={() => this.handleClick(to)}>
+        <Menu.Item key={id}>{icon ? ProfileIcon() : text}</Menu.Item>
+      </NavLink>
+    );
+  }
+}
+
+export default connect(state => ({}), { navigateTo })(NavItem);

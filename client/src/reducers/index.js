@@ -3,12 +3,12 @@ import { reducer as reduxForm } from "redux-form";
 import providerReducer from "./providerReducer";
 import loginReducer from "./loginReducer";
 import registerReducer from "./registerReducer";
-import testReducer from "./testReducer";
+import navigateReducer from "./navigateReducer";
 
 export default combineReducers({
   form: reduxForm,
   expenses: providerReducer,
   login: loginReducer,
   register: registerReducer,
-  test: testReducer
+  route: navigateReducer
 });

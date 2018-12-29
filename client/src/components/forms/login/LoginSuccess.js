@@ -3,8 +3,8 @@ import { connect } from "react-redux";
 import { withRouter } from "react-router";
 import { loginUser } from "../../../actions";
 
-const LoginSuccess = ({ onCancel, formValues, loginUser }) => {
-  loginUser(formValues);
+const LoginSuccess = ({ onCancel, formValues, loginUser, history }) => {
+  loginUser(formValues, history);
   return <div>Success!</div>;
 };
 

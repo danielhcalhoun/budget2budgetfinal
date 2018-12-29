@@ -1,10 +1,10 @@
 import { NAVIGATE_TO } from "../actions/types";
 
 const initialState = {
-  route: ""
+  route: "/"
 };
 
-export default function(state = [], action) {
+export default function(state = initialState, action) {
   switch (action.type) {
     case NAVIGATE_TO:
       return {
