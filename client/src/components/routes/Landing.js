@@ -1,8 +1,8 @@
 import React, { Component } from "react";
 import connect from "react-redux/es/connect/connect";
-import Modal from "./Modal";
-import Register from "./forms/register/Register";
-import Login from "./forms/login/Login";
+import Modal from "../Modal";
+import Register from "../forms/register/Register";
+import Login from "../forms/login/Login";
 import { Card, Container } from "semantic-ui-react";
 
 class Landing extends Component {

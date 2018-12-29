@@ -4755,6 +4755,11 @@ keyboard-key@^1.0.1:
   resolved "https://registry.yarnpkg.com/keyboard-key/-/keyboard-key-1.0.1.tgz#a946294fe59ad5431c63a3ea269f023e51fac6aa"
   integrity sha512-OAfjaSI917BOonwfH6LQHMZJRv5035jjZvgElouB/DM4I7l5zEjrA15RD80YwIjhN69xqEfWCZIbhBcGpb85Ig==
 
+keyboard-key@^1.0.2:
+  version "1.0.2"
+  resolved "https://registry.yarnpkg.com/keyboard-key/-/keyboard-key-1.0.2.tgz#212e14dde4c2059814336159bbc5acd0a348ca6b"
+  integrity sha512-05cjQmw4ss/YuY2utmVim0wywDyBZGUivo8siLPkWinwGWtKlO8/4RGbPUqNycwlD3u/3D15eNRjnNAyaTDs8g==
+
 killable@^1.0.0:
   version "1.0.0"
   resolved "https://registry.yarnpkg.com/killable/-/killable-1.0.0.tgz#da8b84bd47de5395878f95d64d02f2449fe05e6b"
@@ -5233,6 +5238,11 @@ mkdirp@0.5.1, mkdirp@0.5.x, mkdirp@^0.5.0, mkdirp@^0.5.1, mkdirp@~0.5.0, mkdirp@
   integrity sha1-MAV0OOrGz3+MR2fzhkjWaX11yQM=
   dependencies:
     minimist "0.0.8"
+
+moment@^2.22.2:
+  version "2.23.0"
+  resolved "https://registry.yarnpkg.com/moment/-/moment-2.23.0.tgz#759ea491ac97d54bac5ad776996e2a58cc1bc225"
+  integrity sha512-3IE39bHVqFbWWaPOMHZF98Q9c3LDKGTmypMiTM2QygGXXElkFWIH7GxfmlwmY2vwa+wmNsoYZmG2iusf1ZjJoA==
 
 ms@2.0.0:
   version "2.0.0"
@@ -6274,7 +6284,7 @@ promise@^7.1.1:
   dependencies:
     asap "~2.0.3"
 
-prop-types@^15.5.10, prop-types@^15.6.0, prop-types@^15.6.1:
+prop-types@^15.5.10, prop-types@^15.6.0, prop-types@^15.6.1, prop-types@^15.6.2:
   version "15.6.2"
   resolved "https://registry.yarnpkg.com/prop-types/-/prop-types-15.6.2.tgz#05d5ca77b4453e985d60fc7ff8c859094a497102"
   integrity sha512-3pboPvLiWD7dkI3qf3KbUe6hKFKa52w+AE0VCqECtf+QHAKgOL37tTaNCnuX1nAAQ4ZhyP+kYVKf8rLmJ/feDQ==
@@ -7034,6 +7044,16 @@ selfsigned@^1.9.1:
   integrity sha512-vmZenZ+8Al3NLHkWnhBQ0x6BkML1eCP2xEi3JE+f3D9wW9fipD9NNJHYtE9XJM4TsPaHGZJIamrSI6MTg1dU2Q==
   dependencies:
     node-forge "0.7.5"
+
+semantic-ui-calendar-react@^0.12.1:
+  version "0.12.1"
+  resolved "https://registry.yarnpkg.com/semantic-ui-calendar-react/-/semantic-ui-calendar-react-0.12.1.tgz#3802b1a873b0293ae50ded566a3de5b40073a152"
+  integrity sha512-9sT4b2DKIz7rhSpO3hvY7GgvnI0HAhe8UMWQG9w2tmO1tl9ARivG87Ai3vHK9yNdXVW4ICSNfsi/MkAhBA3Mvg==
+  dependencies:
+    keyboard-key "^1.0.2"
+    lodash "^4.17.10"
+    moment "^2.22.2"
+    prop-types "^15.6.2"
 
 semantic-ui-react@^0.82.0:
   version "0.82.0"
