@@ -7,6 +7,8 @@ import { Card, Container } from "semantic-ui-react";
 import { fetchUser } from "../../actions";
 import Calendars from "./Calendars";
 
+
+
 class Landing extends Component {
   componentDidMount() {
     this.props.fetchUser();
