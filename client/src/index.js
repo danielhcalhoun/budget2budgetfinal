@@ -11,7 +11,7 @@ import reducers from "./reducers";
 import { composeWithDevTools } from "redux-devtools-extension";
 import setAuthToken from "./utils/setAuthToken";
 import jwt_decode from "jwt-decode";
-import {setCurrentUser} from "./actions";
+import { setCurrentUser } from "./actions";
 
 const store = createStore(
   reducers,
@@ -21,7 +21,7 @@ const store = createStore(
 if (localStorage.jwtToken) {
   //set auth token header auth
   setAuthToken(localStorage.jwtToken);
-  // Decode token and get user info and epxiration
+  // Decode token and get user info and expiration
   const decoded = jwt_decode(localStorage.jwtToken);
   // Set user and isAuthenticated
   store.dispatch(setCurrentUser(decoded));
