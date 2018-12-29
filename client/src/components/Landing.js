@@ -18,7 +18,13 @@ class Landing extends Component {
         </Card>
         Already have an account?{" "}
         <Modal modalText="Login" modalHeader="Login">
-          <Login />
+          <Card>
+            <Card.Content>
+              <Card.Description>
+                <Login />
+              </Card.Description>
+            </Card.Content>
+          </Card>
         </Modal>
       </Container>
     );

@@ -17,8 +17,11 @@ class ModalContainer extends Component {
         open={this.state.modalOpen}
         onClose={this.handleClose}
         closeIcon
+        style={{ height: "auto" }}
       >
-        <Modal.Header>{this.props.modalHeader}</Modal.Header>
+        <Modal.Header style={{ textAlign: "center" }}>
+          {this.props.modalHeader}
+        </Modal.Header>
         <Modal.Content image>
           <Modal.Description>{this.props.children}</Modal.Description>
         </Modal.Content>

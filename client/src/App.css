@@ -9,6 +9,6 @@
 
 body > div,
 body > div > div,
-body > div > div > div {
+body > div > div > div.ui.container {
   height: 100%;
 }
