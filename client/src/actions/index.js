@@ -14,19 +14,27 @@ export const fetchUser = () => async dispatch => {
   dispatch({ type: types.FETCH_USER, payload: res.data });
 };
 
-export const loginUser = (values, history) => async dispatch => {
+export const loginUser = (values, history) => dispatch => {
   try {
-    await axios.post("/api/users/login", values).then(res => {
-      //save to local storage
-      const { token } = res.data;
-      localStorage.setItem("jwtToken", token);
-      //set token to Auth header
-      setAuthToken(token);
-      //Decode token to get user data
-      const decoded = jwt_decode(token);
-      //Set current user
-      dispatch(setCurrentUser(decoded, history));
-    });
+    axios
+      .post("/api/users/login", values)
+      .then(res => {
+        //save to local storage
+        const { token } = res.data;
+        localStorage.setItem("jwtToken", token);
+        //set token to Auth header
+        setAuthToken(token);
+        //Decode token to get user data
+        const decoded = jwt_decode(token);
+        //Set current user
+        dispatch(setCurrentUser(decoded, history));
+      })
+      .catch(err =>
+        dispatch({
+          type: GET_ERRORS,
+          payload: err.response.data
+        })
+      );
     // dispatch({ type: types.LOGIN_USER, payload: res.data });
     // dispatch(navigateTo("/calendar"));
     // history.push("/calendar");
@@ -39,21 +47,28 @@ export const loginUser = (values, history) => async dispatch => {
 };
 
 //Set Logged in User
-export const setCurrentUser = (decoded, history) => async dispatch => {
+export const setCurrentUser = (decoded, history) => dispatch => {
   dispatch({
     type: types.SET_CURRENT_USER,
     PAYLOAD: decoded
   });
-  dispatch(navigateTo("/calendar"));
-  history.push("/calendar");
+  // dispatch(navigateTo("/calendar"));
+  //   // history.push("/calendar");
 };
 
-export const registerUser = (values, history) => async dispatch => {
+export const registerUser = (values, history) => dispatch => {
   try {
-    const res = await axios.post("/api/users/register", values);
-    dispatch({ type: types.REGISTER_USER, payload: res.data });
-    dispatch(navigateTo("/calendar"));
-    history.push("/calendar");
+    axios
+      .post("/api/users/register", values)
+      .then(res => dispatch({ type: types.REGISTER_USER, payload: res.data }))
+      .then(dispatch(navigateTo("/calendar")))
+      .then(history.push("/calendar"))
+      .catch(err =>
+        dispatch({
+          type: GET_ERRORS,
+          payload: err.response.data
+        })
+      );
   } catch (err) {
     dispatch({
       type: GET_ERRORS,

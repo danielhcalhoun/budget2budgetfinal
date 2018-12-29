@@ -12,9 +12,12 @@ class Landing extends Component {
   }
   render() {
     {
-      switch (this.props.auth) {
+      switch (this.props.auth.isAuthenticated) {
         case null:
           return "Still deciding";
+        case true:
+          this.props.history.push("/calendar");
+          break;
         default:
           return (
             <Container>
