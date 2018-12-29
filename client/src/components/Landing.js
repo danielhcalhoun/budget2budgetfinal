@@ -3,17 +3,24 @@ import connect from "react-redux/es/connect/connect";
 import Modal from "./Modal";
 import Register from "./forms/register/Register";
 import Login from "./forms/login/Login";
+import { Card, Container } from "semantic-ui-react";
 
 class Landing extends Component {
   render() {
     return (
-      <div>
-        <Register />
+      <Container>
+        <Card>
+          <Card.Content>
+            <Card.Description>
+              <Register />
+            </Card.Description>
+          </Card.Content>
+        </Card>
         Already have an account?{" "}
         <Modal modalText="Login" modalHeader="Login">
           <Login />
         </Modal>
-      </div>
+      </Container>
     );
   }
 }

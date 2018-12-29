@@ -4,7 +4,7 @@ import { reduxForm, Field } from "redux-form";
 import validateEmails from "../../../utils/validateEmails";
 import validatePasswords from "../../../utils/validatePasswords";
 import formFields from "./registerFields";
-import { Button, Form, Message } from "semantic-ui-react";
+import { Button, Form, Header } from "semantic-ui-react";
 import FormField from "../FormField";
 
 class RegisterForm extends Component {
@@ -29,6 +29,7 @@ class RegisterForm extends Component {
           className={`ui form ${this.props.valid ? "" : "error"}`}
           onSubmit={this.props.handleSubmit(this.props.onRegisterSubmit)}
         >
+          <Header as="h1">Sign Up</Header>
           {this.renderFields()}
           <Button type="submit">Submit</Button>
         </Form>
