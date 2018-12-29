@@ -6,6 +6,11 @@ export const fetchExpenses = () => async dispatch => {
   dispatch({ type: types.FETCH_PROVIDERS, payload: res.data });
 };
 
+export const fetchUser = () => async dispatch => {
+  const res = await axios.get("/api/users/current");
+  dispatch({ type: types.FETCH_USER, payload: res.data });
+};
+
 export const loginUser = (values, history) => async dispatch => {
   try {
     const res = await axios.post("/api/users/login", values);

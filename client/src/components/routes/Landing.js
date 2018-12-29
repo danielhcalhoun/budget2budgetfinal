@@ -4,30 +4,47 @@ import Modal from "../Modal";
 import Register from "../forms/register/Register";
 import Login from "../forms/login/Login";
 import { Card, Container } from "semantic-ui-react";
+import { fetchUser } from "../../actions";
 
 class Landing extends Component {
+  componentDidMount() {
+    this.props.fetchUser();
+  }
   render() {
-    return (
-      <Container>
-        <Card>
-          <Card.Content>
-            <Card.Description>
-              <Register />
-            </Card.Description>
-          </Card.Content>
-        </Card>
-        Already have an account?{" "}
-        <Modal modalText="Login" modalHeader="Login">
-          <Card>
-            <Card.Content>
-              <Card.Description>
-                <Login />
-              </Card.Description>
-            </Card.Content>
-          </Card>
-        </Modal>
-      </Container>
-    );
+    {
+      switch (this.props.auth) {
+        case null:
+          return "Still deciding";
+        case false:
+          return (
+            <Container>
+              <Card>
+                <Card.Content>
+                  <Card.Description>
+                    <Register />
+                  </Card.Description>
+                </Card.Content>
+              </Card>
+              Already have an account?{" "}
+              <Modal modalText="Login" modalHeader="Login">
+                <Card>
+                  <Card.Content>
+                    <Card.Description>
+                      <Login />
+                    </Card.Description>
+                  </Card.Content>
+                </Card>
+              </Modal>
+            </Container>
+          );
+        default:
+          return (
+            <Container>
+              <h1>Hello</h1>
+            </Container>
+          );
+      }
+    }
   }
 }
 
@@ -35,4 +52,4 @@ function mapStateToProps({ auth }) {
   return { auth };
 }
 
-export default connect(mapStateToProps)(Landing);
+export default connect(mapStateToProps, { fetchUser })(Landing);
