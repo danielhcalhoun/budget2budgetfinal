@@ -1,18 +1,5 @@
 import React, { Component } from "react";
-import {
-  DateInput,
-  DateInputOnChangeData,
-  DatesRangeInput,
-  DatesRangeInputOnChangeData,
-  DateTimeInput,
-  DateTimeInputOnChangeData,
-  MonthInput,
-  MonthInputOnChangeData,
-  TimeInput,
-  TimeInputOnChangeData,
-  YearInput,
-  YearInputOnChangeData
-} from "semantic-ui-calendar-react";
+import { DateInput } from "semantic-ui-calendar-react";
 
 class DateTimeFormInline extends Component {
   constructor(props) {

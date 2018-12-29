@@ -4,12 +4,14 @@ import "./App.css";
 import Landing from "./components/routes/Landing";
 import { Grid } from "semantic-ui-react";
 import Calendars from "./components/routes/Calendars";
+import Navigation from "./components/Navigation";
 
 class App extends Component {
   render() {
     return (
       <BrowserRouter>
         <div className="App">
+          <Navigation />
           <Grid
             textAlign="center"
             style={{ height: "100%" }}
