@@ -5,6 +5,7 @@ import Register from "../forms/register/Register";
 import Login from "../forms/login/Login";
 import { Card, Container } from "semantic-ui-react";
 import { fetchUser } from "../../actions";
+import Calendars from "./Calendars";
 
 class Landing extends Component {
   componentDidMount() {
@@ -16,7 +17,7 @@ class Landing extends Component {
         case null:
           return "Still deciding";
         case true:
-          this.props.history.push("/calendar");
+          return <Calendars />;
           break;
         default:
           return (
