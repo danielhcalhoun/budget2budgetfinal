@@ -3,8 +3,13 @@ import { reduxForm, Field } from "redux-form";
 import { Button, Form, Header } from "semantic-ui-react";
 import FormField from "../FormField";
 import DateTimeFormInline from "../../DateTimeFormInline";
-import validateNumbers from "../../../utils/validateNumbers";
-import formatCurrency from "../../../utils/formatCurrency";
+import { createNumberMask } from "redux-form-input-masks";
+
+const currencyMask = createNumberMask({
+  prefix: "$ ",
+  decimalPlaces: 2,
+  locale: "en-US"
+});
 
 class PaycheckForm extends Component {
   render() {
@@ -22,7 +27,7 @@ class PaycheckForm extends Component {
             type="text"
             label="How much will you make?"
             name="income"
-            normalize={formatCurrency}
+            {...currencyMask}
           />
 
           <DateTimeFormInline />

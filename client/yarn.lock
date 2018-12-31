@@ -6685,6 +6685,11 @@ redux-devtools-extension@^2.13.7:
   resolved "https://registry.yarnpkg.com/redux-devtools-extension/-/redux-devtools-extension-2.13.7.tgz#14bd7a1a7c8bee7f397beb1116fd16fc9633b752"
   integrity sha512-F2GlWMWxCTJGRjJ+GSZcGDcVAj6Pbf77FKb4C9S8eni5Eah6UBGNwxNj8K1MTtmItdZH1Wx+EvIifHN2KKcQrw==
 
+redux-form-input-masks@^1.3.0:
+  version "1.3.0"
+  resolved "https://registry.yarnpkg.com/redux-form-input-masks/-/redux-form-input-masks-1.3.0.tgz#51732b8d459e22d7a56ca803140224cff10acc72"
+  integrity sha512-2RaJPtTmraU52KqHzJ9L4HLU0czho02V+DWNm/QqASxhCSOplISPkuHqIpDYl9wntU3B3KjSatbnrTkmfI4FGg==
+
 redux-form@^7.4.2:
   version "7.4.2"
   resolved "https://registry.yarnpkg.com/redux-form/-/redux-form-7.4.2.tgz#d6061088fb682eb9fc5fb9749bd8b102f03154b0"
