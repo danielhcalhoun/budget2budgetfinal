@@ -4,6 +4,7 @@ import { Button, Form, Header } from "semantic-ui-react";
 import FormField from "../FormField";
 import DateTimeFormInline from "../../DateTimeFormInline";
 import validateNumbers from "../../../utils/validateNumbers";
+import formatCurrency from "../../../utils/formatCurrency";
 
 class PaycheckForm extends Component {
   render() {
@@ -18,10 +19,10 @@ class PaycheckForm extends Component {
           <Field
             key="income"
             component={FormField}
-            type="number"
+            type="text"
             label="How much will you make?"
             name="income"
-            normalize={validateNumbers}
+            normalize={formatCurrency}
           />
 
           <DateTimeFormInline />

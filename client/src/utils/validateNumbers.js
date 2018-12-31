@@ -1,6 +1,9 @@
-export default value => {
-  const regex = /\d*\.?\d?/g;
+import currency from "currency.js";
 
-  return value && regex.exec(value);
+export default value => {
+  return value.toFixed(2).toLocaleString("en-US", {
+    style: "currency",
+    currency: "USD"
+  });
   // return !isNaN(value - parseFloat(value));
 };
