@@ -5,6 +5,7 @@ import Landing from "./components/routes/Landing";
 import { Grid } from "semantic-ui-react";
 import Calendars from "./components/routes/Calendars";
 import Navigation from "./components/nav/Navigation";
+import Profile from "./components/routes/Profile";
 
 class App extends Component {
   render() {
@@ -20,6 +21,7 @@ class App extends Component {
             <Grid.Column>
               <Route exact path="/" component={Landing} />
               <Route exact path="/calendar" component={Calendars} />
+              <Route exact path="/profile" component={Profile} />
             </Grid.Column>
           </Grid>
         </div>
