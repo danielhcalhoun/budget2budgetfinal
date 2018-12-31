@@ -7,20 +7,17 @@ import { Card, Container } from "semantic-ui-react";
 import { fetchUser } from "../../actions";
 import Calendars from "./Calendars";
 
-
-
 class Landing extends Component {
-  componentDidMount() {
-    this.props.fetchUser();
-  }
+  // componentDidMount() {
+  //   this.props.fetchUser();
+  // }
   render() {
     {
       switch (this.props.auth.isAuthenticated) {
         case null:
-          return "Still deciding";
+          return "Loading...";
         case true:
           return <Calendars />;
-          break;
         default:
           return (
             <Container>
@@ -31,7 +28,7 @@ class Landing extends Component {
                   </Card.Description>
                 </Card.Content>
               </Card>
-              Already have an account?{" "}
+              Already have an account?
               <Modal modalText="Login" modalHeader="Login">
                 <Card>
                   <Card.Content>

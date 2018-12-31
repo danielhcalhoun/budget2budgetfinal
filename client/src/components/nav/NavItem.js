@@ -2,7 +2,7 @@ import { NavLink } from "react-router-dom";
 import React, { Component } from "react";
 import { Menu, Icon } from "semantic-ui-react";
 import { connect } from "react-redux";
-import { navigateTo } from "../../actions";
+import { logoutUser, navigateTo } from "../../actions";
 
 const ProfileIcon = () => {
   return <Icon name="user" />;
@@ -10,6 +10,9 @@ const ProfileIcon = () => {
 
 class NavItem extends Component {
   handleClick = to => {
+    if (this.props.logout) {
+      this.props.logoutUser();
+    }
     this.props.navigateTo(to);
   };
 
@@ -23,4 +26,4 @@ class NavItem extends Component {
   }
 }
 
-export default connect(state => ({}), { navigateTo })(NavItem);
+export default connect(null, { navigateTo, logoutUser })(NavItem);

@@ -68,3 +68,13 @@ export const registerUser = (values, history) => dispatch => {
 export const navigateTo = path => async dispatch => {
   dispatch({ type: types.NAVIGATE_TO, payload: path });
 };
+
+//Log user out
+export const logoutUser = () => dispatch => {
+  //Remove token from localStorage
+  localStorage.removeItem("jwtToken");
+  //Remove auth header for future requests
+  dispatch(setAuthToken(false));
+  //Set current user to {} which will also set isAuthenticated to false
+  dispatch(setCurrentUser({}));
+};
