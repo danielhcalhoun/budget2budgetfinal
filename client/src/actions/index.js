@@ -70,3 +70,10 @@ export const logoutUser = () => dispatch => {
   //Set current user to {} which will also set isAuthenticated to false
   dispatch(setCurrentUser({}));
 };
+
+export const addPaycheck = (values, history) => dispatch => {
+  dispatch({
+    type: types.ADD_PAYCHECK,
+    payload: values
+  });
+};

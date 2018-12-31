@@ -1,14 +1,15 @@
 import React, { Component } from "react";
 import DateTimeFormInline from "../DateTimeFormInline";
-import { Button, Container, Message } from "semantic-ui-react";
+import { Button, Card, Container, Message } from "semantic-ui-react";
 import connect from "react-redux/es/connect/connect";
+import Modal from "../Modal";
+import Paycheck from "../forms/paycheck/Paycheck";
 
 const PayCheckTutorial = () => {
   return (
     <Container>
       <Message warning header="Enter your first paycheck to get started!" />
-      <DateTimeFormInline />
-      <Button fluid>Enter your first paycheck</Button>
+      <Paycheck />
     </Container>
   );
 };

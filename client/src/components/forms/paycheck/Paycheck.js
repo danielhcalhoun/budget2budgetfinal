@@ -1,18 +1,18 @@
 import React, { Component } from "react";
-import RegisterForm from "./RegisterForm";
 import { reduxForm } from "redux-form";
-import RegisterSuccess from "./RegisterSuccess";
-class Register extends Component {
+import PaycheckSuccess from "./PaycheckSuccess";
+import PaycheckForm from "./PaycheckForm";
+class Paycheck extends Component {
   state = { formReview: false };
 
   renderContent() {
     if (this.state.showFormReview === true) {
-      return <RegisterSuccess />;
+      return <PaycheckSuccess />;
     }
     return (
       <div>
-        <RegisterForm
-          onRegisterSubmit={() => this.setState({ showFormReview: true })}
+        <PaycheckForm
+          onPaycheckSubmit={() => this.setState({ showFormReview: true })}
         />
       </div>
     );
@@ -24,5 +24,5 @@ class Register extends Component {
 }
 
 export default reduxForm({
-  form: "RegisterForm"
-})(Register);
+  form: "PaycheckForm"
+})(Paycheck);
