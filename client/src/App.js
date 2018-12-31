@@ -68,4 +68,4 @@ function mapStateToProps({ auth }) {
   return { auth };
 }
 
-export default connect(mapStateToProps, { fetchUser })(App);
+export default connect(mapStateToProps)(App);
