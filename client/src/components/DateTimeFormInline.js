@@ -27,14 +27,24 @@ class DateTimeFormInline extends Component {
   };
 
   render() {
+    const {
+      input,
+      placeholder,
+      defaultValue,
+      meta: { touched, error }
+    } = this.props;
+
     return (
-      <DateInput
-        inline
-        className="example-calendar-input"
-        value={this.state.date}
-        name="date"
-        onChange={this.handleChange}
-      />
+      <div>
+        <DateInput
+          inline
+          className="example-calendar-input"
+          value={this.state.date}
+          name="date"
+          onChange={this.handleChange}
+        />
+        {touched && error && <span>{error}</span>}
+      </div>
     );
   }
 }
