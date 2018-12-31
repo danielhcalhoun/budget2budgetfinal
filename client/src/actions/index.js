@@ -14,7 +14,7 @@ export const fetchUser = () => async dispatch => {
   dispatch({ type: types.FETCH_USER, payload: res.data });
 };
 
-export const loginUser = (values, history) => dispatch => {
+export const loginUser = values => dispatch => {
   axios
     .post("/api/users/login", values)
     .then(res => {
@@ -44,13 +44,11 @@ export const setCurrentUser = decoded => dispatch => {
   });
 };
 
-export const registerUser = (values, history) => dispatch => {
+export const registerUser = values => dispatch => {
   axios
     .post("/api/users/register", values)
     .then(res => dispatch({ type: types.REGISTER_USER, payload: res.data }))
     .then(() => dispatch(loginUser(values)))
-    // .then(dispatch(navigateTo("/calendar")))
-    // .then(history.push("/calendar"))
     .catch(err =>
       dispatch({
         type: GET_ERRORS,
@@ -58,11 +56,6 @@ export const registerUser = (values, history) => dispatch => {
       })
     );
 };
-
-// export const testUser = () => async dispatch => {
-//   const res = await axios.post("/api/users/test");
-//   dispatch({ type: types.TEST_USER, payload: res.data });
-// };
 
 export const navigateTo = path => async dispatch => {
   dispatch({ type: types.NAVIGATE_TO, payload: path });
