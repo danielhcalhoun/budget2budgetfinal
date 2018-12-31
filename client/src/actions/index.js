@@ -42,16 +42,15 @@ export const setCurrentUser = decoded => dispatch => {
     type: types.SET_CURRENT_USER,
     payload: decoded
   });
-  // dispatch(navigateTo("/calendar"));
-  //   // history.push("/calendar");
 };
 
 export const registerUser = (values, history) => dispatch => {
   axios
     .post("/api/users/register", values)
     .then(res => dispatch({ type: types.REGISTER_USER, payload: res.data }))
-    .then(dispatch(navigateTo("/calendar")))
-    .then(history.push("/calendar"))
+    .then(() => dispatch(loginUser(values)))
+    // .then(dispatch(navigateTo("/calendar")))
+    // .then(history.push("/calendar"))
     .catch(err =>
       dispatch({
         type: GET_ERRORS,
