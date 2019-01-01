@@ -3,7 +3,7 @@ import { Progress } from "semantic-ui-react";
 
 class BudgetBar extends Component {
   render() {
-    return <Progress size="medium" />;
+    return <Progress size="medium" color="green" />;
   }
 }
 

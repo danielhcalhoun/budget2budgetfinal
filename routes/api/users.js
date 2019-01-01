@@ -8,6 +8,7 @@ const passport = require("passport");
 //Load Input Validation
 const validateRegisterInput = require("../../validation/register");
 const validateLoginInput = require("../../validation/login");
+const validatePaycheckInput = require("../../validation/paycheck");
 
 //Load User model
 const User = require("../../models/User");
@@ -54,6 +55,29 @@ router.post("/register", async (req, res) => {
         });
       });
     }
+  });
+});
+
+//@route POST api/users/add-paycheck
+//@desc Add paycheck to user profile
+//@access Public
+router.post("/add-paycheck", async (req, res) => {
+  const { errors, isValid } = validatePaycheckInput(req.body);
+  //Check Validation
+  if (!isValid) {
+    return res.status(400).json(errors);
+  }
+
+  const paychecks = req.body.paychecks;
+
+  if (!paychecks) {
+    return res.status(400).json(errors);
+  }
+
+  user.paychecks = paychecks;
+
+  user.save(function(err) {
+    // todo: don't forget to handle err
   });
 });
 

@@ -14,7 +14,7 @@ class Calendars extends Component {
           <div>
             <BudgetBar />
             <Link to="/add-paycheck">
-              <Button fluid>Enter your next paycheck</Button>
+              <Button>Enter your next paycheck</Button>
             </Link>
           </div>
         ) : (
