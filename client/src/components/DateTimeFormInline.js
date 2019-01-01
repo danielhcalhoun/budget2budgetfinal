@@ -35,8 +35,6 @@ class DateTimeFormInline extends Component {
       meta: { touched, error }
     } = this.props;
 
-    console.log(this.props);
-
     return (
       <div>
         <DateInput
