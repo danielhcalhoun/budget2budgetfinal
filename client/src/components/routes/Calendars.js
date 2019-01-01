@@ -6,9 +6,10 @@ import AddPaycheck from "./AddPaycheck";
 
 class Calendars extends Component {
   render() {
+    const { paychecks } = this.props.paychecks.paychecks;
     return (
       <Container>
-        {this.props.paychecks.paychecks.length ? (
+        {paychecks.length ? (
           <Link to="/add-paycheck">
             <Button fluid>Enter your next paycheck</Button>
           </Link>

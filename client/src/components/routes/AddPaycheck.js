@@ -5,9 +5,11 @@ import Paycheck from "../forms/paycheck/Paycheck";
 
 class AddPaycheck extends Component {
   render() {
+    const { paychecks } = this.props.paychecks.paychecks;
+
     return (
       <Container>
-        {this.props.paychecks.paychecks.length ? (
+        {paychecks.length ? (
           ""
         ) : (
           <Message warning header="Enter your first paycheck to get started!" />
