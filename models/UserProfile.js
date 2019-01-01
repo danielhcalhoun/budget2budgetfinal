@@ -1,6 +1,22 @@
 const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
 
+//Paychecks Schema
+// const PaycheckSchema = new Schema({
+//   income: {
+//     type: Number,
+//     required: true
+//   },
+//   date: {
+//     type: String,
+//     required: true
+//   },
+//   recurring: {
+//     type: Boolean,
+//     default: false
+//   }
+// });
+
 //Create Schema
 const UserProfileSchema = new Schema({
   user: {
@@ -9,21 +25,33 @@ const UserProfileSchema = new Schema({
   },
   paychecks: [
     {
-      income: Number,
-      date: String,
-      recurring: Boolean,
-      recurringPattern: {
-        //daily, weekly, monthly
-        recurringType: String,
-        //every x weeks or months
-        separationCount: Number,
-        dayOfWeek: Number,
-        weekOfMonth: Number,
-        monthOfYear: Number,
-        isRescheduled: String,
-        isCancelled: String,
-        idParentEvent: Number
+      income: {
+        type: Number
+      },
+      date: {
+        type: String
+      },
+      recurring: {
+        type: Boolean,
+        default: false
       }
+      // {
+      //   income: Number,
+      //   date: String,
+      //   recurring: Boolean
+      // recurringPattern: {
+      //   //daily, weekly, monthly
+      //   recurringType: String,
+      //   //every x weeks or months
+      //   separationCount: Number,
+      //   dayOfWeek: Number,
+      //   weekOfMonth: Number,
+      //   monthOfYear: Number,
+      //   isRescheduled: String,
+      //   isCancelled: String,
+      //   idParentEvent: Number
+      // }
+      // }
     }
   ]
 });

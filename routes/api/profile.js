@@ -5,6 +5,7 @@ const passport = require("passport");
 
 //Load Validation
 const validateProfileInput = require("../../validation/profile");
+const validatePaycheckInput = require("../../validation/profile");
 
 //Load Profile Model
 const Profile = require("../../models/UserProfile");
@@ -60,7 +61,6 @@ router.post(
     const profileFields = {};
     profileFields.user = req.user.id;
 
-    //Check if handle exists
     Profile.findOne({ user: req.user.id }).then(profile => {
       if (profile) {
         // Update
@@ -68,11 +68,87 @@ router.post(
           { user: req.user.id },
           { $set: profileFields },
           { new: true }
-        ).then(profile => res.json(profile));
+        )
+          .then(profile => res.json(profile))
+          .catch(err => {
+            res.status(500).send({
+              message:
+                err.message || "Some error occured while updating profile"
+            });
+          });
       } else {
         // Create
         // Save Profile
-        new Profile(profileFields).save().then(profile => res.json(profile));
+        new Profile(profileFields)
+          .save()
+          .then(profile => res.json(profile))
+          .catch(err => {
+            res.status(500).send({
+              message:
+                err.message || "Some error occured while creating profile"
+            });
+          });
+      }
+    });
+  }
+);
+
+// @route   POST api/profile/add-paycheck
+// @desc    Add experience to profile
+// @access  Private
+router.post(
+  "/paycheck",
+  passport.authenticate("jwt", { session: false }),
+  (req, res) => {
+    const { errors, isValid } = validatePaycheckInput(req.body);
+
+    // Check Validation
+    if (!isValid) {
+      // Return any errors with 400 status
+      return res.status(400).json(errors);
+    }
+
+    Profile.findOne({ user: req.user.id }).then(profile => {
+      const addPaycheck = () => {
+        const newPaycheck = {
+          income: req.body.income,
+          date: req.body.date,
+          recurring: req.body.recurring
+        };
+
+        // Add to exp array
+        profile.paychecks.unshift(newPaycheck);
+
+        profile
+          .save()
+          .then(profile => res.json(profile))
+          .catch(err => {
+            res.status(500).send({
+              message:
+                err.message || "Some error occured while adding a paycheck"
+            });
+          });
+      };
+
+      if (profile) {
+        addPaycheck();
+      } else {
+        // Get fields
+        const profileFields = {};
+        profileFields.user = req.user.id;
+
+        // Create
+        // Save Profile
+        new Profile(profileFields)
+          .save()
+          .then(profile => res.json(profile))
+          .then(addPaycheck)
+          .catch(err => {
+            res.status(500).send({
+              message:
+                err.message || "Some error occured while creating profile"
+            });
+          });
       }
     });
   }
