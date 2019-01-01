@@ -42,6 +42,23 @@ router.get(
   }
 );
 
+const createProfile = (req, res) => {
+  // Get fields
+  const profileFields = {};
+  profileFields.user = req.user.id;
+
+  // Create
+  // Save Profile
+  new Profile(profileFields)
+    .save()
+    .then(profile => res.json(profile))
+    .catch(err => {
+      res.status(500).send({
+        message: err.message || "Some error occured while creating profile"
+      });
+    });
+};
+
 // @route   POST api/profile
 // @desc    Create or edit user profile
 // @access  Private
@@ -77,17 +94,7 @@ router.post(
             });
           });
       } else {
-        // Create
-        // Save Profile
-        new Profile(profileFields)
-          .save()
-          .then(profile => res.json(profile))
-          .catch(err => {
-            res.status(500).send({
-              message:
-                err.message || "Some error occured while creating profile"
-            });
-          });
+        createProfile(req, res);
       }
     });
   }
@@ -133,22 +140,7 @@ router.post(
       if (profile) {
         addPaycheck();
       } else {
-        // Get fields
-        const profileFields = {};
-        profileFields.user = req.user.id;
-
-        // Create
-        // Save Profile
-        new Profile(profileFields)
-          .save()
-          .then(profile => res.json(profile))
-          .then(addPaycheck)
-          .catch(err => {
-            res.status(500).send({
-              message:
-                err.message || "Some error occured while creating profile"
-            });
-          });
+        createProfile(req, res);
       }
     });
   }

@@ -4,11 +4,6 @@ import setAuthToken from "../utils/setAuthToken";
 import jwt_decode from "jwt-decode";
 import { GET_ERRORS } from "./types";
 
-export const fetchExpenses = () => async dispatch => {
-  const res = await axios.get("/api/provider/all");
-  dispatch({ type: types.FETCH_PROVIDERS, payload: res.data });
-};
-
 export const fetchUser = () => async dispatch => {
   const res = await axios.get("/api/users/current");
   dispatch({ type: types.FETCH_USER, payload: res.data });
@@ -72,8 +67,18 @@ export const logoutUser = () => dispatch => {
 };
 
 export const addPaycheck = (values, history) => dispatch => {
-  dispatch({
-    type: types.ADD_PAYCHECK,
-    payload: values
-  });
+  axios
+    .post("/api/profile/paycheck", values)
+    .then(res => dispatch({ type: types.ADD_PAYCHECK, payload: values }))
+    .catch(err =>
+      dispatch({
+        type: GET_ERRORS,
+        payload: err.response.data
+      })
+    );
+
+  // dispatch({
+  //   type: types.ADD_PAYCHECK,
+  //   payload: values
+  // });
 };
