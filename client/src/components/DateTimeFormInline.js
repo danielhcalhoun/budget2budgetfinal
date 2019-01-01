@@ -39,13 +39,16 @@ class DateTimeFormInline extends Component {
 
     return (
       <div>
-        <Input {...input} value={this.state.date} />
         <DateInput
+          {...input}
           inline
           className="example-calendar-input"
           value={this.state.date}
           name="date"
-          onChange={this.handleChange}
+          onChange={(event, { name, value }) => {
+            input.onChange(value); //call the onchange function from redux form
+            this.handleChange(event, { name, value });
+          }}
         />
         <Message error style={{ marginBottom: "5px" }}>
           {touched && error}
