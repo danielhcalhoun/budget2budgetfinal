@@ -5,7 +5,7 @@ import Paycheck from "../forms/paycheck/Paycheck";
 
 class AddPaycheck extends Component {
   render() {
-    const { paychecks } = this.props.paychecks.paychecks;
+    const { paychecks } = this.props.paychecks;
 
     return (
       <Container>
