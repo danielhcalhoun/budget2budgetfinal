@@ -31,12 +31,7 @@ class PaycheckForm extends Component {
             {...currencyMask}
           />
           {/*{...currencyMask}*/}
-          <Field
-            key="date"
-            type="text"
-            component={DateTimeFormInline}
-            name="date"
-          />
+          <Field key="date" component={DateTimeFormInline} name="date" />
 
           <Button type="submit">Confirm</Button>
         </Form>
@@ -49,6 +44,8 @@ function validate(values) {
   const errors = {};
 
   !values.income ? (errors.income = "You must provide an income") : "";
+
+  !values.date ? (errors.date = "You must provide a date") : "";
 
   // _.each(formFields, ({ name }) => {
   //   if (!values[name]) {

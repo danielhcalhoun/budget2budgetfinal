@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import { DateInput } from "semantic-ui-calendar-react";
+import { Input, Message } from "semantic-ui-react";
 
 class DateTimeFormInline extends Component {
   constructor(props) {
@@ -34,8 +35,11 @@ class DateTimeFormInline extends Component {
       meta: { touched, error }
     } = this.props;
 
+    console.log(this.props);
+
     return (
       <div>
+        <Input {...input} value={this.state.date} />
         <DateInput
           inline
           className="example-calendar-input"
@@ -43,7 +47,9 @@ class DateTimeFormInline extends Component {
           name="date"
           onChange={this.handleChange}
         />
-        {touched && error && <span>{error}</span>}
+        <Message error style={{ marginBottom: "5px" }}>
+          {touched && error}
+        </Message>
       </div>
     );
   }
