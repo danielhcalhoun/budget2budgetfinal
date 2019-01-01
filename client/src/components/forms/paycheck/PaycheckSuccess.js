@@ -1,12 +1,15 @@
 import React from "react";
 import { connect } from "react-redux";
-import { withRouter } from "react-router";
+import { Redirect, withRouter } from "react-router";
 import { addPaycheck } from "../../../actions";
-import { Message } from "semantic-ui-react";
 
 const PaycheckSuccess = ({ onCancel, formValues, addPaycheck, history }) => {
   addPaycheck(formValues, history);
-  return <Message success header="Success!" />;
+  return (
+    <React.Fragment>
+      <Redirect to="/thank-you" />
+    </React.Fragment>
+  );
 };
 
 function mapStateToProps(state) {

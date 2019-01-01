@@ -1,10 +1,9 @@
 import React, { Component } from "react";
 import { reduxForm, Field } from "redux-form";
-import { Button, Form, Header, Message } from "semantic-ui-react";
+import { Button, Form, Header } from "semantic-ui-react";
 import FormField from "../FormField";
 import DateTimeFormInline from "../../DateTimeFormInline";
 import { createNumberMask } from "redux-form-input-masks";
-import validateCurrency from "../../../utils/validateCurrency";
 
 const currencyMask = createNumberMask({
   prefix: "$ ",
@@ -30,7 +29,6 @@ class PaycheckForm extends Component {
             name="income"
             {...currencyMask}
           />
-          {/*{...currencyMask}*/}
           <Field key="date" component={DateTimeFormInline} name="date" />
 
           <Button type="submit">Confirm</Button>
@@ -43,15 +41,13 @@ class PaycheckForm extends Component {
 function validate(values) {
   const errors = {};
 
-  !values.income ? (errors.income = "You must provide an income") : "";
+  if (!values.income) {
+    errors.income = "You must provide an income";
+  }
 
-  !values.date ? (errors.date = "You must provide a date") : "";
-
-  // _.each(formFields, ({ name }) => {
-  //   if (!values[name]) {
-  //     errors[name] = "You must provide a value";
-  //   }
-  // });
+  if (!values.date) {
+    errors.date = "You must provide a date";
+  }
 
   return errors;
 }

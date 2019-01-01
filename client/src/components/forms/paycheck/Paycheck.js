@@ -7,7 +7,11 @@ class Paycheck extends Component {
 
   renderContent() {
     if (this.state.showFormReview === true) {
-      return <PaycheckSuccess />;
+      return (
+        <div>
+          <PaycheckSuccess />
+        </div>
+      );
     }
     return (
       <div>

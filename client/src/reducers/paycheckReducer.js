@@ -1,13 +1,7 @@
 import { ADD_PAYCHECK } from "../actions/types";
 
 const initialState = {
-  paychecks: [],
-  currentPaycheck: {
-    date: {},
-    amount: {},
-    recurring: false,
-    recur: {}
-  }
+  paychecks: []
 };
 
 export default function(state = initialState, action) {
@@ -15,8 +9,7 @@ export default function(state = initialState, action) {
     case ADD_PAYCHECK:
       return {
         ...state,
-        paychecks: [...state.paychecks, action.payload],
-        currentPaycheck: {}
+        paychecks: [...state.paychecks, action.payload]
       };
     default:
       return state;
