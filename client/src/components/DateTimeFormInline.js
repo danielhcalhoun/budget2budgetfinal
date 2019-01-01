@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import { DateInput } from "semantic-ui-calendar-react";
-import { Input, Message } from "semantic-ui-react";
+import { Message } from "semantic-ui-react";
 
 class DateTimeFormInline extends Component {
   constructor(props) {
