@@ -66,19 +66,35 @@ export const logoutUser = () => dispatch => {
   dispatch(setCurrentUser({}));
 };
 
-export const addPaycheck = (values, history) => dispatch => {
+export const createProfile = () => dispatch => {
   axios
-    .post("/api/profile/paycheck", values)
-    .then(res => dispatch({ type: types.ADD_PAYCHECK, payload: values }))
+    .post("/api/profile")
+    .then(
+      dispatch({
+        type: types.CREATE_PROFILE
+      })
+    )
     .catch(err =>
       dispatch({
         type: GET_ERRORS,
         payload: err.response.data
       })
     );
+};
 
-  // dispatch({
-  //   type: types.ADD_PAYCHECK,
-  //   payload: values
-  // });
+export const addPaycheck = values => dispatch => {
+  axios
+    .post("/api/profile/paycheck", values)
+    .then(
+      dispatch({
+        type: types.ADD_PAYCHECK,
+        payload: values
+      })
+    )
+    .catch(err =>
+      dispatch({
+        type: GET_ERRORS,
+        payload: err.response.data
+      })
+    );
 };

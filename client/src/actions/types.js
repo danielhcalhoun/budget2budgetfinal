@@ -1,4 +1,3 @@
-export const FETCH_PROVIDERS = "fetch_providers";
 export const LOGIN_USER = "login_user";
 export const REGISTER_USER = "register_user";
 export const TEST_USER = "test_user";
@@ -8,3 +7,4 @@ export const FETCH_USER = "fetch_users";
 export const SET_CURRENT_USER = "SET_CURRENT_USER";
 export const ADD_PAYCHECK = "ADD_PAYCHECK";
 export const ADD_EXPENSE = "ADD_EXPENSE";
+export const CREATE_PROFILE = "CREATE_PROFILE";
