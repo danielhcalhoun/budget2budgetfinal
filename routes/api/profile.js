@@ -38,10 +38,6 @@ router.post(
     // Get fields
     const profileFields = {};
     profileFields.user = req.user.id;
-    if (req.body.bio) profileFields.bio = req.body.bio;
-    if (req.body.age) profileFields.age = req.body.age;
-    if (req.body.ethnicity) profileFields.ethnicity = req.body.ethnicity;
-    if (req.body.avatar) profileFields.avatar = req.body.avatar;
 
     //Check if handle exists
     Profile.findOne({ user: req.user.id }).then(profile => {

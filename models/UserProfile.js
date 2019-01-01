@@ -7,23 +7,25 @@ const UserProfileSchema = new Schema({
     type: Schema.Types.ObjectId,
     ref: "users"
   },
-  handle: {
-    type: String,
-    required: true,
-    max: 40
-  },
-  bio: {
-    type: String
-  },
-  age: {
-    type: Number
-  },
-  ethnicity: {
-    type: String
-  },
-  avatar: {
-    type: String
-  }
+  paychecks: [
+    {
+      income: Number,
+      date: String,
+      recurring: Boolean,
+      recurringPattern: {
+        //daily, weekly, monthly
+        recurringType: String,
+        //every x weeks or months
+        separationCount: Number,
+        dayOfWeek: Number,
+        weekOfMonth: Number,
+        monthOfYear: Number,
+        isRescheduled: String,
+        isCancelled: String,
+        idParentEvent: Number
+      }
+    }
+  ]
 });
 
 module.exports = UserProfile = mongoose.model("userprofile", UserProfileSchema);
