@@ -28,12 +28,7 @@ class DateTimeFormInline extends Component {
   };
 
   render() {
-    const {
-      input,
-      placeholder,
-      defaultValue,
-      meta: { touched, error }
-    } = this.props;
+    const { input, meta: { touched, error } } = this.props;
 
     return (
       <div>
