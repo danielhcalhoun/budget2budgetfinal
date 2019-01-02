@@ -5,7 +5,7 @@ import Register from "../forms/register/Register";
 import Login from "../forms/login/Login";
 import { Card, Container } from "semantic-ui-react";
 import { fetchUser } from "../../actions";
-import Calendars from "./Calendars";
+import Dashboard from "./Dashboard";
 
 class Landing extends Component {
   render() {
@@ -13,7 +13,7 @@ class Landing extends Component {
       case null:
         return <div>Loading...</div>;
       case true:
-        return <Calendars />;
+        return <Dashboard />;
       default:
         return (
           <Container>
