@@ -87,12 +87,9 @@ export const addPaycheck = values => dispatch => {
     .post("/api/profile/paycheck", values)
     .then(res => dispatch({ type: types.ADD_PAYCHECK, payload: res.data }))
     .catch(err =>
-      dispatch(
-        {
-          type: GET_ERRORS,
-          payload: err.response.data
-        },
-        console.log(err.response.data)
-      )
+      dispatch({
+        type: GET_ERRORS,
+        payload: err.response.data
+      })
     );
 };
