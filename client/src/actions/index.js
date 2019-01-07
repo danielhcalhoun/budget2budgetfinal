@@ -85,16 +85,14 @@ export const createProfile = () => dispatch => {
 export const addPaycheck = values => dispatch => {
   axios
     .post("/api/profile/paycheck", values)
-    .then(
-      dispatch({
-        type: types.ADD_PAYCHECK,
-        payload: values
-      })
-    )
+    .then(res => dispatch({ type: types.ADD_PAYCHECK, payload: res.data }))
     .catch(err =>
-      dispatch({
-        type: GET_ERRORS,
-        payload: err.response.data
-      })
+      dispatch(
+        {
+          type: GET_ERRORS,
+          payload: err.response.data
+        },
+        console.log(err.response.data)
+      )
     );
 };
