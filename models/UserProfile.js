@@ -29,7 +29,7 @@ const UserProfileSchema = new Schema({
         type: Number
       },
       date: {
-        type: String
+        type: Date
       },
       recurring: {
         type: Boolean,

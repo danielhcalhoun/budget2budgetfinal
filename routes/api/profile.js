@@ -170,6 +170,64 @@ router.post(
   }
 );
 
+const getCurrentPaychecks = function(req, res) {
+  Profile.aggregate(
+    [
+      { $unwind: "$paychecks" },
+      {
+        $project: {
+          month: { $month: "$paychecks.date" },
+          income: "$paychecks.income",
+          recurring: "$paychecks.recurring"
+        }
+      }
+    ],
+    function(err, result) {
+      if (err) res.sendStatus(404);
+      res.send(result);
+    }
+  );
+};
+
+// const getCurrentPaychecks = function(req, res) {
+//   Profile.aggregate(
+//     [
+//       {
+//         $match: {
+//           _id: 0,
+//           date: "$paychecks.income"
+//         }
+//       }
+//     ],
+//     function(err, result) {
+//       if (err) res.sendStatus(404);
+//       res.send(result);
+//     }
+//   );
+// };
+
+// @route   GET api/profile/current-paychecks
+// @desc
+// @access  Private
+router.get(
+  "/current-paychecks",
+  passport.authenticate("jwt", { session: false }),
+  (req, res) => {
+    Profile.findOne({ user: req.user.id })
+      .then(profile => {
+        if (!profile.paychecks) {
+          errors.noprofile = "There is no profile for this user";
+          return res.status(404).json(errors);
+        }
+
+        //return res.json(profile.paychecks);
+
+        return getCurrentPaychecks(req, res);
+      })
+      .catch(err => res.status(404).json(err));
+  }
+);
+
 // @route   POST api/profile/paychecks
 // @desc    Add experience to profile
 // @access  Private
