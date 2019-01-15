@@ -180,6 +180,11 @@ const getCurrentPaychecks = function(req, res) {
           income: "$paychecks.income",
           recurring: "$paychecks.recurring"
         }
+      },
+      {
+        $match: {
+          month: new Date().getMonth() + 1
+        }
       }
     ],
     function(err, result) {
