@@ -1,8 +1,7 @@
 import React, { Component } from "react";
-import { Button, Container, Dimmer } from "semantic-ui-react";
+import { Button, Container } from "semantic-ui-react";
 import connect from "react-redux/es/connect/connect";
 import { Link } from "react-router-dom";
-import AddPaycheck from "./AddPaycheck";
 import BudgetBar from "../BudgetBar";
 import { getCurrentProfile } from "../../actions/profileActions";
 import Loading from "../Loading";
@@ -28,6 +27,8 @@ class Dashboard extends Component {
             </Link>
           </Container>
         );
+      default:
+        return <Loading />;
     }
   }
 }

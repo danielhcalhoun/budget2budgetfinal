@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { Container, Dimmer, Loader, Segment } from "semantic-ui-react";
+import { Container, Loader } from "semantic-ui-react";
 
 class Loading extends Component {
   render() {

@@ -37,6 +37,7 @@ class DateTimeFormInline extends Component {
           inline
           className="example-calendar-input"
           value={this.state.date}
+          dateFormat={"MM-DD-YYYY"}
           name="date"
           onChange={(event, { name, value }) => {
             input.onChange(value); //call the onchange function from redux form
