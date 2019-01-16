@@ -14,10 +14,14 @@ class Dashboard extends Component {
   render() {
     const { profile, loading } = this.props.profile;
     switch (profile) {
-      case null:
-        return <Loading />;
       case loading:
         return <Loading />;
+      case null:
+        return (
+          <div>
+            <h1>Profile not found</h1>
+          </div>
+        );
       case profile:
         return (
           <Container>

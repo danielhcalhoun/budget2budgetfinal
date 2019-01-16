@@ -6,12 +6,13 @@ import Login from "../forms/login/Login";
 import { Card, Container } from "semantic-ui-react";
 import { fetchUser } from "../../actions";
 import Dashboard from "./Dashboard";
+import Loading from "../Loading";
 
 class Landing extends Component {
   render() {
     switch (this.props.auth.isAuthenticated) {
       case null:
-        return <div>Loading...</div>;
+        return <Loading />;
       case true:
         return <Dashboard />;
       default:

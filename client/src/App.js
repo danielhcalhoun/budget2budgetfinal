@@ -3,7 +3,7 @@ import { BrowserRouter, Route, Redirect } from "react-router-dom";
 import "./App.css";
 import Landing from "./components/routes/Landing";
 import { Grid } from "semantic-ui-react";
-import Calendars from "./components/routes/Dashboard";
+import Calendars from "./components/routes/CalendarPage";
 import Navigation from "./components/nav/Navigation";
 import Profile from "./components/routes/Profile";
 import connect from "react-redux/es/connect/connect";
