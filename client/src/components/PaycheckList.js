@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import connect from "react-redux/es/connect/connect";
 import { getCurrentPaychecks } from "../actions/profileActions";
-import { List, Icon } from "semantic-ui-react";
+import { List, Icon, Button } from "semantic-ui-react";
 import Loading from "./Loading";
 
 class PaycheckList extends Component {
@@ -23,9 +23,15 @@ class PaycheckList extends Component {
                 return (
                   <List.Item>
                     <List className="Content">
-                      <Icon circular color="green" name="dollar sign" />
-                      {item.income}
-                      {item.date}
+                      <List.Content floated="left">
+                        <Icon circular color="green" name="dollar sign" />
+                        {item.income} {item.date}
+                      </List.Content>
+                      <List.Content floated="right">
+                        <Icon circular name="check" />
+                        <Icon circular name="edit" />
+                        <Icon circular name="delete" />
+                      </List.Content>
                     </List>
                   </List.Item>
                 );
