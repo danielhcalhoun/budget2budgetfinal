@@ -5,6 +5,7 @@ import { Link } from "react-router-dom";
 import BudgetBar from "../BudgetBar";
 import { getCurrentProfile } from "../../actions/profileActions";
 import Loading from "../Loading";
+import ExpenseList from "../PaycheckList";
 
 class Dashboard extends Component {
   componentDidMount() {
@@ -19,7 +20,7 @@ class Dashboard extends Component {
       case null:
         return (
           <div>
-            <h1>Profile not found</h1>
+            <Loading />
           </div>
         );
       case profile:
@@ -29,6 +30,7 @@ class Dashboard extends Component {
             <Link to="/add-paycheck">
               <Button>Enter your next paycheck</Button>
             </Link>
+            <ExpenseList />
           </Container>
         );
       default:

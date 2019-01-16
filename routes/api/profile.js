@@ -178,7 +178,10 @@ const getCurrentPaychecks = function(req, res) {
         $project: {
           month: { $month: "$paychecks.date" },
           income: "$paychecks.income",
-          recurring: "$paychecks.recurring"
+          recurring: "$paychecks.recurring",
+          date: {
+            $dateToString: { format: "%m/%d/%Y", date: "$paychecks.date" }
+          }
         }
       },
       {
@@ -194,25 +197,8 @@ const getCurrentPaychecks = function(req, res) {
   );
 };
 
-// const getCurrentPaychecks = function(req, res) {
-//   Profile.aggregate(
-//     [
-//       {
-//         $match: {
-//           _id: 0,
-//           date: "$paychecks.income"
-//         }
-//       }
-//     ],
-//     function(err, result) {
-//       if (err) res.sendStatus(404);
-//       res.send(result);
-//     }
-//   );
-// };
-
 // @route   GET api/profile/current-paychecks
-// @desc
+// @desc    Get the current paychecks from this month
 // @access  Private
 router.get(
   "/current-paychecks",
