@@ -281,46 +281,18 @@ router.get(
       },
       {
         "paychecks.$.": 1
+      },
+      {
+        user: req.user.id
       }
     )
       .then(paycheck => {
         if (!paycheck) {
-          errors.noprofile = "There is no profile for this user";
-          return res.status(404).json(errors);
+          return res.status(404).json({ notfound: "Paycheck not found" });
         } else {
-          return res.json(paycheck);
+          return res.json(paycheck.paychecks[0]);
         }
       })
-      // if (!profile) {
-      //   errors.noprofile = "There is no profile for this user";
-      //   return res.status(404).json(errors);
-      // }
-
-      //return getPaycheck(req, res);
-
-      // profile.paychecks
-      //   .findOne({
-      //     _id: req.params.id
-      //   })
-      //   .then(paycheck => res.json(paycheck))
-      //   .catch(err =>
-      //     res.status(404).json({
-      //       notfound: "no paycheck found"
-      //     })
-      //   );
-
-      // // Profile.findOne({
-      // //   paychecks: {
-      // //     $elemMatch: { _id: req.params.id }
-      // //   }
-      // // })
-      // Profile.findOne({
-      //   "paychecks._id": mongoose.Types.ObjectId(req.params.id)
-      // })
-      //   .then(paycheck => res.json(paycheck))
-      //   .catch(err =>
-      //     res.status(404).json({ notfound: "no paycheck found" })
-      //   );
       .catch(err => res.status(404).json({ notfound: "Paycheck not found" }));
   }
 );
@@ -332,40 +304,27 @@ router.delete(
   "/paycheck/:id",
   passport.authenticate("jwt", { session: false }),
   (req, res) => {
-    Profile.findOne({ user: req.user.id })
+    Profile.findOne(
+      {
+        "paychecks._id": req.params.id
+      },
+      {
+        "paychecks.$.": 1
+      },
+      {
+        user: req.user.id
+      }
+    )
       .then(profile => {
         if (!profile) {
-          errors.noprofile = "There is no profile for this user";
-          return res.status(404).json(errors);
+          return res.status(404).json({ notfound: "Paycheck not found" });
+        } else {
+          profile.paychecks[0].remove();
+
+          profile.save().then(profile => res.json(profile));
         }
-
-        let cursor = getPaycheck(req, res);
-
-        // return getPaycheck(req, res).then(paycheck => {
-        //   paycheck
-        //     .remove()
-        //     .then(() => res.json({ success: true }))
-        //     .catch(err =>
-        //       res.status(404).json({ cannotdelete: "Can't delete paycheck" })
-        //     );
-        // });
-
-        // return getPaycheck(req, res)
-        //   .then(paycheck => {
-        //     paycheck
-        //       .remove()
-        //       .then(() => res.json({ success: true }))
-        //       .catch(err =>
-        //         res.status(404).json({ cannotdelete: "Can't delete paycheck" })
-        //       );
-        //   })
-        //   .catch(err =>
-        //     res
-        //       .status(404)
-        //       .json({ paychecknotfound: "No paycheck found matching that id" })
-        //   );
       })
-      .catch(err => res.status(404).json({ notfound: "Paycheck not found" }));
+      .catch(err => res.status(404).json({ notfound: "Profile not found" }));
   }
 );
 
