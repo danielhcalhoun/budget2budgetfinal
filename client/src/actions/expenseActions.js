@@ -36,7 +36,7 @@ export const deleteExpense = (id, index) => dispatch => {
     .delete(`/api/profile/expense/${id}`)
     .then(res =>
       dispatch({
-        type: types.DELETE_PAYCHECK,
+        type: types.DELETE_EXPENSE,
         payload: index
       })
     )

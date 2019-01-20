@@ -26,7 +26,7 @@ class BudgetBar extends Component {
   updateTotalExpenses = expenses => {
     let total = expenses
       .map(item => {
-        return item.income;
+        return item.cost;
       })
       .reduce((a, b) => {
         return a + b;
@@ -42,7 +42,7 @@ class BudgetBar extends Component {
     }
 
     if (expenses.length >= 1 && expenses !== prevProps.expenses) {
-      this.updateTotalPaychecks(expenses);
+      this.updateTotalExpenses(expenses);
     }
   };
 

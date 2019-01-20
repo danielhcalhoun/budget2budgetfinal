@@ -403,6 +403,33 @@ router.get(
   }
 );
 
+// @route   DELETE api/profile/expenses/:id
+// @desc    Delete expenses
+// @access  Private
+router.delete(
+  "/expense/:id",
+  passport.authenticate("jwt", { session: false }),
+  (req, res) => {
+    Profile.findOne(
+      {
+        "expenses._id": req.params.id
+      },
+      {
+        "expenses.$.": 1
+      },
+      {
+        user: req.user.id
+      }
+    )
+      .then(profile => {
+        profile.expenses[0].remove();
+
+        profile.save().then(profile => res.json(profile));
+      })
+      .catch(() => res.status(404).json({ notfound: "Profile not found" }));
+  }
+);
+
 // @route   DELETE api/profile/paychecks/:id
 // @desc    Delete paycheck
 // @access  Private

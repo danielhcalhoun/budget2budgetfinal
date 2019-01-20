@@ -1,8 +1,4 @@
-import {
-  ADD_PAYCHECK,
-  DELETE_PAYCHECK,
-  GET_CURRENT_PAYCHECKS
-} from "../actions/types";
+import { DELETE_PAYCHECK, GET_CURRENT_PAYCHECKS } from "../actions/types";
 
 const initialState = {};
 
