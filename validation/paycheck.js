@@ -6,9 +6,9 @@ module.exports = function validatePaycheckInput(data) {
 
   data.income = !isEmpty(data.income) ? data.income : "";
   data.date = !isEmpty(data.date) ? data.date : "";
-  data.recurring = !isEmpty(data.recurring) ? data.recurring : "";
+  data.recurring = !isEmpty(data.recurring) ? data.recurring : false;
 
-  if (Validator.isEmpty(data.income)) {
+  if (Validator.isEmpty(data.income.toString())) {
     errors.income = "Income is required";
   }
 
