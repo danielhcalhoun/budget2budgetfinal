@@ -5,7 +5,8 @@ import { Link } from "react-router-dom";
 import BudgetBar from "../BudgetBar";
 import { getCurrentProfile } from "../../actions/profileActions";
 import Loading from "../Loading";
-import ExpenseList from "../PaycheckList";
+import PaycheckList from "../PaycheckList";
+import ExpenseList from "../ExpensesList";
 
 class Dashboard extends Component {
   componentDidMount() {
@@ -36,6 +37,7 @@ class Dashboard extends Component {
               </Link>
             ) : null}
 
+            <PaycheckList />
             <ExpenseList />
           </Container>
         );

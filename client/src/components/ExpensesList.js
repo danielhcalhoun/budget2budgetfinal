@@ -1,31 +1,52 @@
 import React, { Component } from "react";
-import { connect } from "react-redux";
-import { fetchExpenses } from "../actions";
+import connect from "react-redux/es/connect/connect";
+import { getCurrentExpenses, deleteExpense } from "../actions/expenseActions";
+import { List, Icon } from "semantic-ui-react";
+import Loading from "./Loading";
 
-class ExpensesList extends Component {
-  componentDidMount() {
-    this.props.fetchExpenses();
+class ExpenseList extends Component {
+  async componentDidMount() {
+    this.props.getCurrentExpenses();
   }
 
-  renderExpenses() {
-    const reverseExpenses = [...this.props.expenses].reverse();
-    return reverseExpenses.map(expense => {
-      return (
-        <div className="card darken-1" key={expense._id}>
-          <div className="card-content">
-            <img src={expense.avatar} alt={expense.handle} />
-            <br />
-            <span className="card-title">{expense.handle}</span>
-            <p>{expense.status}</p>
-            <p className="right" />
-          </div>
-        </div>
-      );
-    });
-  }
+  handleDelete = (id, index) => {
+    this.props.deleteExpense(id, index);
+  };
 
   render() {
-    return <div>{this.renderExpenses()}</div>;
+    const { expenses } = this.props;
+    switch (expenses.length >= 1) {
+      default:
+        return <Loading />;
+      case true:
+        return (
+          <React.Fragment>
+            <h4>Upcoming Expenses</h4>
+            <List divided verticalAlign="middle">
+              {expenses.map((item, index) => {
+                return (
+                  <List.Item key={item._id}>
+                    <List className="Content">
+                      <List.Content floated="left">
+                        <Icon circular color="green" name="dollar sign" />
+                        {item.cost} {item.date}
+                      </List.Content>
+                      <List.Content floated="right">
+                        <Icon circular name="edit" />
+                        <Icon
+                          circular
+                          name="delete"
+                          onClick={() => this.handleDelete(item._id, index)}
+                        />
+                      </List.Content>
+                    </List>
+                  </List.Item>
+                );
+              })}
+            </List>
+          </React.Fragment>
+        );
+    }
   }
 }
 
@@ -33,4 +54,7 @@ function mapStateToProps({ expenses }) {
   return { expenses };
 }
 
-export default connect(mapStateToProps, { fetchExpenses: fetchExpenses })(ExpensesList);
+export default connect(mapStateToProps, {
+  getCurrentExpenses,
+  deleteExpense
+})(ExpenseList);

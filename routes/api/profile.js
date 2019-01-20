@@ -278,6 +278,63 @@ router.get(
   }
 );
 
+const getCurrentExpenses = function(req, res) {
+  Profile.aggregate(
+    [
+      { $unwind: "$expenses" },
+      {
+        $project: {
+          month: { $month: "$expenses.date" },
+          cost: "$expenses.cost",
+          recurring: "$expenses.recurring",
+          date: {
+            $dateToString: { format: "%m/%d/%Y", date: "$expenses.date" }
+          },
+          _id: "$expenses._id"
+        }
+      },
+      {
+        $match: {
+          month: new Date().getMonth() + 1
+        }
+      },
+      {
+        $sort: {
+          date: 1
+        }
+      }
+    ],
+    function(err, result) {
+      if (err) res.sendStatus(404);
+      res.send(result);
+    }
+  );
+};
+
+// @route   GET api/profile/current-expenses
+// @desc    Get the current expenses from this month
+// @access  Private
+router.get(
+  "/current-expenses",
+  passport.authenticate("jwt", { session: false }),
+  (req, res) => {
+    Profile.findOne({ user: req.user.id })
+      .then(profile => {
+        if (!profile.expenses) {
+          errors.noprofile = "There is no profile for this user";
+          return res.status(404).json(errors);
+        }
+
+        return getCurrentExpenses(req, res);
+      })
+      .catch(err =>
+        res.status(404).json({
+          notfound: "No expenses found"
+        })
+      );
+  }
+);
+
 // @route   POST api/profile/paychecks
 // @desc    Add experience to profile
 // @access  Private
