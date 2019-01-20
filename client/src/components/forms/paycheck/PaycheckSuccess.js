@@ -1,11 +1,10 @@
 import React from "react";
 import { connect } from "react-redux";
 import { Redirect, withRouter } from "react-router";
-import { addPaycheck } from "../../../actions";
+import { addPaycheck } from "../../../actions/paycheckActions";
 import moment from "moment";
 
 const PaycheckSuccess = ({ onCancel, formValues, addPaycheck, history }) => {
-  console.log(formValues.date);
   addPaycheck(
     {
       ...formValues,
@@ -15,7 +14,7 @@ const PaycheckSuccess = ({ onCancel, formValues, addPaycheck, history }) => {
   );
   return (
     <React.Fragment>
-      <Redirect to="/thank-you" />
+      <Redirect to="/" />
     </React.Fragment>
   );
 };

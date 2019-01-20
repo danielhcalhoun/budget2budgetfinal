@@ -8,6 +8,7 @@ import errorReducer from "./errorReducer";
 import paycheckReducer from "./paycheckReducer";
 import expenseReducer from "./expenseReducer";
 import profileReducer from "./profileReducer";
+import budgetbarReducer from "./budgetbarReducer";
 
 export default combineReducers({
   form: reduxForm,
@@ -18,5 +19,6 @@ export default combineReducers({
   errors: errorReducer,
   paychecks: paycheckReducer,
   expenses: expenseReducer,
-  profile: profileReducer
+  profile: profileReducer,
+  budgetbar: budgetbarReducer
 });

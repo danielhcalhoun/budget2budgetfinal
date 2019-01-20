@@ -21,13 +21,21 @@ export const getCurrentProfile = () => dispatch => {
     );
 };
 
-export const getCurrentPaychecks = () => dispatch => {
+
+
+//Profile loading
+export const setProfileLoading = () => {
+  return {
+    type: types.PROFILE_LOADING
+  };
+};
+
+export const createProfile = () => dispatch => {
   axios
-    .get("/api/profile/current-paychecks")
-    .then(res =>
+    .post("/api/profile")
+    .then(
       dispatch({
-        type: types.GET_CURRENT_PAYCHECKS,
-        payload: res.data
+        type: types.CREATE_PROFILE
       })
     )
     .catch(err =>
@@ -38,9 +46,3 @@ export const getCurrentPaychecks = () => dispatch => {
     );
 };
 
-//Profile loading
-export const setProfileLoading = () => {
-  return {
-    type: types.PROFILE_LOADING
-  };
-};

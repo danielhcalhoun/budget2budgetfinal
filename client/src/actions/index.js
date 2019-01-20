@@ -65,31 +65,3 @@ export const logoutUser = () => dispatch => {
   //Set current user to {} which will also set isAuthenticated to false
   dispatch(setCurrentUser({}));
 };
-
-export const createProfile = () => dispatch => {
-  axios
-    .post("/api/profile")
-    .then(
-      dispatch({
-        type: types.CREATE_PROFILE
-      })
-    )
-    .catch(err =>
-      dispatch({
-        type: GET_ERRORS,
-        payload: err.response.data
-      })
-    );
-};
-
-export const addPaycheck = values => dispatch => {
-  axios
-    .post("/api/profile/paycheck", values)
-    .then(res => dispatch({ type: types.ADD_PAYCHECK, payload: res.data }))
-    .catch(err =>
-      dispatch({
-        type: GET_ERRORS,
-        payload: err.response.data
-      })
-    );
-};

@@ -180,7 +180,8 @@ const getCurrentPaychecks = function(req, res) {
           recurring: "$paychecks.recurring",
           date: {
             $dateToString: { format: "%m/%d/%Y", date: "$paychecks.date" }
-          }
+          },
+          _id: "$paychecks._id"
         }
       },
       {
@@ -287,13 +288,9 @@ router.get(
       }
     )
       .then(paycheck => {
-        if (!paycheck) {
-          return res.status(404).json({ notfound: "Paycheck not found" });
-        } else {
-          return res.json(paycheck.paychecks[0]);
-        }
+        return res.json(paycheck.paychecks[0]);
       })
-      .catch(err => res.status(404).json({ notfound: "Paycheck not found" }));
+      .catch(() => res.status(404).json({ notfound: "Paycheck not found" }));
   }
 );
 
@@ -316,15 +313,11 @@ router.delete(
       }
     )
       .then(profile => {
-        if (!profile) {
-          return res.status(404).json({ notfound: "Paycheck not found" });
-        } else {
-          profile.paychecks[0].remove();
+        profile.paychecks[0].remove();
 
-          profile.save().then(profile => res.json(profile));
-        }
+        profile.save().then(profile => res.json(profile));
       })
-      .catch(err => res.status(404).json({ notfound: "Profile not found" }));
+      .catch(() => res.status(404).json({ notfound: "Profile not found" }));
   }
 );
 

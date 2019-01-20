@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import { Container, Message } from "semantic-ui-react";
 import connect from "react-redux/es/connect/connect";
 import Paycheck from "../forms/paycheck/Paycheck";
-import { getCurrentPaychecks } from "../../actions/profileActions";
+import { getCurrentPaychecks } from "../../actions/paycheckActions";
 
 class AddPaycheck extends Component {
   componentDidMount() {
