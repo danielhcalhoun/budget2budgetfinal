@@ -47,3 +47,10 @@ export const deleteExpense = (id, index) => dispatch => {
       })
     );
 };
+
+export const combineExpenses = values => dispatch => {
+  dispatch({
+    type: types.COMBINE_EXPENSES,
+    payload: values
+  });
+};

@@ -28,7 +28,7 @@ class ExpenseList extends Component {
                   <List.Item key={item._id}>
                     <List className="Content">
                       <List.Content floated="left">
-                        <Icon circular color="green" name="dollar sign" />
+                        <Icon circular color="red" name="minus" />
                         {item.cost} {item.date}
                       </List.Content>
                       <List.Content floated="right">
