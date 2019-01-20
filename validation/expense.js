@@ -8,7 +8,7 @@ module.exports = function validateExpenseInput(data) {
   data.date = !isEmpty(data.date) ? data.date : "";
   data.recurring = !isEmpty(data.recurring) ? data.recurring : false;
 
-  if (Validator.isEmpty(data.cost)) {
+  if (Validator.isEmpty(data.cost.toString())) {
     errors.cost = "Cost is required";
   }
 
