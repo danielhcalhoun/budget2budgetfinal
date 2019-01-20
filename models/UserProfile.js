@@ -26,10 +26,12 @@ const UserProfileSchema = new Schema({
   paychecks: [
     {
       income: {
-        type: Number
+        type: Number,
+        required: true
       },
       date: {
-        type: Date
+        type: Date,
+        required: true
       },
       recurring: {
         type: Boolean,
@@ -52,6 +54,22 @@ const UserProfileSchema = new Schema({
       //   idParentEvent: Number
       // }
       // }
+    }
+  ],
+  expenses: [
+    {
+      cost: {
+        type: Number,
+        required: true
+      },
+      date: {
+        type: Date,
+        required: true
+      },
+      recurring: {
+        type: Boolean,
+        default: false
+      }
     }
   ]
 });

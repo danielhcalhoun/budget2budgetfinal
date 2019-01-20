@@ -4,12 +4,12 @@ const isEmpty = require("./is-empty");
 module.exports = function validateExpenseInput(data) {
   let errors = {};
 
-  data.income = !isEmpty(data.income) ? data.income : "";
+  data.cost = !isEmpty(data.cost) ? data.cost : "";
   data.date = !isEmpty(data.date) ? data.date : "";
-  data.recurring = !isEmpty(data.recurring) ? data.recurring : "";
+  data.recurring = !isEmpty(data.recurring) ? data.recurring : false;
 
-  if (Validator.isEmpty(data.income)) {
-    errors.income = "Income is required";
+  if (Validator.isEmpty(data.cost)) {
+    errors.cost = "Cost is required";
   }
 
   if (Validator.isEmpty(data.date)) {

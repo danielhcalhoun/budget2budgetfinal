@@ -115,56 +115,39 @@ router.post(
       return res.status(400).json(errors);
     }
 
-    Profile.findOne({ user: req.user.id }).then(profile => {
-      const addExpense = () => {
-        const newExpense = {
-          income: req.body.income,
-          date: req.body.date,
-          recurring: req.body.recurring
+    Profile.findOne({ user: req.user.id })
+      .then(profile => {
+        const addExpense = () => {
+          const newExpense = {
+            cost: req.body.cost,
+            date: req.body.date,
+            recurring: req.body.recurring
+          };
+
+          if (!profile.expenses) {
+            profile.insert({ expenses: [] });
+          } else {
+            profile.expenses.unshift(newExpense);
+          }
+
+          profile
+            .save()
+            .then(profile => res.json(profile))
+            .catch(err => {
+              res.status(500).send({
+                message:
+                  err.message || "Some error occured while adding a expense"
+              });
+            });
         };
 
-        profile.expenses.unshift(newExpense);
-
-        profile
-          .save()
-          .then(profile => res.json(profile))
-          .catch(err => {
-            res.status(500).send({
-              message:
-                err.message || "Some error occured while adding a expense"
-            });
-          });
-      };
-
-      if (profile) {
         addExpense();
-      } else {
-        const profileFields = {
-          expenses: []
-        };
-
-        const newExpense = {
-          income: req.body.income,
-          date: req.body.date,
-          recurring: req.body.recurring
-        };
-
-        profileFields.expenses.unshift(newExpense);
-        profileFields.user = req.user.id;
-
-        // Create
-        // Save Profile
-        new Profile(profileFields)
-          .save()
-          .then(profile => res.json(profile))
-          .catch(err => {
-            res.status(500).send({
-              message:
-                err.message || "Some error occured while creating profile"
-            });
-          });
-      }
-    });
+      })
+      .catch(err =>
+        res.status(404).json({
+          notfound: "No profile was found"
+        })
+      );
   }
 );
 
@@ -191,7 +174,6 @@ router.post(
           recurring: req.body.recurring
         };
 
-        // Add to exp array
         profile.paychecks.unshift(newPaycheck);
 
         profile
