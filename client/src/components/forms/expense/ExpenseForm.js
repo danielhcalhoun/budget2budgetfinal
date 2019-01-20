@@ -18,16 +18,16 @@ class ExpenseForm extends Component {
       <div>
         <Form
           className={`ui form ${this.props.valid ? "" : "error"}`}
-          onSubmit={this.props.handleSubmit(this.props.onPaycheckSubmit)}
+          onSubmit={this.props.handleSubmit(this.props.onExpenseSubmit)}
         >
           <Header as="h1">Enter your expense</Header>
 
           <Field
-            key="income"
+            key="cost"
             component={FormField}
             type="text"
-            label="How much will you make?"
-            name="income"
+            label="How much does it cost?"
+            name="cost"
             {...currencyMask}
           />
           <Field key="date" component={DateTimeFormInline} name="date" />
@@ -45,8 +45,8 @@ class ExpenseForm extends Component {
 function validate(values) {
   const errors = {};
 
-  if (!values.income) {
-    errors.income = "You must provide an income";
+  if (!values.cost) {
+    errors.cost = "You must provide an cost";
   }
 
   if (!values.date) {

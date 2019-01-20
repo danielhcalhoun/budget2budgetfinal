@@ -9,6 +9,7 @@ import Profile from "./components/pages/Profile";
 import connect from "react-redux/es/connect/connect";
 import AddPaycheck from "./components/pages/AddPaycheck";
 import ThankYou from "./components/pages/ThankYou";
+import AddExpense from "./components/pages/AddExpense";
 
 const PrivateRoute = ({ component: Component, auth, ...rest }) => {
   return (
@@ -55,6 +56,12 @@ class App extends Component {
                 exact
                 path="/add-paycheck"
                 component={AddPaycheck}
+                auth={auth}
+              />
+              <PrivateRoute
+                exact
+                path="/add-expense"
+                component={AddExpense}
                 auth={auth}
               />
               <PrivateRoute

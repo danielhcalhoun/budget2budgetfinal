@@ -30,6 +30,12 @@ class Dashboard extends Component {
             <Link to="/add-paycheck">
               <Button>Enter your next paycheck</Button>
             </Link>
+            {profile.paychecks ? (
+              <Link to="/add-expense">
+                <Button>Enter an expense</Button>
+              </Link>
+            ) : null}
+
             <ExpenseList />
           </Container>
         );

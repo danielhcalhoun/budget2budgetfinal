@@ -126,6 +126,7 @@ router.post(
 
           if (!profile.expenses) {
             profile.insert({ expenses: [] });
+            profile.expenses.unshift(newExpense);
           } else {
             profile.expenses.unshift(newExpense);
           }

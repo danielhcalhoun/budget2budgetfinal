@@ -1,23 +1,15 @@
-import { ADD_EXPENSE } from "../actions/types";
+import { DELETE_EXPENSE, GET_CURRENT_EXPENSES } from "../actions/types";
 
 const initialState = {
-  expenses: [],
-  currentExpense: {
-    date: {},
-    amount: {},
-    recurring: false,
-    recur: {}
-  }
+  expenses: []
 };
 
 export default function(state = initialState, action) {
   switch (action.type) {
-    case ADD_EXPENSE:
-      return {
-        ...state,
-        expenses: [...state.expenses, action.payload],
-        currentExpense: {}
-      };
+    case DELETE_EXPENSE:
+      return state.filter((item, index) => action.payload !== index);
+    case GET_CURRENT_EXPENSES:
+      return action.payload;
     default:
       return state;
   }

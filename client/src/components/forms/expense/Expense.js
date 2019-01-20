@@ -16,7 +16,7 @@ class Expense extends Component {
     return (
       <div>
         <ExpenseForm
-          onPaycheckSubmit={() => this.setState({ showFormReview: true })}
+          onExpenseSubmit={() => this.setState({ showFormReview: true })}
         />
       </div>
     );
@@ -28,5 +28,5 @@ class Expense extends Component {
 }
 
 export default reduxForm({
-  form: "PaycheckForm"
+  form: "ExpenseForm"
 })(Expense);
