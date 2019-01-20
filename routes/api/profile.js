@@ -5,6 +5,7 @@ const passport = require("passport");
 //Load Validation
 const validateProfileInput = require("../../validation/profile");
 const validatePaycheckInput = require("../../validation/profile");
+const validateExpenseInput = require("../../validation/expense");
 
 //Load Profile Model
 const Profile = require("../../models/UserProfile");
@@ -94,6 +95,74 @@ router.post(
           });
       } else {
         createProfile(req, res);
+      }
+    });
+  }
+);
+
+// @route   POST api/profile/add-expense
+// @desc    Add expenses to profile
+// @access  Private
+router.post(
+  "/expense",
+  passport.authenticate("jwt", { session: false }),
+  (req, res) => {
+    const { errors, isValid } = validateExpenseInput(req.body);
+
+    // Check Validation
+    if (!isValid) {
+      // Return any errors with 400 status
+      return res.status(400).json(errors);
+    }
+
+    Profile.findOne({ user: req.user.id }).then(profile => {
+      const addExpense = () => {
+        const newExpense = {
+          income: req.body.income,
+          date: req.body.date,
+          recurring: req.body.recurring
+        };
+
+        profile.expenses.unshift(newExpense);
+
+        profile
+          .save()
+          .then(profile => res.json(profile))
+          .catch(err => {
+            res.status(500).send({
+              message:
+                err.message || "Some error occured while adding a expense"
+            });
+          });
+      };
+
+      if (profile) {
+        addExpense();
+      } else {
+        const profileFields = {
+          expenses: []
+        };
+
+        const newExpense = {
+          income: req.body.income,
+          date: req.body.date,
+          recurring: req.body.recurring
+        };
+
+        profileFields.expenses.unshift(newExpense);
+        profileFields.user = req.user.id;
+
+        // Create
+        // Save Profile
+        new Profile(profileFields)
+          .save()
+          .then(profile => res.json(profile))
+          .catch(err => {
+            res.status(500).send({
+              message:
+                err.message || "Some error occured while creating profile"
+            });
+          });
       }
     });
   }

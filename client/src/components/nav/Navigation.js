@@ -15,7 +15,7 @@ class Navigation extends Component {
         return (
           <Menu stackable>
             <NavItem to="/" text="Budget2Budget" />
-            <NavItem to="/calendar" text="Calendar" />
+            {/*<NavItem to="/calendar" text="Calendar" />*/}
             <Menu.Menu position="right">
               <NavItem to="/" position="right" text="logout" logout />
               <NavItem to="/profile" position="right" icon />

@@ -1,7 +1,7 @@
 const Validator = require("validator");
 const isEmpty = require("./is-empty");
 
-module.exports = function validatePaycheckInput(data) {
+module.exports = function validateExpenseInput(data) {
   let errors = {};
 
   data.income = !isEmpty(data.income) ? data.income : "";
@@ -13,7 +13,7 @@ module.exports = function validatePaycheckInput(data) {
   }
 
   if (Validator.isEmpty(data.date)) {
-    errors.date = "Date is required";
+    errors.company = "Date is required";
   }
 
   return {

@@ -4,9 +4,7 @@ import {
   GET_CURRENT_PAYCHECKS
 } from "../actions/types";
 
-const initialState = {
-  paychecks: []
-};
+const initialState = {};
 
 export default function(state = initialState, action) {
   switch (action.type) {

@@ -12,7 +12,7 @@ const currencyMask = createNumberMask({
   locale: "en-US"
 });
 
-class PaycheckForm extends Component {
+class ExpenseForm extends Component {
   render() {
     return (
       <div>
@@ -20,7 +20,8 @@ class PaycheckForm extends Component {
           className={`ui form ${this.props.valid ? "" : "error"}`}
           onSubmit={this.props.handleSubmit(this.props.onPaycheckSubmit)}
         >
-          <Header as="h1">Enter your paycheck</Header>
+          <Header as="h1">Enter your expense</Header>
+
           <Field
             key="income"
             component={FormField}
@@ -30,7 +31,8 @@ class PaycheckForm extends Component {
             {...currencyMask}
           />
           <Field key="date" component={DateTimeFormInline} name="date" />
-          <Button type="submit">Confirm</Button>{" "}
+
+          <Button type="submit">Confirm</Button>
           <Link to="/">
             <Button>Cancel</Button>
           </Link>
@@ -56,6 +58,6 @@ function validate(values) {
 
 export default reduxForm({
   validate,
-  form: "PaycheckForm",
+  form: "ExpenseForm",
   destroyOnUnmount: false
-})(PaycheckForm);
+})(ExpenseForm);

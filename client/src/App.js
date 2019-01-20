@@ -1,14 +1,14 @@
 import React, { Component } from "react";
 import { BrowserRouter, Route, Redirect } from "react-router-dom";
 import "./App.css";
-import Landing from "./components/routes/Landing";
+import Landing from "./components/pages/Landing";
 import { Grid } from "semantic-ui-react";
-import Calendars from "./components/routes/CalendarPage";
+import Calendars from "./components/pages/CalendarPage";
 import Navigation from "./components/nav/Navigation";
-import Profile from "./components/routes/Profile";
+import Profile from "./components/pages/Profile";
 import connect from "react-redux/es/connect/connect";
-import AddPaycheck from "./components/routes/AddPaycheck";
-import ThankYou from "./components/routes/ThankYou";
+import AddPaycheck from "./components/pages/AddPaycheck";
+import ThankYou from "./components/pages/ThankYou";
 
 const PrivateRoute = ({ component: Component, auth, ...rest }) => {
   return (
