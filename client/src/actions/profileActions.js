@@ -26,7 +26,7 @@ export const getCurrentProfile = () => dispatch => {
 //Profile loading
 export const setProfileLoading = () => {
   return {
-    type: types.PROFILE_LOADING
+    type: types.GET_PROFILE_PENDING
   };
 };
 
