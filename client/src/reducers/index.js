@@ -17,7 +17,7 @@ export default combineReducers({
   route: navigateReducer,
   auth: authReducer,
   errors: errorReducer,
-  paychecks: paycheckReducer,
+  currentPaychecks: paycheckReducer,
   expenses: expenseReducer,
   profile: profileReducer,
   budgetbar: budgetbarReducer

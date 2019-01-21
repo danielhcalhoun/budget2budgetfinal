@@ -1,6 +1,7 @@
 import axios from "axios";
 import * as types from "./types";
 import { GET_ERRORS } from "./types";
+import { GET_CURRENT_PAYCHECKS, GET_CURRENT_PAYCHECKS_ERROR } from "./types";
 
 export const getCurrentPaychecks = () => dispatch => {
   axios
@@ -13,7 +14,7 @@ export const getCurrentPaychecks = () => dispatch => {
     )
     .catch(err =>
       dispatch({
-        type: GET_ERRORS,
+        type: GET_CURRENT_PAYCHECKS_ERROR,
         payload: err.response.data
       })
     );

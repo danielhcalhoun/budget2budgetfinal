@@ -36,9 +36,13 @@ class BudgetBar extends Component {
   };
 
   componentDidUpdate = prevProps => {
-    const { paychecks, expenses } = this.props;
-    if (paychecks.length >= 1 && paychecks !== prevProps.paychecks) {
-      this.updateTotalPaychecks(paychecks);
+    const { currentPaychecks, expenses } = this.props;
+    if (
+      currentPaychecks &&
+      currentPaychecks.paychecks.length >= 1 &&
+      currentPaychecks.paychecks !== prevProps.currentPaychecks.paychecks
+    ) {
+      this.updateTotalPaychecks(currentPaychecks.paychecks);
     }
 
     if (expenses.length >= 1 && expenses !== prevProps.expenses) {
@@ -57,8 +61,8 @@ class BudgetBar extends Component {
   }
 }
 
-function mapStateToProps({ paychecks, budgetbar, expenses }) {
-  return { paychecks, budgetbar, expenses };
+function mapStateToProps({ currentPaychecks, budgetbar, expenses }) {
+  return { currentPaychecks, budgetbar, expenses };
 }
 
 export default connect(mapStateToProps, {

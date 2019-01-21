@@ -17,8 +17,8 @@ class PaycheckList extends Component {
   };
 
   render() {
-    const { paychecks } = this.props;
-    switch (paychecks.length >= 1) {
+    const { currentPaychecks } = this.props;
+    switch (currentPaychecks && currentPaychecks.paychecks.length >= 1) {
       default:
         return <Loading />;
       case true:
@@ -26,7 +26,7 @@ class PaycheckList extends Component {
           <React.Fragment>
             <h4>Upcoming Paychecks</h4>
             <List divided verticalAlign="middle">
-              {paychecks.map((item, index) => {
+              {currentPaychecks.paychecks.map((item, index) => {
                 return (
                   <List.Item key={item._id}>
                     <List className="Content">
@@ -53,8 +53,8 @@ class PaycheckList extends Component {
   }
 }
 
-function mapStateToProps({ paychecks }) {
-  return { paychecks };
+function mapStateToProps({ currentPaychecks }) {
+  return { currentPaychecks };
 }
 
 export default connect(mapStateToProps, {

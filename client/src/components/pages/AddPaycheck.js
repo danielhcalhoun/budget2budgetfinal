@@ -10,11 +10,11 @@ class AddPaycheck extends Component {
   }
 
   render() {
-    const { paychecks } = this.props;
+    const { currentPaychecks } = this.props;
 
     return (
       <Container>
-        {paychecks.length ? (
+        {currentPaychecks && currentPaychecks.paychecks.length ? (
           ""
         ) : (
           <Message warning header="Enter your first paycheck to get started!" />
@@ -25,8 +25,8 @@ class AddPaycheck extends Component {
   }
 }
 
-function mapStateToProps({ paychecks }) {
-  return { paychecks };
+function mapStateToProps({ currentPaychecks }) {
+  return { currentPaychecks };
 }
 
 export default connect(mapStateToProps, { getCurrentPaychecks })(AddPaycheck);
