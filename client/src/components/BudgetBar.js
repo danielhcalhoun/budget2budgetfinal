@@ -39,6 +39,7 @@ class BudgetBar extends Component {
     const { currentPaychecks, expenses } = this.props;
     if (
       currentPaychecks &&
+      currentPaychecks.paychecks &&
       currentPaychecks.paychecks.length >= 1 &&
       currentPaychecks.paychecks !== prevProps.currentPaychecks.paychecks
     ) {

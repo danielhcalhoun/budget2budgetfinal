@@ -1,4 +1,9 @@
-import { DELETE_PAYCHECK, GET_CURRENT_PAYCHECKS } from "../actions/types";
+import {
+  DELETE_PAYCHECK,
+  GET_CURRENT_EXPENSES_ERROR,
+  GET_CURRENT_EXPENSES_PENDING,
+  GET_CURRENT_PAYCHECKS
+} from "../actions/types";
 
 const initialState = {
   paychecks: [],
@@ -11,15 +16,26 @@ export default function(state = initialState, action) {
     //   return state.push(action.payload);
     case DELETE_PAYCHECK:
       return {
+        ...state,
         paychecks: state.paychecks.filter(
           (item, index) => action.payload !== index
-        ),
-        loading: false
+        )
+      };
+    case GET_CURRENT_EXPENSES_PENDING:
+      return {
+        ...state,
+        loading: true
       };
     case GET_CURRENT_PAYCHECKS:
       return {
+        ...state,
         paychecks: action.payload,
-        loading: true
+        loading: false
+      };
+    case GET_CURRENT_EXPENSES_ERROR:
+      return {
+        ...state,
+        loading: false
       };
     default:
       return state;

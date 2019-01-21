@@ -2,13 +2,15 @@ import React, { Component } from "react";
 import connect from "react-redux/es/connect/connect";
 import {
   getCurrentPaychecks,
-  deletePaycheck
+  deletePaycheck,
+  loadingCurrentPaychecks
 } from "../actions/paycheckActions";
 import { List, Icon } from "semantic-ui-react";
 import Loading from "./Loading";
 
 class PaycheckList extends Component {
   async componentDidMount() {
+    this.props.loadingCurrentPaychecks();
     this.props.getCurrentPaychecks();
   }
 
@@ -18,10 +20,10 @@ class PaycheckList extends Component {
 
   render() {
     const { currentPaychecks } = this.props;
-    switch (currentPaychecks && currentPaychecks.paychecks.length >= 1) {
+    switch (currentPaychecks.loading) {
       default:
         return <Loading />;
-      case true:
+      case false:
         return (
           <React.Fragment>
             <h4>Upcoming Paychecks</h4>
@@ -59,5 +61,6 @@ function mapStateToProps({ currentPaychecks }) {
 
 export default connect(mapStateToProps, {
   getCurrentPaychecks,
+  loadingCurrentPaychecks,
   deletePaycheck
 })(PaycheckList);
