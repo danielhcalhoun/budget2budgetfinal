@@ -2,7 +2,8 @@ import {
   DELETE_EXPENSE,
   GET_CURRENT_EXPENSES_ERROR,
   GET_CURRENT_EXPENSES_PENDING,
-  GET_CURRENT_EXPENSES
+  GET_CURRENT_EXPENSES,
+  ADD_EXPENSE
 } from "../actions/types";
 
 const initialState = {
@@ -12,8 +13,11 @@ const initialState = {
 
 export default function(state = initialState, action) {
   switch (action.type) {
-    // case ADD_EXPENSE:
-    //   return state.push(action.payload);
+    case ADD_EXPENSE:
+      return {
+        ...state,
+        expenses: [...state.expenses, action.payload]
+      };
     case DELETE_EXPENSE:
       return {
         ...state,

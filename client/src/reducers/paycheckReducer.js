@@ -1,4 +1,5 @@
 import {
+  ADD_PAYCHECK,
   DELETE_PAYCHECK,
   GET_CURRENT_EXPENSES_ERROR,
   GET_CURRENT_EXPENSES_PENDING,
@@ -12,8 +13,11 @@ const initialState = {
 
 export default function(state = initialState, action) {
   switch (action.type) {
-    // case ADD_PAYCHECK:
-    //   return state.push(action.payload);
+    case ADD_PAYCHECK:
+      return {
+        ...state,
+        paychecks: [...state.paychecks, action.payload]
+      };
     case DELETE_PAYCHECK:
       return {
         ...state,
