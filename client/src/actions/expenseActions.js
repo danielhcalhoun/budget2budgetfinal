@@ -2,6 +2,12 @@ import axios from "axios";
 import * as types from "./types";
 import { GET_ERRORS } from "./types";
 
+export const loadingCurrentExpenses = () => dispatch => {
+  dispatch({
+    type: types.GET_CURRENT_EXPENSES_PENDING
+  });
+};
+
 export const getCurrentExpenses = () => dispatch => {
   axios
     .get("/api/profile/current-expenses")

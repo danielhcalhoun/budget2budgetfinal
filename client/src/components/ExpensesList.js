@@ -1,11 +1,16 @@
 import React, { Component } from "react";
 import connect from "react-redux/es/connect/connect";
-import { getCurrentExpenses, deleteExpense } from "../actions/expenseActions";
+import {
+  getCurrentExpenses,
+  deleteExpense,
+  loadingCurrentExpenses
+} from "../actions/expenseActions";
 import { List, Icon } from "semantic-ui-react";
 import Loading from "./Loading";
 
 class ExpenseList extends Component {
   async componentDidMount() {
+    this.props.loadingCurrentExpenses();
     this.props.getCurrentExpenses();
   }
 
@@ -14,16 +19,16 @@ class ExpenseList extends Component {
   };
 
   render() {
-    const { expenses } = this.props;
-    switch (expenses.length >= 1) {
+    const { currentExpenses } = this.props;
+    switch (currentExpenses.loading) {
       default:
         return <Loading />;
-      case true:
+      case false:
         return (
           <React.Fragment>
             <h4>Upcoming Expenses</h4>
             <List divided verticalAlign="middle">
-              {expenses.map((item, index) => {
+              {currentExpenses.expenses.map((item, index) => {
                 return (
                   <List.Item key={item._id}>
                     <List className="Content">
@@ -50,11 +55,12 @@ class ExpenseList extends Component {
   }
 }
 
-function mapStateToProps({ expenses }) {
-  return { expenses };
+function mapStateToProps({ currentExpenses }) {
+  return { currentExpenses };
 }
 
 export default connect(mapStateToProps, {
   getCurrentExpenses,
+  loadingCurrentExpenses,
   deleteExpense
 })(ExpenseList);
