@@ -26,7 +26,7 @@ class ExpenseList extends Component {
       case false:
         return (
           <React.Fragment>
-            <h4>Upcoming Expenses</h4>
+            <h4>Monthly Expenses</h4>
             <List divided verticalAlign="middle">
               {currentExpenses.expenses.map((item, index) => {
                 return (

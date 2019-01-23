@@ -26,7 +26,7 @@ class PaycheckList extends Component {
       case false:
         return (
           <React.Fragment>
-            <h4>Upcoming Paychecks</h4>
+            <h4>Monthly Income</h4>
             <List divided verticalAlign="middle">
               {currentPaychecks.paychecks.map((item, index) => {
                 return (
