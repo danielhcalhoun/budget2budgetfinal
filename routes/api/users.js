@@ -8,6 +8,7 @@ const passport = require("passport");
 //Load Input Validation
 const validateRegisterInput = require("../../validation/register");
 const validateLoginInput = require("../../validation/login");
+const validateUsernameInput = require("../../validation/username");
 
 //Load User model
 const User = require("../../models/User");
@@ -107,6 +108,30 @@ router.post("/login", async (req, res) => {
       }
     });
   });
+});
+
+//@route GET api/user
+//@desc Check User name
+//@access Private
+router.get("/user", (req, res) => {
+  const { errors, isValid } = validateUsernameInput(req.body);
+  //Check Validation
+  if (!isValid) {
+    return res.status(400).json(errors);
+  }
+
+  const email = req.body.email;
+
+  User.findOne({ email })
+    .then(user => {
+      if (user) {
+        errors.email = "Email already exists";
+        return res.status(400).json(errors);
+      } else {
+        res.json({ msg: "User not found" });
+      }
+    })
+    .catch(err => res.status(404).json(err));
 });
 
 //@route GET api/users/current

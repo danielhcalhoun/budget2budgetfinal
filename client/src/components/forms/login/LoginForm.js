@@ -6,6 +6,19 @@ import formFields from "./loginFields";
 import { Button, Form } from "semantic-ui-react";
 import validatePasswords from "../../../utils/validatePasswords";
 import FormField from "../FormField";
+import { connect } from "react-redux";
+import { loginUser } from "../../../actions";
+
+const sleep = ms => new Promise(resolve => setTimeout(resolve, ms));
+
+const asyncValidate = (values, dispatch) => {
+  return sleep(1000).then(() => {
+    // simulate server latency
+    if (["jmedran@gmail.com"].includes(values.email)) {
+      throw { email: "That email is taken" };
+    }
+  });
+};
 
 class LoginForm extends Component {
   renderFields() {
@@ -23,11 +36,13 @@ class LoginForm extends Component {
   }
 
   render() {
+    const { error, handleSubmit, pristine, reset, submitting } = this.props;
+
     return (
       <div>
         <Form
           className={`ui form ${this.props.valid ? "" : "error"}`}
-          onSubmit={this.props.handleSubmit(this.props.onLoginSubmit)}
+          onSubmit={handleSubmit(this.props.onLoginSubmit)}
         >
           {this.renderFields()}
           <Button type="submit">Submit</Button>
@@ -53,8 +68,16 @@ function validate(values) {
   return errors;
 }
 
+const mapStateToProps = state => {
+  return { formValues: state.form.LoginForm.values };
+};
+
+LoginForm = connect(mapStateToProps, { loginUser })(LoginForm);
+
 export default reduxForm({
-  validate,
   form: "LoginForm",
+  validate,
+  asyncValidate,
+  asyncBlurFields: ["email"],
   destroyOnUnmount: false
 })(LoginForm);

@@ -1,7 +1,12 @@
 import React from "react";
 import { Message, Form } from "semantic-ui-react";
 
-export default ({ input, label, type, meta: { error, touched } }) => {
+export default ({
+  input,
+  label,
+  type,
+  meta: { error, touched, asyncValidating }
+}) => {
   return (
     <Form.Field>
       <label>{label}</label>
