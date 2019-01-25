@@ -37,19 +37,11 @@ class BudgetBar extends Component {
 
   componentDidUpdate = prevProps => {
     const { currentPaychecks, currentExpenses } = this.props;
-    if (
-      currentPaychecks &&
-      currentPaychecks.paychecks &&
-      currentPaychecks.paychecks.length >= 1 &&
-      currentPaychecks.paychecks !== prevProps.currentPaychecks.paychecks
-    ) {
+    if (currentPaychecks.paychecks !== prevProps.currentPaychecks.paychecks) {
       this.updateTotalPaychecks(currentPaychecks.paychecks);
     }
 
-    if (
-      currentExpenses.expenses.length >= 1 &&
-      currentExpenses.expenses !== prevProps.currentExpenses.expenses
-    ) {
+    if (currentExpenses.expenses !== prevProps.currentExpenses.expenses) {
       this.updateTotalExpenses(currentExpenses.expenses);
     }
   };

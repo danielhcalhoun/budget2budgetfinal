@@ -28,7 +28,7 @@ export const getCurrentExpenses = () => dispatch => {
 export const addExpense = values => dispatch => {
   axios
     .post("/api/profile/expense", values)
-    .then(res => dispatch({ type: types.ADD_EXPENSE, payload: res.data }))
+    .then(res => dispatch({ type: types.ADD_EXPENSE, payload: values }))
     .catch(err =>
       dispatch({
         type: GET_ERRORS,

@@ -13,11 +13,11 @@ const initialState = {
 
 export default function(state = initialState, action) {
   switch (action.type) {
-    // case ADD_PAYCHECK:
-    //   return {
-    //     ...state,
-    //     paychecks: [...state.paychecks, action.payload]
-    //   };
+    case ADD_PAYCHECK:
+      return {
+        ...state,
+        loading: true
+      };
     case DELETE_PAYCHECK:
       return {
         ...state,

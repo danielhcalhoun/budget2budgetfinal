@@ -10,12 +10,18 @@ import Loading from "./Loading";
 
 class ExpenseList extends Component {
   async componentDidMount() {
-    this.props.loadingCurrentExpenses();
     this.props.getCurrentExpenses();
   }
 
   handleDelete = (id, index) => {
     this.props.deleteExpense(id, index);
+  };
+
+  componentDidUpdate = prevProps => {
+    const { currentExpenses } = this.props;
+    if (currentExpenses.loading === true) {
+      this.props.getCurrentExpenses();
+    }
   };
 
   render() {
