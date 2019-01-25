@@ -52,6 +52,18 @@ export const registerUser = values => dispatch => {
     );
 };
 
+export const getUsername = values => dispatch => {
+  axios
+    .post("api/users/user", values)
+    .then(res => dispatch({ types: types.GET_USERNAME, payload: res.data }))
+    .catch(err =>
+      dispatch({
+        type: GET_ERRORS,
+        payload: err.response.data
+      })
+    );
+};
+
 export const navigateTo = path => async dispatch => {
   dispatch({ type: types.NAVIGATE_TO, payload: path });
 };

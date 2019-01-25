@@ -5,13 +5,10 @@ import { addPaycheck } from "../../../actions/paycheckActions";
 import moment from "moment";
 
 const PaycheckSuccess = ({ onCancel, formValues, addPaycheck, history }) => {
-  addPaycheck(
-    {
-      ...formValues,
-      date: moment(formValues.date.toString(), "MM-DD-YYYY").toISOString()
-    },
-    history
-  );
+  addPaycheck({
+    ...formValues,
+    date: moment(formValues.date.toString(), "MM-DD-YYYY").toISOString()
+  });
   return (
     <React.Fragment>
       <Redirect to="/" />

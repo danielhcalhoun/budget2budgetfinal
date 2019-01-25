@@ -110,10 +110,10 @@ router.post("/login", async (req, res) => {
   });
 });
 
-//@route GET api/user
+//@route POST api/user
 //@desc Check User name
 //@access Private
-router.get("/user", (req, res) => {
+router.post("/user", (req, res) => {
   const { errors, isValid } = validateUsernameInput(req.body);
   //Check Validation
   if (!isValid) {

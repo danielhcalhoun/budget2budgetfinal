@@ -13,11 +13,11 @@ const initialState = {
 
 export default function(state = initialState, action) {
   switch (action.type) {
-    case ADD_EXPENSE:
-      return {
-        ...state,
-        expenses: [...state.expenses, action.payload]
-      };
+    // case ADD_EXPENSE:
+    //   return {
+    //     ...state,
+    //     expenses: [...state.expenses, action.payload]
+    //   };
     case DELETE_EXPENSE:
       return {
         ...state,

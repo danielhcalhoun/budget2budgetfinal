@@ -28,7 +28,9 @@ export const getCurrentPaychecks = () => dispatch => {
 export const addPaycheck = values => dispatch => {
   axios
     .post("/api/profile/paycheck", values)
-    .then(res => dispatch({ type: types.ADD_PAYCHECK, payload: res.data }))
+    .then(res => {
+      dispatch({ type: types.ADD_PAYCHECK, payload: res.data });
+    })
     .catch(err =>
       dispatch({
         type: GET_ERRORS,

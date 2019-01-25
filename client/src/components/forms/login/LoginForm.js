@@ -9,17 +9,6 @@ import FormField from "../FormField";
 import { connect } from "react-redux";
 import { loginUser } from "../../../actions";
 
-const sleep = ms => new Promise(resolve => setTimeout(resolve, ms));
-
-const asyncValidate = (values, dispatch) => {
-  return sleep(1000).then(() => {
-    // simulate server latency
-    if (["jmedran@gmail.com"].includes(values.email)) {
-      throw { email: "That email is taken" };
-    }
-  });
-};
-
 class LoginForm extends Component {
   renderFields() {
     return _.map(formFields, ({ label, name, type }) => {
@@ -36,7 +25,7 @@ class LoginForm extends Component {
   }
 
   render() {
-    const { error, handleSubmit, pristine, reset, submitting } = this.props;
+    const { handleSubmit } = this.props;
 
     return (
       <div>
@@ -77,7 +66,6 @@ LoginForm = connect(mapStateToProps, { loginUser })(LoginForm);
 export default reduxForm({
   form: "LoginForm",
   validate,
-  asyncValidate,
   asyncBlurFields: ["email"],
   destroyOnUnmount: false
 })(LoginForm);
