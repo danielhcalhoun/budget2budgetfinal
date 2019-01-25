@@ -5,16 +5,12 @@ import Paycheck from "../forms/paycheck/Paycheck";
 import { getCurrentPaychecks } from "../../actions/paycheckActions";
 
 class AddPaycheck extends Component {
-  componentDidMount() {
-    this.props.getCurrentPaychecks();
-  }
-
   render() {
     const { currentPaychecks } = this.props;
 
     return (
       <Container>
-        {currentPaychecks && currentPaychecks.paychecks.length ? (
+        {currentPaychecks.paychecks.length >= 1 ? (
           ""
         ) : (
           <Message warning header="Enter your first paycheck to get started!" />

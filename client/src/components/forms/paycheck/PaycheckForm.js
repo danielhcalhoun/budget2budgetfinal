@@ -30,6 +30,14 @@ class PaycheckForm extends Component {
             {...currencyMask}
           />
           <Field key="date" component={DateTimeFormInline} name="date" />
+          <Form.Group inline>
+            <Field
+              name="recurring"
+              component={FormField}
+              type="checkbox"
+              label="Recurring?"
+            />
+          </Form.Group>
           <Button type="submit">Confirm</Button>{" "}
           <Link to="/">
             <Button>Cancel</Button>
