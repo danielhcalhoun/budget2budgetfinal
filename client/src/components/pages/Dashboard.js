@@ -29,11 +29,11 @@ class Dashboard extends Component {
           <Container>
             <BudgetBar />
             <Link to="/add-paycheck">
-              <Button>Enter your next paycheck</Button>
+              <Button>Enter your next income</Button>
             </Link>
             {profile.paychecks ? (
               <Link to="/add-expense">
-                <Button>Enter an expense</Button>
+                <Button>Enter your next expense</Button>
               </Link>
             ) : null}
 

@@ -20,7 +20,7 @@ class PaycheckForm extends Component {
           className={`ui form ${this.props.valid ? "" : "error"}`}
           onSubmit={this.props.handleSubmit(this.props.onPaycheckSubmit)}
         >
-          <Header as="h1">Enter your paycheck</Header>
+          <Header as="h1">Enter your income</Header>
           <Field
             key="income"
             component={FormField}
