@@ -238,7 +238,7 @@ const getCurrentPaychecks = function(req, res) {
       },
       {
         $match: {
-          month: new Date().getMonth() + 1
+          $or: [{ month: new Date().getMonth() + 1 }, { recurring: true }]
         }
       },
       {
