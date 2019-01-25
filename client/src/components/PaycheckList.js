@@ -11,6 +11,7 @@ import Loading from "./Loading";
 class PaycheckList extends Component {
   async componentDidMount() {
     this.props.loadingCurrentPaychecks();
+    this.props.getCurrentPaychecks();
   }
 
   handleDelete = (id, index) => {
@@ -19,7 +20,7 @@ class PaycheckList extends Component {
 
   componentDidUpdate = prevProps => {
     const { currentPaychecks } = this.props;
-    if (currentPaychecks.loading === true) {
+    if (currentPaychecks.loading !== prevProps.currentPaychecks.loading) {
       this.props.getCurrentPaychecks();
     }
   };

@@ -10,6 +10,7 @@ import Loading from "./Loading";
 
 class ExpenseList extends Component {
   async componentDidMount() {
+    this.props.loadingCurrentExpenses();
     this.props.getCurrentExpenses();
   }
 
@@ -19,7 +20,7 @@ class ExpenseList extends Component {
 
   componentDidUpdate = prevProps => {
     const { currentExpenses } = this.props;
-    if (currentExpenses.loading === true) {
+    if (currentExpenses.loading !== prevProps.currentExpenses.loading) {
       this.props.getCurrentExpenses();
     }
   };
