@@ -28,8 +28,10 @@ class ExpenseList extends Component {
   render() {
     const { currentExpenses } = this.props;
     switch (currentExpenses.loading) {
-      default:
+      case true:
         return <Loading />;
+      case null:
+        return null;
       case false:
         return (
           <React.Fragment>

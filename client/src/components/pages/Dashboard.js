@@ -15,34 +15,28 @@ class Dashboard extends Component {
 
   render() {
     const { profile, loading } = this.props.profile;
-    switch (profile) {
-      case loading:
+    switch (loading) {
+      case true:
         return <Loading />;
-      case null:
-        return (
-          <div>
-            <Loading />
-          </div>
-        );
-      case profile:
+      case false:
         return (
           <Container>
             <BudgetBar />
             <Link to="/add-paycheck">
               <Button>Enter your next income</Button>
             </Link>
-            {profile.paychecks ? (
+            {profile ? (
               <Link to="/add-expense">
                 <Button>Enter your next expense</Button>
               </Link>
             ) : null}
 
-            <PaycheckList />
-            <ExpenseList />
+            {profile && profile.paychecks ? <PaycheckList /> : null}
+            {profile && profile.expenses ? <ExpenseList /> : null}
           </Container>
         );
       default:
-        return <Loading />;
+        return <h2>There is no profile</h2>;
     }
   }
 }

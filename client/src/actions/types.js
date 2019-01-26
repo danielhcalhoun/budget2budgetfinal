@@ -1,4 +1,6 @@
 export const LOGIN_USER = "login_user";
+export const LOAD_USER = "LOAD_USER";
+export const LOAD_USER_COMPLETE = "LOAD_USER_COMPLETE";
 export const REGISTER_USER = "register_user";
 export const TEST_USER = "test_user";
 export const GET_ERRORS = "get_errors";
