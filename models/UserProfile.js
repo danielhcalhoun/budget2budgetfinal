@@ -58,6 +58,11 @@ const UserProfileSchema = new Schema({
   ],
   expenses: [
     {
+      name: {
+        type: String,
+        default: "",
+        required: true
+      },
       cost: {
         type: Number,
         required: true

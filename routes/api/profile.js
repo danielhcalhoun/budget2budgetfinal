@@ -119,6 +119,7 @@ router.post(
       .then(profile => {
         const addExpense = () => {
           const newExpense = {
+            name: req.body.name,
             cost: req.body.cost,
             date: req.body.date,
             recurring: req.body.recurring
@@ -284,6 +285,7 @@ const getCurrentExpenses = function(req, res) {
       { $unwind: "$expenses" },
       {
         $project: {
+          name: "$expenses.name",
           month: { $month: "$expenses.date" },
           cost: "$expenses.cost",
           recurring: "$expenses.recurring",

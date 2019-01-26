@@ -41,7 +41,8 @@ class ExpenseList extends Component {
                     <List className="Content">
                       <List.Content floated="left">
                         <Icon circular color="red" name="minus" />
-                        {item.cost} {item.date}{" "}
+                        {item.cost} <strong>for {item.name}</strong> on{" "}
+                        {item.date}{" "}
                         {item.recurring ? (
                           <Icon
                             name="repeat"

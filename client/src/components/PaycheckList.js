@@ -41,7 +41,8 @@ class PaycheckList extends Component {
                     <List className="Content">
                       <List.Content floated="left">
                         <Icon circular color="green" name="dollar sign" />
-                        {item.income} {item.date}{" "}
+                        {item.income} for <strong>{item.name}</strong> on{" "}
+                        {item.date}{" "}
                         {item.recurring ? (
                           <Icon
                             name="repeat"

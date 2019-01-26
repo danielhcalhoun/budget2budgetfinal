@@ -21,7 +21,13 @@ class ExpenseForm extends Component {
           onSubmit={this.props.handleSubmit(this.props.onExpenseSubmit)}
         >
           <Header as="h1">Enter your expense</Header>
-
+          <Field
+            key="name"
+            component={FormField}
+            type="text"
+            label="Name"
+            name="name"
+          />
           <Field
             key="cost"
             component={FormField}
