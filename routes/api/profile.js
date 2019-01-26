@@ -192,32 +192,6 @@ router.post(
 
       if (profile) {
         addPaycheck();
-      } else {
-        const profileFields = {
-          paychecks: []
-        };
-
-        const newPaycheck = {
-          income: req.body.income,
-          date: req.body.date,
-          recurring: req.body.recurring
-        };
-
-        // Add to exp array
-        profileFields.paychecks.unshift(newPaycheck);
-        profileFields.user = req.user.id;
-
-        // Create
-        // Save Profile
-        new Profile(profileFields)
-          .save()
-          .then(profile => res.json(profile))
-          .catch(err => {
-            res.status(500).send({
-              message:
-                err.message || "Some error occured while creating profile"
-            });
-          });
       }
     });
   }

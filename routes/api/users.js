@@ -12,6 +12,7 @@ const validateUsernameInput = require("../../validation/username");
 
 //Load User model
 const User = require("../../models/User");
+const Profile = require("../../models/UserProfile");
 
 //@route GET api/users/current
 //@desc Return current user

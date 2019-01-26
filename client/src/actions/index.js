@@ -4,6 +4,7 @@ import setAuthToken from "../utils/setAuthToken";
 import jwt_decode from "jwt-decode";
 import { GET_ERRORS } from "./types";
 import { SubmissionError } from "redux-form";
+import { createProfile } from "./profileActions";
 
 export const fetchUser = () => async dispatch => {
   const res = await axios.get("/api/users/current");
@@ -53,6 +54,7 @@ export const registerUser = values => dispatch => {
     .post("/api/users/register", values)
     .then(res => dispatch({ type: types.REGISTER_USER, payload: res.data }))
     .then(() => dispatch(loginUser(values)))
+    .then(() => dispatch(createProfile(values)))
     .catch(err => {
       dispatch({
         type: GET_ERRORS,

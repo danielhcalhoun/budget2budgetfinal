@@ -59,6 +59,10 @@ class PaycheckForm extends Component {
 function validate(values) {
   const errors = {};
 
+  if (!values.name) {
+    errors.name = "You must provide a name";
+  }
+
   if (!values.income) {
     errors.income = "You must provide an income";
   }
