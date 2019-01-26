@@ -43,16 +43,18 @@ export const setCurrentUser = decoded => dispatch => {
 };
 
 export const registerUser = values => dispatch => {
-  axios
+  return axios
     .post("/api/users/register", values)
     .then(res => dispatch({ type: types.REGISTER_USER, payload: res.data }))
     .then(() => dispatch(loginUser(values)))
-    .catch(err =>
+    .catch(err => {
       dispatch({
         type: GET_ERRORS,
         payload: err.response.data
-      })
-    );
+      });
+
+      throw new SubmissionError(err.response.data);
+    });
 };
 
 export const getUsername = values => dispatch => {

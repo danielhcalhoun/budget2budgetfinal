@@ -12,7 +12,7 @@ class Register extends Component {
     return (
       <div>
         <RegisterForm
-          onRegisterSubmit={() => this.setState({ showFormReview: true })}
+        // onRegisterSubmit={() => this.setState({ showFormReview: true })}
         />
       </div>
     );

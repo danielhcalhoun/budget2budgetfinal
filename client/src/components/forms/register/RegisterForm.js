@@ -6,6 +6,7 @@ import validatePasswords from "../../../utils/validatePasswords";
 import formFields from "./registerFields";
 import { Button, Form, Header } from "semantic-ui-react";
 import FormField from "../FormField";
+import { registerUser } from "../../../actions";
 
 class RegisterForm extends Component {
   renderFields() {
@@ -22,12 +23,18 @@ class RegisterForm extends Component {
     });
   }
 
+  handleSubmit = values => {
+    return this.props.dispatch(registerUser(values));
+  };
+
   render() {
+    const { handleSubmit } = this.props;
+
     return (
       <div>
         <Form
           className={`ui form ${this.props.valid ? "" : "error"}`}
-          onSubmit={this.props.handleSubmit(this.props.onRegisterSubmit)}
+          onSubmit={handleSubmit(this.handleSubmit.bind(this))}
         >
           <Header as="h1">Sign Up</Header>
           {this.renderFields()}
