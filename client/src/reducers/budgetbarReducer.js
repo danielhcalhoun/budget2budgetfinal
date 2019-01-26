@@ -3,7 +3,7 @@ import { COMBINE_EXPENSES, COMBINE_PAYCHECKS } from "../actions/types";
 const initialState = {
   totalPaychecks: 0,
   totalExpenses: 0,
-  whatsLeftOver: 0
+  percentLeft: 0
 };
 
 export default function(state = initialState, action) {
@@ -12,15 +12,17 @@ export default function(state = initialState, action) {
       return (state = {
         ...state,
         totalPaychecks: action.payload,
-        whatsLeftOver:
-          (action.payload - state.totalExpenses) / action.payload * 100
+        percentLeft:
+          (action.payload - state.totalExpenses) / action.payload * 100,
+        amountLeft: action.payload - state.totalExpenses
       });
     case COMBINE_EXPENSES:
       return (state = {
         ...state,
         totalExpenses: action.payload,
-        whatsLeftOver:
-          (state.totalPaychecks - action.payload) / state.totalPaychecks * 100
+        percentLeft:
+          (state.totalPaychecks - action.payload) / state.totalPaychecks * 100,
+        amountLeft: state.totalPaychecks - action.payload
       });
     default:
       return state;

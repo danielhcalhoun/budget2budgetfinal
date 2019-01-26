@@ -47,11 +47,15 @@ class BudgetBar extends Component {
   };
 
   render() {
-    const { whatsLeftOver } = this.props.budgetbar;
+    const { percentLeft, amountLeft } = this.props.budgetbar;
     return (
       <div>
         <h1>Monthly Budget</h1>
-        <Progress percent={whatsLeftOver} size="medium" color="green" />
+        <Progress percent={percentLeft} size="medium" color="green" />
+        <p style={{ marginBottom: "1em" }}>
+          You have ${amountLeft ? Math.floor(amountLeft) : 0} left for this
+          month
+        </p>
       </div>
     );
   }
