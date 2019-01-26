@@ -171,6 +171,7 @@ router.post(
     Profile.findOne({ user: req.user.id }).then(profile => {
       const addPaycheck = () => {
         const newPaycheck = {
+          name: req.body.name,
           income: req.body.income,
           date: req.body.date,
           recurring: req.body.recurring
@@ -228,6 +229,7 @@ const getCurrentPaychecks = function(req, res) {
       { $unwind: "$paychecks" },
       {
         $project: {
+          name: "$paychecks.name",
           month: { $month: "$paychecks.date" },
           income: "$paychecks.income",
           recurring: "$paychecks.recurring",

@@ -22,6 +22,14 @@ class PaycheckForm extends Component {
         >
           <Header as="h1">Enter your income</Header>
           <Field
+            key="name"
+            component={FormField}
+            type="text"
+            label="Name"
+            name="name"
+            placeholder="Name"
+          />
+          <Field
             key="income"
             component={FormField}
             type="text"
@@ -65,5 +73,8 @@ function validate(values) {
 export default reduxForm({
   validate,
   form: "PaycheckForm",
+  initialValues: {
+    name: "Paycheck"
+  },
   destroyOnUnmount: false
 })(PaycheckForm);

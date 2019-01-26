@@ -25,6 +25,11 @@ const UserProfileSchema = new Schema({
   },
   paychecks: [
     {
+      name: {
+        type: String,
+        required: true,
+        default: ""
+      },
       income: {
         type: Number,
         required: true

@@ -28,5 +28,8 @@ class Expense extends Component {
 }
 
 export default reduxForm({
-  form: "ExpenseForm"
+  form: "ExpenseForm",
+  initialValues: {
+    name: "Expense"
+  }
 })(Expense);
