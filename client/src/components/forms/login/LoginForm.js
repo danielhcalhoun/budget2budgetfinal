@@ -1,6 +1,6 @@
 import _ from "lodash";
 import React, { Component } from "react";
-import { reduxForm, Field, SubmissionError } from "redux-form";
+import { reduxForm, Field } from "redux-form";
 import validateEmails from "../../../utils/validateEmails";
 import formFields from "./loginFields";
 import { Button, Form } from "semantic-ui-react";

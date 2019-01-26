@@ -30,8 +30,6 @@ class ExpenseList extends Component {
     switch (currentExpenses.loading) {
       case true:
         return <Loading />;
-      case null:
-        return null;
       case false:
         return (
           <React.Fragment>
@@ -67,6 +65,9 @@ class ExpenseList extends Component {
             </List>
           </React.Fragment>
         );
+
+      default:
+        return <h2>There are no expenses</h2>;
     }
   }
 }

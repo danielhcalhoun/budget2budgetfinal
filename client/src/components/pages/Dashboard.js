@@ -25,7 +25,7 @@ class Dashboard extends Component {
             <Link to="/add-paycheck">
               <Button>Enter your next income</Button>
             </Link>
-            {profile ? (
+            {profile && profile.paychecks ? (
               <Link to="/add-expense">
                 <Button>Enter your next expense</Button>
               </Link>
@@ -36,7 +36,7 @@ class Dashboard extends Component {
           </Container>
         );
       default:
-        return <h2>There is no profile</h2>;
+        return <h2>There is no profile for this user</h2>;
     }
   }
 }
