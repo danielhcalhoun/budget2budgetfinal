@@ -1,6 +1,6 @@
 import _ from "lodash";
 import React, { Component } from "react";
-import { reduxForm, Field } from "redux-form";
+import { reduxForm, Field, SubmissionError } from "redux-form";
 import validateEmails from "../../../utils/validateEmails";
 import formFields from "./loginFields";
 import { Button, Form } from "semantic-ui-react";
@@ -24,6 +24,10 @@ class LoginForm extends Component {
     });
   }
 
+  handleSubmit = values => {
+    return this.props.dispatch(loginUser(values));
+  };
+
   render() {
     const { handleSubmit } = this.props;
 
@@ -31,7 +35,7 @@ class LoginForm extends Component {
       <div>
         <Form
           className={`ui form ${this.props.valid ? "" : "error"}`}
-          onSubmit={handleSubmit(this.props.onLoginSubmit)}
+          onSubmit={handleSubmit(this.handleSubmit.bind(this))}
         >
           {this.renderFields()}
           <Button type="submit">Submit</Button>
@@ -58,7 +62,7 @@ function validate(values) {
 }
 
 const mapStateToProps = state => {
-  return { formValues: state.form.LoginForm.values };
+  return { formValues: state.form.LoginForm.values, errors: state.errors };
 };
 
 LoginForm = connect(mapStateToProps, { loginUser })(LoginForm);

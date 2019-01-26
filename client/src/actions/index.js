@@ -3,6 +3,7 @@ import * as types from "./types";
 import setAuthToken from "../utils/setAuthToken";
 import jwt_decode from "jwt-decode";
 import { GET_ERRORS } from "./types";
+import { SubmissionError } from "redux-form";
 
 export const fetchUser = () => async dispatch => {
   const res = await axios.get("/api/users/current");
@@ -10,7 +11,7 @@ export const fetchUser = () => async dispatch => {
 };
 
 export const loginUser = values => dispatch => {
-  axios
+  return axios
     .post("/api/users/login", values)
     .then(res => {
       //save to local storage
@@ -23,12 +24,14 @@ export const loginUser = values => dispatch => {
       //Set current user
       dispatch(setCurrentUser(decoded));
     })
-    .catch(err =>
+    .catch(err => {
       dispatch({
         type: GET_ERRORS,
         payload: err.response.data
-      })
-    );
+      });
+
+      throw new SubmissionError(err.response.data);
+    });
 };
 
 //Set Logged in User

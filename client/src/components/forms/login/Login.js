@@ -3,7 +3,6 @@ import LoginForm from "./LoginForm";
 import { reduxForm } from "redux-form";
 import LoginSuccess from "./LoginSuccess";
 
-
 class Login extends Component {
   state = { formReview: false };
 
@@ -14,7 +13,7 @@ class Login extends Component {
     return (
       <div>
         <LoginForm
-          onLoginSubmit={() => this.setState({ showFormReview: true })}
+        // onLoginSubmit={() => this.setState({ showFormReview: true })}
         />
       </div>
     );
