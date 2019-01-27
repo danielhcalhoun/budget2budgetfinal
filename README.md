@@ -1,4 +1,4 @@
-##BUDGET 2 BUDGET
+# BUDGET 2 BUDGET
 
 A monthly budget tracking app build in React / Redux and Node.
 
