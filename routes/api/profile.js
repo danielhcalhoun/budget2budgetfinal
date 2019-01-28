@@ -12,15 +12,6 @@ const Profile = require("../../models/UserProfile");
 // Load User Profile
 const User = require("../../models/User");
 
-// @route   GET api/profile/test
-// @desc    Tests profile route
-// @access  Public
-router.get("/test", (req, res) =>
-  res.json({
-    msg: "Profile Works"
-  })
-);
-
 // @route   GET api/profile
 // @desc    Get current users profile
 // @access  Private
@@ -100,7 +91,7 @@ router.post(
   }
 );
 
-// @route   POST api/profile/add-expense
+// @route   POST api/profile/expense
 // @desc    Add expenses to profile
 // @access  Private
 router.post(
@@ -153,8 +144,8 @@ router.post(
   }
 );
 
-// @route   POST api/profile/add-paycheck
-// @desc    Add experience to profile
+// @route   POST api/profile/paycheck
+// @desc    Add a new income
 // @access  Private
 router.post(
   "/paycheck",
@@ -249,7 +240,7 @@ router.get(
       })
       .catch(err =>
         res.status(404).json({
-          nopaychecksfound: "No paychecks found"
+          notfound: "No paychecks found"
         })
       );
   }
@@ -355,6 +346,48 @@ const getPaycheck = (req, res) => {
     }
   );
 };
+
+// @route   POST api/profile/paycheck/:id
+// @desc    Edit an income
+// @access  Private
+router.post(
+  "/paycheck/:id",
+  passport.authenticate("jwt", { session: false }),
+  (req, res) => {
+    const { errors, isValid } = validatePaycheckInput(req.body);
+
+    // Check Validation
+    if (!isValid) {
+      // Return any errors with 400 status
+      return res.status(400).json(errors);
+    }
+
+    Profile.findOne({ user: req.user.id })
+      .then(profile => {
+        if (profile) {
+          Profile.findOneAndUpdate(
+            {
+              "paychecks._id": req.params.id
+            },
+            {
+              "paychecks.$.name": req.body.name,
+              "paychecks.$.income": req.body.income,
+              "paychecks.$.date": req.body.date,
+              "paychecks.$.recurring": req.body.recurring
+            }
+          )
+            .then(profile => res.json(profile))
+            .catch(err => {
+              res.status(500).send({
+                message:
+                  err.message || "Some error occured while updating paycheck"
+              });
+            });
+        }
+      })
+      .catch(() => res.status(404).json({ notfound: "Profile not found" }));
+  }
+);
 
 // @route   GET api/profile/paycheck/:id
 // @desc    Get paycheck
