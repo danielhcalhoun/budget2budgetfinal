@@ -366,9 +366,11 @@ router.post(
       .then(profile => {
         if (profile) {
           Profile.findOneAndUpdate(
+            //find id matching the url param
             {
               "paychecks._id": req.params.id
             },
+            //update each field
             {
               "paychecks.$.name": req.body.name,
               "paychecks.$.income": req.body.income,

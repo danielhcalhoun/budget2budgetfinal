@@ -8,6 +8,7 @@ export const NAVIGATE_TO = "navigate_to";
 export const FETCH_USER = "fetch_users";
 export const SET_CURRENT_USER = "SET_CURRENT_USER";
 export const ADD_PAYCHECK = "ADD_PAYCHECK";
+export const EDIT_PAYCHECK = "EDIT_PAYCHECK";
 export const ADD_EXPENSE = "ADD_EXPENSE";
 export const CREATE_PROFILE = "CREATE_PROFILE";
 export const GET_USERNAME = "GET_USERNAME";

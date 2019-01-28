@@ -1,6 +1,7 @@
 import {
   ADD_PAYCHECK,
   DELETE_PAYCHECK,
+  EDIT_PAYCHECK,
   GET_CURRENT_EXPENSES_ERROR,
   GET_CURRENT_EXPENSES_PENDING,
   GET_CURRENT_PAYCHECKS
@@ -13,6 +14,11 @@ const initialState = {
 
 export default function(state = initialState, action) {
   switch (action.type) {
+    case EDIT_PAYCHECK:
+      return {
+        ...state,
+        loading: true
+      };
     case ADD_PAYCHECK:
       return {
         ...state,
