@@ -25,6 +25,10 @@ export const getCurrentPaychecks = () => dispatch => {
     );
 };
 
+export const setCurrentPaycheck = values => dispatch => {
+  dispatch({ type: types.SET_CURRENT_PAYCHECK, payload: values });
+};
+
 export const editPaycheck = values => dispatch => {
   axios
     .post("/api/profile/paycheck/:id", values)

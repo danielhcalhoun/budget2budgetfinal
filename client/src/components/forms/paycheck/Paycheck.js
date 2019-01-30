@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import { reduxForm } from "redux-form";
 import PaycheckSuccess from "./PaycheckSuccess";
 import PaycheckForm from "./PaycheckForm";
+import connect from "react-redux/es/connect/connect";
 class Paycheck extends Component {
   state = { formReview: false };
 
@@ -27,6 +28,27 @@ class Paycheck extends Component {
   }
 }
 
+function mapStateToProps(state) {
+  console.log(state.currentPaychecks);
+  const {
+    name,
+    income,
+    date,
+    recurring
+  } = state.currentPaychecks.currentPaycheck;
+  return {
+    initialValues: {
+      name,
+      income,
+      date,
+      recurring
+    }
+  };
+}
+
+Paycheck = connect(mapStateToProps)(Paycheck);
+
 export default reduxForm({
-  form: "PaycheckForm"
+  form: "PaycheckForm",
+  enableReinitialize: true
 })(Paycheck);

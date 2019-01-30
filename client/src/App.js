@@ -60,7 +60,8 @@ class App extends Component {
               />
               <PrivateRoute
                 exact
-                path="/edit-paycheck/:id/:name?/:income?/:recurring?/"
+                path="/edit-paycheck/:id"
+                // path="/edit-paycheck/:id/:name?/:income?/:recurring?/"
                 component={AddPaycheck}
                 auth={auth}
               />

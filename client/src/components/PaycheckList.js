@@ -3,7 +3,8 @@ import connect from "react-redux/es/connect/connect";
 import {
   getCurrentPaychecks,
   deletePaycheck,
-  loadingCurrentPaychecks
+  loadingCurrentPaychecks,
+  setCurrentPaycheck
 } from "../actions/paycheckActions";
 import { List, Icon } from "semantic-ui-react";
 import Loading from "./Loading";
@@ -14,6 +15,10 @@ class PaycheckList extends Component {
     this.props.loadingCurrentPaychecks();
     this.props.getCurrentPaychecks();
   }
+
+  handleEdit = values => {
+    this.props.setCurrentPaycheck(values);
+  };
 
   handleDelete = (id, index) => {
     this.props.deletePaycheck(id, index);
@@ -54,15 +59,13 @@ class PaycheckList extends Component {
                       </List.Content>
                       <List.Content floated="right">
                         <Link
-                          // to={`/edit-paycheck/${item._id},${item.name},${
-                          //   item.date
-                          // },${item.income},${item.recurring}`}
-
-                          to={`/edit-paycheck/id=${item._id}?name=${
-                            item.name
-                          }?date=${item.date}?income=${item.income}?recurring=${
-                            item.recurring
-                          }`}
+                          onClick={() => this.handleEdit(item)}
+                          to={`/edit-paycheck/${item._id}`}
+                          // to={`/edit-paycheck/id=${item._id}?name=${
+                          //   item.name
+                          // }?date=${item.date}?income=${item.income}?recurring=${
+                          //   item.recurring
+                          // }`}
                         >
                           <Icon circular name="edit" />
                         </Link>
@@ -90,5 +93,6 @@ function mapStateToProps({ currentPaychecks }) {
 export default connect(mapStateToProps, {
   getCurrentPaychecks,
   loadingCurrentPaychecks,
+  setCurrentPaycheck,
   deletePaycheck
 })(PaycheckList);

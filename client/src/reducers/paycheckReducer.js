@@ -4,12 +4,14 @@ import {
   EDIT_PAYCHECK,
   GET_CURRENT_EXPENSES_ERROR,
   GET_CURRENT_EXPENSES_PENDING,
-  GET_CURRENT_PAYCHECKS
+  GET_CURRENT_PAYCHECKS,
+  SET_CURRENT_PAYCHECK
 } from "../actions/types";
 
 const initialState = {
   paychecks: [],
-  loading: false
+  loading: false,
+  currentPaycheck: {}
 };
 
 export default function(state = initialState, action) {
@@ -23,6 +25,11 @@ export default function(state = initialState, action) {
       return {
         ...state,
         loading: true
+      };
+    case SET_CURRENT_PAYCHECK:
+      return {
+        ...state,
+        currentPaycheck: action.payload
       };
     case DELETE_PAYCHECK:
       return {
