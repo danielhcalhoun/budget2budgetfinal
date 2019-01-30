@@ -7,6 +7,7 @@ import {
 } from "../actions/paycheckActions";
 import { List, Icon } from "semantic-ui-react";
 import Loading from "./Loading";
+import { Link } from "react-router-dom";
 
 class PaycheckList extends Component {
   async componentDidMount() {
@@ -52,7 +53,19 @@ class PaycheckList extends Component {
                         ) : null}
                       </List.Content>
                       <List.Content floated="right">
-                        <Icon circular name="edit" />
+                        <Link
+                          // to={`/edit-paycheck/${item._id},${item.name},${
+                          //   item.date
+                          // },${item.income},${item.recurring}`}
+
+                          to={`/edit-paycheck/id=${item._id}?name=${
+                            item.name
+                          }?date=${item.date}?income=${item.income}?recurring=${
+                            item.recurring
+                          }`}
+                        >
+                          <Icon circular name="edit" />
+                        </Link>
                         <Icon
                           circular
                           name="delete"

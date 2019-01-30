@@ -1,26 +1,14 @@
 import React, { Component } from "react";
 import LoginForm from "./LoginForm";
 import { reduxForm } from "redux-form";
-import LoginSuccess from "./LoginSuccess";
 
 class Login extends Component {
-  state = { formReview: false };
-
-  renderContent() {
-    if (this.state.showFormReview === true) {
-      return <LoginSuccess />;
-    }
+  render() {
     return (
       <div>
-        <LoginForm
-        // onLoginSubmit={() => this.setState({ showFormReview: true })}
-        />
+        <LoginForm />
       </div>
     );
-  }
-
-  render() {
-    return <div>{this.renderContent()}</div>;
   }
 }
 

@@ -5,6 +5,7 @@ import FormField from "../FormField";
 import DateTimeFormInline from "../../DateTimeFormInline";
 import { createNumberMask } from "redux-form-input-masks";
 import { Link } from "react-router-dom";
+import queryString from "query-string";
 
 const currencyMask = createNumberMask({
   prefix: "$ ",
@@ -13,6 +14,11 @@ const currencyMask = createNumberMask({
 });
 
 class PaycheckForm extends Component {
+  componentDidMount() {
+    const values = queryString.parse(this.props.location);
+    console.log(values);
+  }
+
   render() {
     return (
       <div>
