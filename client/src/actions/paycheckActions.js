@@ -29,9 +29,9 @@ export const setCurrentPaycheck = values => dispatch => {
   dispatch({ type: types.SET_CURRENT_PAYCHECK, payload: values });
 };
 
-export const editPaycheck = values => dispatch => {
+export const editPaycheck = (values, id) => dispatch => {
   axios
-    .post("/api/profile/paycheck/:id", values)
+    .post(`/api/profile/paycheck/${id}`, values)
     .then(res => {
       dispatch({ type: types.EDIT_PAYCHECK, payload: values });
     })

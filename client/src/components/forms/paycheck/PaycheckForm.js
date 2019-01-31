@@ -6,7 +6,13 @@ import DateTimeFormInline from "../../DateTimeFormInline";
 import { createNumberMask } from "redux-form-input-masks";
 import { Link } from "react-router-dom";
 import { connect } from "react-redux";
-import { setCurrentPaycheck } from "../../../actions/paycheckActions";
+import {
+  addPaycheck,
+  editPaycheck,
+  setCurrentPaycheck
+} from "../../../actions/paycheckActions";
+import moment from "moment";
+import { withRouter } from "react-router";
 
 const currencyMask = createNumberMask({
   prefix: "$ ",
@@ -19,12 +25,35 @@ class PaycheckForm extends Component {
     this.props.setCurrentPaycheck({});
   }
 
+  handleSubmit = (values, dispatch, props) => {
+    const formValues = {
+      ...values,
+      //send date as an ISO date
+      date: moment(values.date.toString(), "MM-DD-YYYY").toISOString()
+    };
+    //redirect to homepage
+    props.history.push("/");
+
+    if (props._id) {
+      //If we are editing
+      return dispatch(editPaycheck(formValues, props._id));
+    } else {
+      //If we are adding
+      return dispatch(addPaycheck(formValues));
+    }
+  };
+
   render() {
+    const { handleSubmit } = this.props;
+
     return (
       <div>
         <Form
           className={`ui form ${this.props.valid ? "" : "error"}`}
-          onSubmit={this.props.handleSubmit(this.props.onPaycheckSubmit)}
+          onSubmit={handleSubmit(
+            this.handleSubmit.bind(this),
+            this.props.history
+          )}
         >
           <Header as="h1">Enter your income</Header>
           <Field
@@ -86,9 +115,16 @@ function validate(values) {
 }
 
 const mapStateToProps = () => ({ currentPaychecks }) => {
-  const { name, income, date, recurring } = currentPaychecks.currentPaycheck;
+  const {
+    _id,
+    name,
+    income,
+    date,
+    recurring
+  } = currentPaychecks.currentPaycheck;
 
   return {
+    _id,
     initialValues: {
       name: name ? name : "Paycheck",
       income,
@@ -107,7 +143,9 @@ PaycheckForm = reduxForm({
 
 // You have to connect() to any reducers that you wish to connect to yourself
 PaycheckForm = connect(mapStateToProps, {
-  setCurrentPaycheck
-})(PaycheckForm);
+  setCurrentPaycheck,
+  addPaycheck,
+  editPaycheck
+})(withRouter(PaycheckForm));
 
 export default PaycheckForm;
