@@ -5,7 +5,6 @@ import FormField from "../FormField";
 import DateTimeFormInline from "../../DateTimeFormInline";
 import { createNumberMask } from "redux-form-input-masks";
 import { Link } from "react-router-dom";
-import queryString from "query-string";
 import { connect } from "react-redux";
 
 const currencyMask = createNumberMask({
@@ -15,10 +14,9 @@ const currencyMask = createNumberMask({
 });
 
 class PaycheckForm extends Component {
-  componentDidMount() {
-    const values = queryString.parse(this.props.location);
-    console.log(values);
-  }
+  // componentWillUnmount() {
+  //   this.props.setCurrentPaycheck({});
+  // }
 
   render() {
     return (
@@ -44,7 +42,12 @@ class PaycheckForm extends Component {
             name="income"
             {...currencyMask}
           />
-          <Field key="date" component={DateTimeFormInline} name="date" />
+          <Field
+            key="date"
+            component={DateTimeFormInline}
+            name="date"
+            initialDate={this.props.initialValues.date}
+          />
           <Form.Group inline>
             <Field
               name="recurring"
@@ -80,45 +83,20 @@ function validate(values) {
 
   return errors;
 }
-//
-// function mapStateToProps(state) {
-//   console.log(state.currentPaychecks);
-//   const {
-//     name,
-//     income,
-//     date,
-//     recurring
-//   } = state.currentPaychecks.currentPaycheck;
-//   return {
-//     initialValues: {
-//       name,
-//       income,
-//       date,
-//       recurring
-//     }
-//   };
-// }
-//
-// PaycheckForm = connect(mapStateToProps)(PaycheckForm);
-//
-// export default reduxForm({
-//   validate,
-//   form: "PaycheckForm",
-//   destroyOnUnmount: false
-// })(PaycheckForm);
-//
-//
+
 // // Decorate with reduxForm(). It will read the initialValues prop provided by connect()
 PaycheckForm = reduxForm({
   validate,
   form: "PaycheckForm",
-  destroyOnUnmount: false // a unique identifier for this form
+  destroyOnUnmount: false
 })(PaycheckForm);
 
 // You have to connect() to any reducers that you wish to connect to yourself
 PaycheckForm = connect(state => ({
   initialValues: {
-    name: state.currentPaychecks.currentPaycheck.name,
+    name: state.currentPaychecks.currentPaycheck.name
+      ? state.currentPaychecks.currentPaycheck.name
+      : "Paycheck",
     date: state.currentPaychecks.currentPaycheck.date,
     income: state.currentPaychecks.currentPaycheck.income,
     recurring: state.currentPaychecks.currentPaycheck.recurring

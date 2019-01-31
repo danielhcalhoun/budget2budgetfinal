@@ -36,7 +36,7 @@ class DateTimeFormInline extends Component {
           {...input}
           inline
           className="example-calendar-input"
-          value={this.state.date}
+          value={this.state.date ? this.state.date : this.props.initialDate}
           dateFormat={"MM-DD-YYYY"}
           name="date"
           onChange={(event, { name, value }) => {
