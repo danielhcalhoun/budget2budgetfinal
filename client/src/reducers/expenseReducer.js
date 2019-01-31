@@ -4,15 +4,14 @@ import {
   GET_CURRENT_EXPENSES_PENDING,
   GET_CURRENT_EXPENSES,
   ADD_EXPENSE,
-  EDIT_PAYCHECK,
-  SET_CURRENT_PAYCHECK,
   EDIT_EXPENSE,
   SET_CURRENT_EXPENSE
 } from "../actions/types";
 
 const initialState = {
   expenses: [],
-  loading: false
+  loading: false,
+  currentExpense: {}
 };
 
 export default function(state = initialState, action) {

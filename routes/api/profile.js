@@ -442,7 +442,7 @@ router.post(
             //update each field
             {
               "expenses.$.name": req.body.name,
-              "expenses.$.income": req.body.income,
+              "expenses.$.cost": req.body.cost,
               "expenses.$.date": req.body.date,
               "expenses.$.recurring": req.body.recurring
             }

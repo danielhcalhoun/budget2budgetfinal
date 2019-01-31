@@ -16,12 +16,12 @@ class PaycheckList extends Component {
     this.props.getCurrentPaychecks();
   }
 
-  handleEdit = values => {
-    this.props.setCurrentPaycheck(values);
-  };
-
   handleDelete = (id, index) => {
     this.props.deletePaycheck(id, index);
+  };
+
+  handleEdit = values => {
+    this.props.setCurrentPaycheck(values);
   };
 
   componentDidUpdate = prevProps => {
@@ -61,11 +61,6 @@ class PaycheckList extends Component {
                         <Link
                           onClick={() => this.handleEdit(item)}
                           to={`/edit-paycheck/${item._id}`}
-                          // to={`/edit-paycheck/id=${item._id}?name=${
-                          //   item.name
-                          // }?date=${item.date}?income=${item.income}?recurring=${
-                          //   item.recurring
-                          // }`}
                         >
                           <Icon circular name="edit" />
                         </Link>

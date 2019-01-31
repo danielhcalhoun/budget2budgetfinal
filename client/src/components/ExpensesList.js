@@ -3,10 +3,12 @@ import connect from "react-redux/es/connect/connect";
 import {
   getCurrentExpenses,
   deleteExpense,
-  loadingCurrentExpenses
+  loadingCurrentExpenses,
+  setCurrentExpense
 } from "../actions/expenseActions";
 import { List, Icon } from "semantic-ui-react";
 import Loading from "./Loading";
+import { Link } from "react-router-dom";
 
 class ExpenseList extends Component {
   async componentDidMount() {
@@ -16,6 +18,10 @@ class ExpenseList extends Component {
 
   handleDelete = (id, index) => {
     this.props.deleteExpense(id, index);
+  };
+
+  handleEdit = values => {
+    this.props.setCurrentExpense(values);
   };
 
   componentDidUpdate = prevProps => {
@@ -52,7 +58,12 @@ class ExpenseList extends Component {
                         ) : null}
                       </List.Content>
                       <List.Content floated="right">
-                        <Icon circular name="edit" />
+                        <Link
+                          onClick={() => this.handleEdit(item)}
+                          to={`/edit-expense/${item._id}`}
+                        >
+                          <Icon circular name="edit" />
+                        </Link>
                         <Icon
                           circular
                           name="delete"
@@ -80,5 +91,6 @@ function mapStateToProps({ currentExpenses }) {
 export default connect(mapStateToProps, {
   getCurrentExpenses,
   loadingCurrentExpenses,
-  deleteExpense
+  deleteExpense,
+  setCurrentExpense
 })(ExpenseList);

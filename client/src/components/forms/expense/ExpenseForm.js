@@ -5,6 +5,14 @@ import FormField from "../FormField";
 import DateTimeFormInline from "../../DateTimeFormInline";
 import { createNumberMask } from "redux-form-input-masks";
 import { Link } from "react-router-dom";
+import connect from "react-redux/es/connect/connect";
+import { withRouter } from "react-router";
+import {
+  addExpense,
+  editExpense,
+  setCurrentExpense
+} from "../../../actions/expenseActions";
+import moment from "moment";
 
 const currencyMask = createNumberMask({
   prefix: "$ ",
@@ -13,12 +21,39 @@ const currencyMask = createNumberMask({
 });
 
 class ExpenseForm extends Component {
+  componentWillUnmount() {
+    this.props.setCurrentExpense({});
+  }
+
+  handleSubmit = (values, dispatch, props) => {
+    const formValues = {
+      ...values,
+      //send date as an ISO date
+      date: moment(values.date.toString(), "MM-DD-YYYY").toISOString()
+    };
+    //redirect to homepage
+    props.history.push("/");
+
+    if (props._id) {
+      //If we are editing
+      return dispatch(editExpense(formValues, props._id));
+    } else {
+      //If we are adding
+      return dispatch(addExpense(formValues));
+    }
+  };
+
   render() {
+    const { handleSubmit } = this.props;
+
     return (
       <div>
         <Form
           className={`ui form ${this.props.valid ? "" : "error"}`}
-          onSubmit={this.props.handleSubmit(this.props.onExpenseSubmit)}
+          onSubmit={handleSubmit(
+            this.handleSubmit.bind(this),
+            this.props.history
+          )}
         >
           <Header as="h1">Enter your expense</Header>
           <Field
@@ -36,7 +71,12 @@ class ExpenseForm extends Component {
             name="cost"
             {...currencyMask}
           />
-          <Field key="date" component={DateTimeFormInline} name="date" />
+          <Field
+            key="date"
+            component={DateTimeFormInline}
+            name="date"
+            initialDate={this.props.initialValues.date}
+          />
           <Form.Group inline>
             <Field
               name="recurring"
@@ -69,8 +109,32 @@ function validate(values) {
   return errors;
 }
 
-export default reduxForm({
+const mapStateToProps = () => ({ currentExpenses }) => {
+  const { _id, name, cost, date, recurring } = currentExpenses.currentExpense;
+
+  return {
+    _id,
+    initialValues: {
+      name: name ? name : "Expense",
+      cost,
+      date,
+      recurring
+    }
+  };
+};
+
+// // Decorate with reduxForm(). It will read the initialValues prop provided by connect()
+ExpenseForm = reduxForm({
   validate,
   form: "ExpenseForm",
   destroyOnUnmount: false
 })(ExpenseForm);
+
+// You have to connect() to any reducers that you wish to connect to yourself
+ExpenseForm = connect(mapStateToProps, {
+  setCurrentExpense,
+  addExpense,
+  editExpense
+})(withRouter(ExpenseForm));
+
+export default ExpenseForm;
