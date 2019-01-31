@@ -86,14 +86,14 @@ function validate(values) {
 }
 
 const mapStateToProps = () => ({ currentPaychecks }) => {
+  const { name, income, date, recurring } = currentPaychecks.currentPaycheck;
+
   return {
     initialValues: {
-      name: currentPaychecks.currentPaycheck.name
-        ? currentPaychecks.currentPaycheck.name
-        : "Paycheck",
-      date: currentPaychecks.currentPaycheck.date,
-      income: currentPaychecks.currentPaycheck.income,
-      recurring: currentPaychecks.currentPaycheck.recurring
+      name: name ? name : "Paycheck",
+      income,
+      date,
+      recurring
     }
   };
 };

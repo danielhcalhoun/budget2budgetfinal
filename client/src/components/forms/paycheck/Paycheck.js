@@ -29,7 +29,6 @@ class Paycheck extends Component {
 }
 
 function mapStateToProps(state) {
-  console.log(state.currentPaychecks);
   const {
     name,
     income,
@@ -49,6 +48,5 @@ function mapStateToProps(state) {
 Paycheck = connect(mapStateToProps)(Paycheck);
 
 export default reduxForm({
-  form: "PaycheckForm",
-  enableReinitialize: true
+  form: "PaycheckForm"
 })(Paycheck);
