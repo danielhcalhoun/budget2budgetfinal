@@ -37,6 +37,24 @@ export const addExpense = values => dispatch => {
     );
 };
 
+export const setCurrentExpense = values => dispatch => {
+  dispatch({ type: types.SET_CURRENT_EXPENSE, payload: values });
+};
+
+export const editExpense = (values, id) => dispatch => {
+  axios
+    .post(`/api/profile/expense/${id}`, values)
+    .then(res => {
+      dispatch({ type: types.EDIT_EXPENSE, payload: values });
+    })
+    .catch(err =>
+      dispatch({
+        type: GET_ERRORS,
+        payload: err.response.data
+      })
+    );
+};
+
 export const deleteExpense = (id, index) => dispatch => {
   axios
     .delete(`/api/profile/expense/${id}`)

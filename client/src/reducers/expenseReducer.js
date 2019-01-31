@@ -3,7 +3,11 @@ import {
   GET_CURRENT_EXPENSES_ERROR,
   GET_CURRENT_EXPENSES_PENDING,
   GET_CURRENT_EXPENSES,
-  ADD_EXPENSE
+  ADD_EXPENSE,
+  EDIT_PAYCHECK,
+  SET_CURRENT_PAYCHECK,
+  EDIT_EXPENSE,
+  SET_CURRENT_EXPENSE
 } from "../actions/types";
 
 const initialState = {
@@ -13,6 +17,16 @@ const initialState = {
 
 export default function(state = initialState, action) {
   switch (action.type) {
+    case EDIT_EXPENSE:
+      return {
+        ...state,
+        loading: true
+      };
+    case SET_CURRENT_EXPENSE:
+      return {
+        ...state,
+        currentExpense: action.payload
+      };
     case ADD_EXPENSE:
       return {
         ...state,
