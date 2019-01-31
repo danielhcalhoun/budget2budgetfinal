@@ -6,6 +6,7 @@ import DateTimeFormInline from "../../DateTimeFormInline";
 import { createNumberMask } from "redux-form-input-masks";
 import { Link } from "react-router-dom";
 import { connect } from "react-redux";
+import { setCurrentPaycheck } from "../../../actions/paycheckActions";
 
 const currencyMask = createNumberMask({
   prefix: "$ ",
@@ -14,9 +15,9 @@ const currencyMask = createNumberMask({
 });
 
 class PaycheckForm extends Component {
-  // componentWillUnmount() {
-  //   this.props.setCurrentPaycheck({});
-  // }
+  componentWillUnmount() {
+    this.props.setCurrentPaycheck({});
+  }
 
   render() {
     return (
@@ -84,6 +85,19 @@ function validate(values) {
   return errors;
 }
 
+const mapStateToProps = () => ({ currentPaychecks }) => {
+  return {
+    initialValues: {
+      name: currentPaychecks.currentPaycheck.name
+        ? currentPaychecks.currentPaycheck.name
+        : "Paycheck",
+      date: currentPaychecks.currentPaycheck.date,
+      income: currentPaychecks.currentPaycheck.income,
+      recurring: currentPaychecks.currentPaycheck.recurring
+    }
+  };
+};
+
 // // Decorate with reduxForm(). It will read the initialValues prop provided by connect()
 PaycheckForm = reduxForm({
   validate,
@@ -92,15 +106,8 @@ PaycheckForm = reduxForm({
 })(PaycheckForm);
 
 // You have to connect() to any reducers that you wish to connect to yourself
-PaycheckForm = connect(state => ({
-  initialValues: {
-    name: state.currentPaychecks.currentPaycheck.name
-      ? state.currentPaychecks.currentPaycheck.name
-      : "Paycheck",
-    date: state.currentPaychecks.currentPaycheck.date,
-    income: state.currentPaychecks.currentPaycheck.income,
-    recurring: state.currentPaychecks.currentPaycheck.recurring
-  } // pull initial values from account reducer
-}))(PaycheckForm);
+PaycheckForm = connect(mapStateToProps, {
+  setCurrentPaycheck
+})(PaycheckForm);
 
 export default PaycheckForm;
