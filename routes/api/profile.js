@@ -416,6 +416,50 @@ router.get(
   }
 );
 
+// @route   POST api/profile/expense/:id
+// @desc    Edit an expense
+// @access  Private
+router.post(
+  "/expense/:id",
+  passport.authenticate("jwt", { session: false }),
+  (req, res) => {
+    const { errors, isValid } = validateExpenseInput(req.body);
+
+    // Check Validation
+    if (!isValid) {
+      // Return any errors with 400 status
+      return res.status(400).json(errors);
+    }
+
+    Profile.findOne({ user: req.user.id })
+      .then(profile => {
+        if (profile) {
+          Profile.findOneAndUpdate(
+            //find id matching the url param
+            {
+              "expenses._id": req.params.id
+            },
+            //update each field
+            {
+              "expenses.$.name": req.body.name,
+              "expenses.$.income": req.body.income,
+              "expenses.$.date": req.body.date,
+              "expenses.$.recurring": req.body.recurring
+            }
+          )
+            .then(profile => res.json(profile))
+            .catch(err => {
+              res.status(500).send({
+                message:
+                  err.message || "Some error occured while updating expense"
+              });
+            });
+        }
+      })
+      .catch(() => res.status(404).json({ notfound: "Profile not found" }));
+  }
+);
+
 // @route   DELETE api/profile/expenses/:id
 // @desc    Delete expenses
 // @access  Private
