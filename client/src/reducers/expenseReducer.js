@@ -18,8 +18,7 @@ export default function(state = initialState, action) {
   switch (action.type) {
     case EDIT_EXPENSE:
       return {
-        ...state,
-        loading: true
+        ...state
       };
     case SET_CURRENT_EXPENSE:
       return {
@@ -28,8 +27,7 @@ export default function(state = initialState, action) {
       };
     case ADD_EXPENSE:
       return {
-        ...state,
-        loading: true
+        ...state
       };
     case DELETE_EXPENSE:
       return {
