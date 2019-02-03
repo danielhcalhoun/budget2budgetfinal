@@ -191,7 +191,10 @@ router.post(
 const getCurrentPaychecks = function(req, res) {
   Profile.aggregate(
     [
-      { $unwind: "$paychecks" },
+      { $match: { user: mongoose.Types.ObjectId(req.user.id) } },
+      {
+        $unwind: "$paychecks"
+      },
       {
         $project: {
           name: "$paychecks.name",
