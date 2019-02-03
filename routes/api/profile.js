@@ -252,6 +252,7 @@ router.get(
 const getCurrentExpenses = function(req, res) {
   Profile.aggregate(
     [
+      { $match: { user: mongoose.Types.ObjectId(req.user.id) } },
       { $unwind: "$expenses" },
       {
         $project: {
