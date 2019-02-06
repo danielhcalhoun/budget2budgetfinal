@@ -20,14 +20,16 @@ class Dashboard extends Component {
         return <Loading />;
       case false:
         return (
-          <Container>
+          <Container id="dashboard">
             <BudgetBar />
             <Link to="/add-paycheck">
-              <Button>Enter your next income</Button>
+              <Button className="basic positive">Enter your next income</Button>
             </Link>
             {profile && profile.paychecks ? (
               <Link to="/add-expense">
-                <Button>Enter your next expense</Button>
+                <Button className="basic negative">
+                  Enter your next expense
+                </Button>
               </Link>
             ) : null}
 

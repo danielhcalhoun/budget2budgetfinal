@@ -12,3 +12,23 @@ body > div > div,
 body > div > div > div.ui.container {
   height: 100%;
 }
+
+@media screen and (max-width: 992px) {
+  #dashboard button {
+    margin-bottom: 1em;
+  }
+
+  .ui.list {
+    overflow: auto;
+    display: flex;
+    flex-direction: column;
+  }
+
+  .ui.list .floated {
+    margin-bottom: 1em;
+  }
+
+  .ui.list .list>.item [class*="right floated"], .ui.list>.item [class*="right floated"] {
+    margin-left: 0;
+  }
+}
