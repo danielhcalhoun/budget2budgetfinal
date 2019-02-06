@@ -24,8 +24,16 @@ body > div > div > div.ui.container {
     flex-direction: column;
   }
 
+  .ui.list .list {
+    padding-left: 0;
+  }
+
   .ui.list .floated {
     margin-bottom: 1em;
+  }
+
+  .ui.list .list>.item [class*="left floated"], .ui.list>.item [class*="left floated"] {
+    margin-right: 0;
   }
 
   .ui.list .list>.item [class*="right floated"], .ui.list>.item [class*="right floated"] {
