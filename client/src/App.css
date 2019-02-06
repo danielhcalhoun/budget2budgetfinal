@@ -39,4 +39,8 @@ body > div > div > div.ui.container {
   .ui.list .list>.item [class*="right floated"], .ui.list>.item [class*="right floated"] {
     margin-left: 0;
   }
+
+  .ui.center {
+    height: auto !important;
+  }
 }
