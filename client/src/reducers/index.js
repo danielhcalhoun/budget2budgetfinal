@@ -9,6 +9,7 @@ import paycheckReducer from "./paycheckReducer";
 import expenseReducer from "./expenseReducer";
 import profileReducer from "./profileReducer";
 import budgetbarReducer from "./budgetbarReducer";
+import idleReducer from "./idleReducer";
 
 export default combineReducers({
   form: reduxForm,
@@ -20,5 +21,6 @@ export default combineReducers({
   currentPaychecks: paycheckReducer,
   currentExpenses: expenseReducer,
   profile: profileReducer,
-  budgetbar: budgetbarReducer
+  budgetbar: budgetbarReducer,
+  idleTimer: idleReducer
 });
