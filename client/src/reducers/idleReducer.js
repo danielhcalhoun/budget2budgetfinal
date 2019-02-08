@@ -13,11 +13,11 @@ import {
 
 const initialState = {
   timeout: 1000 * 60 * 15,
-  remaining: null,
+  remaining: 99999999,
   isIdle: false,
   lastActive: null,
   elapsed: null,
-  remainingInterval: {}
+  remainingInterval: null
 };
 
 export default function(state = initialState, action) {

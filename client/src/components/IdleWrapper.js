@@ -49,7 +49,7 @@ class IdleWrapper extends Component {
     const { onActive, onIdle, idleTimer } = this.props;
     return (
       <div>
-        {idleTimer.remaining < 1000 ? (
+        {idleTimer.remaining < 10000 ? (
           <div>You are about to be logged out</div>
         ) : null}
 
