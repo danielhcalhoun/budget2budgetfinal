@@ -189,6 +189,7 @@ router.post(
 );
 
 const getCurrentPaychecks = function(req, res) {
+  const currentMonth = new Date().getMonth() + 1;
   Profile.aggregate(
     [
       { $match: { user: mongoose.Types.ObjectId(req.user.id) } },
@@ -202,14 +203,17 @@ const getCurrentPaychecks = function(req, res) {
           income: "$paychecks.income",
           recurring: "$paychecks.recurring",
           date: {
-            $dateToString: { format: "%m/%d/%Y", date: "$paychecks.date" }
+            $dateToString: {
+              format: `${currentMonth}/%d/%Y`,
+              date: "$paychecks.date"
+            }
           },
           _id: "$paychecks._id"
         }
       },
       {
         $match: {
-          $or: [{ month: new Date().getMonth() + 1 }, { recurring: true }]
+          $or: [{ month: currentMonth }, { recurring: true }]
         }
       },
       {
@@ -250,6 +254,7 @@ router.get(
 );
 
 const getCurrentExpenses = function(req, res) {
+  const currentMonth = new Date().getMonth() + 1;
   Profile.aggregate(
     [
       { $match: { user: mongoose.Types.ObjectId(req.user.id) } },
@@ -261,14 +266,17 @@ const getCurrentExpenses = function(req, res) {
           cost: "$expenses.cost",
           recurring: "$expenses.recurring",
           date: {
-            $dateToString: { format: "%m/%d/%Y", date: "$expenses.date" }
+            $dateToString: {
+              format: `${currentMonth}/%d/%Y`,
+              date: "$expenses.date"
+            }
           },
           _id: "$expenses._id"
         }
       },
       {
         $match: {
-          month: new Date().getMonth() + 1
+          $or: [{ month: currentMonth }, { recurring: true }]
         }
       },
       {
