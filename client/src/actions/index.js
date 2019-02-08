@@ -82,11 +82,11 @@ export const navigateTo = path => async dispatch => {
 };
 
 //Log user out
-export const logoutUser = () => dispatch => {
+export const logoutUser = () => async dispatch => {
   //Remove token from localStorage
   localStorage.removeItem("jwtToken");
   //Remove auth header for future requests
-  dispatch(setAuthToken(false));
+  setAuthToken(false);
   //Set current user to {} which will also set isAuthenticated to false
   dispatch(setCurrentUser({}));
 };

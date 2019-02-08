@@ -10,6 +10,7 @@ import connect from "react-redux/es/connect/connect";
 import AddPaycheck from "./components/pages/AddPaycheck";
 import ThankYou from "./components/pages/ThankYou";
 import AddExpense from "./components/pages/AddExpense";
+import IdleWrapper from "./components/IdleWrapper";
 
 const PrivateRoute = ({ component: Component, auth, ...rest }) => {
   return (
@@ -34,10 +35,10 @@ const PrivateRoute = ({ component: Component, auth, ...rest }) => {
 class App extends Component {
   render() {
     const { auth } = this.props;
-
     return (
       <BrowserRouter>
         <div className="App">
+          {this.props.auth.isAuthenticated ? <IdleWrapper /> : null}
           <Navigation />
           <Grid
             textAlign="center"
@@ -96,8 +97,8 @@ class App extends Component {
   }
 }
 
-function mapStateToProps({ auth }) {
-  return { auth };
+function mapStateToProps({ auth, idleTimer }) {
+  return { auth, idleTimer };
 }
 
 export default connect(mapStateToProps)(App);
