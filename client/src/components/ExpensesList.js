@@ -64,11 +64,12 @@ class ExpenseList extends Component {
                         >
                           <Icon circular name="edit" />
                         </Link>
-                        <Icon
-                          circular
-                          name="delete"
+                        <Link
                           onClick={() => this.handleDelete(item._id, index)}
-                        />
+                          to="#"
+                        >
+                          <Icon circular name="delete" />
+                        </Link>
                       </List.Content>
                     </List>
                   </List.Item>
