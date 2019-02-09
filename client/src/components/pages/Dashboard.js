@@ -32,7 +32,6 @@ class Dashboard extends Component {
                 </Button>
               </Link>
             ) : null}
-
             {profile && profile.paychecks ? <PaycheckList /> : null}
             {profile && profile.expenses ? <ExpenseList /> : null}
           </Container>

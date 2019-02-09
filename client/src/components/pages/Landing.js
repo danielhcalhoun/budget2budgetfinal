@@ -26,7 +26,7 @@ class Landing extends Component {
               </Card.Content>
             </Card>
             Already have an account?{" "}
-            <Modal modalText="Login" modalHeader="Login">
+            <Modal modalHeader="Login" modalTrigger="Login">
               <Card>
                 <Card.Content>
                   <Card.Description>

@@ -15,6 +15,8 @@ import {
   setRemainingInterval
 } from "../actions/idleActions";
 import { logoutUser } from "../actions";
+import { Card } from "semantic-ui-react";
+import Modal from "./Modal";
 
 class IdleWrapper extends Component {
   constructor(props) {
@@ -48,9 +50,12 @@ class IdleWrapper extends Component {
   render() {
     const { onActive, onIdle, idleTimer } = this.props;
     return (
-      <div>
-        {idleTimer.remaining < 10000 ? (
-          <div>You are about to be logged out</div>
+      <React.Fragment>
+        {idleTimer.remaining < 100000 ? (
+          <Modal modalHeader="Are you still there?" startOpen="true">
+            You've been inactive for some time. You will be automatically logged
+            out in 1 minute.
+          </Modal>
         ) : null}
 
         <IdleTimer
@@ -62,7 +67,7 @@ class IdleWrapper extends Component {
           timeout={idleTimer.timeout}
           startOnLoad
         />
-      </div>
+      </React.Fragment>
     );
   }
 }

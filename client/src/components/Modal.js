@@ -4,16 +4,28 @@ import { Button, Modal } from "semantic-ui-react";
 class ModalContainer extends Component {
   state = { modalOpen: false };
 
+  componentDidMount() {
+    const { startOpen } = this.props;
+
+    if (startOpen) {
+      this.handleOpen();
+    }
+  }
+
   handleOpen = () => this.setState({ modalOpen: true });
 
   handleClose = () => this.setState({ modalOpen: false });
 
   render() {
-    const { modalText } = this.props;
+    const { modalTrigger } = this.props;
 
     return (
       <Modal
-        trigger={<Button onClick={this.handleOpen}>{modalText}</Button>}
+        trigger={
+          modalTrigger ? (
+            <Button onClick={this.handleOpen}>{modalTrigger}</Button>
+          ) : null
+        }
         open={this.state.modalOpen}
         onClose={this.handleClose}
         closeIcon
