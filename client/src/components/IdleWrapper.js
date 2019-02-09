@@ -62,15 +62,6 @@ class IdleWrapper extends Component {
           </Modal>
         ) : null}
 
-        <Modal modalHeader="Are you still there?" startOpen="true">
-          <Message
-            info
-            icon="bullhorn"
-            content="You've been inactive for some time. You will be automatically logged
-              out in 1 minute."
-          />
-        </Modal>
-
         <IdleTimer
           ref={ref => {
             this.idleTimer = ref;

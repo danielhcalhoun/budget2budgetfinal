@@ -64,11 +64,12 @@ class PaycheckList extends Component {
                         >
                           <Icon circular name="edit" />
                         </Link>
-                        <Icon
-                          circular
-                          name="delete"
+                        <Link
+                          to="#"
                           onClick={() => this.handleDelete(item._id, index)}
-                        />
+                        >
+                          <Icon circular name="delete" />
+                        </Link>
                       </List.Content>
                     </List>
                   </List.Item>
