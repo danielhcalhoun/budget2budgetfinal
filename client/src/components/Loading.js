@@ -5,7 +5,7 @@ class Loading extends Component {
   render() {
     return (
       <Container style={{ height: "100%" }}>
-        <Loader active size="medium">
+        <Loader active size="medium" inline="centered">
           Loading
         </Loader>
       </Container>

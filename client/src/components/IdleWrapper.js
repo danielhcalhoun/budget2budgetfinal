@@ -15,7 +15,7 @@ import {
   setRemainingInterval
 } from "../actions/idleActions";
 import { logoutUser } from "../actions";
-import { Button, Card, Message } from "semantic-ui-react";
+import { Message } from "semantic-ui-react";
 import Modal from "./Modal";
 
 class IdleWrapper extends Component {
