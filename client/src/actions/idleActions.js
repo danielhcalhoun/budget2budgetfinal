@@ -66,3 +66,4 @@ export const destroyRemainingInterval = value => dispatch => {
     type: types.DESTROY_REMAINING_INTERVAL
   });
 };
+

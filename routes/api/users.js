@@ -14,15 +14,6 @@ const validateUsernameInput = require("../../validation/username");
 const User = require("../../models/User");
 const Profile = require("../../models/UserProfile");
 
-//@route GET api/users/current
-//@desc Return current user
-//@access Private
-router.post("/test", (req, res) =>
-  res.json({
-    msg: "Post user works"
-  })
-);
-
 // @route   POST api/users/register
 // @desc    Register user
 // @access  Public

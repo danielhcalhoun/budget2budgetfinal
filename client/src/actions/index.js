@@ -5,6 +5,8 @@ import jwt_decode from "jwt-decode";
 import { GET_ERRORS } from "./types";
 import { SubmissionError } from "redux-form";
 import { createProfile } from "./profileActions";
+import { CLOSE_MODAL } from "./types";
+import { OPEN_MODAL } from "./types";
 
 export const fetchUser = () => async dispatch => {
   const res = await axios.get("/api/users/current");
@@ -89,4 +91,16 @@ export const logoutUser = () => async dispatch => {
   setAuthToken(false);
   //Set current user to {} which will also set isAuthenticated to false
   dispatch(setCurrentUser({}));
+};
+
+export const closeModal = () => async dispatch => {
+  dispatch({
+    type: CLOSE_MODAL
+  });
+};
+
+export const openModal = () => async dispatch => {
+  dispatch({
+    type: OPEN_MODAL
+  });
 };

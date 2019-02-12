@@ -1,23 +1,30 @@
 import React, { Component } from "react";
 import { Button, Modal } from "semantic-ui-react";
+import connect from "react-redux/es/connect/connect";
+import { closeModal, openModal } from "../actions";
 
 class ModalContainer extends Component {
-  state = { modalOpen: false };
+  state = { modalOpen: this.props.modalOpen };
 
   componentDidMount() {
-    const { startOpen } = this.props;
-
+    const { startOpen, modalOpen } = this.props;
     if (startOpen) {
       this.handleOpen();
     }
   }
 
-  handleOpen = () => this.setState({ modalOpen: true });
+  handleOpen = () => {
+    this.setState({ modalOpen: true });
+    this.props.openModal();
+  };
 
-  handleClose = () => this.setState({ modalOpen: false });
+  handleClose = () => {
+    this.setState({ modalOpen: false });
+    this.props.closeModal();
+  };
 
   render() {
-    const { modalTrigger } = this.props;
+    const { modalTrigger, modalHeader, children } = this.props;
 
     return (
       <Modal
@@ -32,14 +39,21 @@ class ModalContainer extends Component {
         style={{ height: "auto" }}
       >
         <Modal.Header style={{ textAlign: "center" }}>
-          {this.props.modalHeader}
+          {modalHeader}
         </Modal.Header>
         <Modal.Content image>
-          <Modal.Description>{this.props.children}</Modal.Description>
+          <Modal.Description>{children}</Modal.Description>
         </Modal.Content>
       </Modal>
     );
   }
 }
 
-export default ModalContainer;
+function mapStateToProps({ modal }) {
+  return { modalOpen: modal.modalOpen };
+}
+
+export default connect(mapStateToProps, {
+  openModal,
+  closeModal
+})(ModalContainer);

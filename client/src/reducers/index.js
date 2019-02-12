@@ -10,6 +10,7 @@ import expenseReducer from "./expenseReducer";
 import profileReducer from "./profileReducer";
 import budgetbarReducer from "./budgetbarReducer";
 import idleReducer from "./idleReducer";
+import modalReducer from "./modalReducer";
 
 export default combineReducers({
   form: reduxForm,
@@ -22,5 +23,6 @@ export default combineReducers({
   currentExpenses: expenseReducer,
   profile: profileReducer,
   budgetbar: budgetbarReducer,
-  idleTimer: idleReducer
+  idleTimer: idleReducer,
+  modal: modalReducer
 });

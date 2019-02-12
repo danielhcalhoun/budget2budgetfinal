@@ -14,7 +14,7 @@ import {
   setRemaining,
   setRemainingInterval
 } from "../actions/idleActions";
-import { logoutUser } from "../actions";
+import { closeModal, logoutUser } from "../actions";
 import { Message } from "semantic-ui-react";
 import Modal from "./Modal";
 
@@ -44,6 +44,7 @@ class IdleWrapper extends Component {
       this.props.resetIdleTimer();
       this.props.pauseIdleTimer();
       this.props.onActive();
+      this.props.closeModal();
     }
   }
 
@@ -51,7 +52,7 @@ class IdleWrapper extends Component {
     const { onActive, onIdle, idleTimer } = this.props;
     return (
       <React.Fragment>
-        {idleTimer.remaining < 100000 ? (
+        {idleTimer.remaining < 1000 ? (
           <Modal modalHeader="Are you still there?" startOpen="true">
             <Message
               info
@@ -91,5 +92,6 @@ export default connect(mapStateToProps, {
   setRemaining,
   setRemainingInterval,
   logoutUser,
-  destroyRemainingInterval
+  destroyRemainingInterval,
+  closeModal
 })(IdleWrapper);
