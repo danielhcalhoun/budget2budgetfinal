@@ -52,7 +52,7 @@ class IdleWrapper extends Component {
     const { onActive, onIdle, idleTimer } = this.props;
     return (
       <React.Fragment>
-        {idleTimer.remaining < 1000 ? (
+        {idleTimer.remaining < 1000 * 60 ? (
           <Modal modalHeader="Are you still there?" startOpen="true">
             <Message
               info
