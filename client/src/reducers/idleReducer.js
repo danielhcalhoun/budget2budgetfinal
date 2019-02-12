@@ -12,7 +12,7 @@ import {
 } from "../actions/types";
 
 const initialState = {
-  timeout: 1000 * 50 * 15,
+  timeout: 1000 * 60 * 15,
   remaining: 99999999,
   isIdle: false,
   lastActive: null,
@@ -60,7 +60,8 @@ export default function(state = initialState, action) {
     case RESET_IDLE_TIMER:
       return {
         ...state,
-        remaining: initialState.remaining
+        remaining: initialState.remaining,
+        isIdle: false
       };
     case PAUSE_IDLE_TIMER:
       return {

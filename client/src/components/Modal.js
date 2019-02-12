@@ -7,7 +7,7 @@ class ModalContainer extends Component {
   state = { modalOpen: this.props.modalOpen };
 
   componentDidMount() {
-    const { startOpen, modalOpen } = this.props;
+    const { startOpen } = this.props;
     if (startOpen) {
       this.handleOpen();
     }
