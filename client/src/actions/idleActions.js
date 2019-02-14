@@ -66,3 +66,10 @@ export const destroyRemainingInterval = value => dispatch => {
     type: types.DESTROY_REMAINING_INTERVAL
   });
 };
+
+export const setLastActiveTime = value => dispatch => {
+  dispatch({
+    type: types.SET_LAST_ACTIVE_TIME,
+    payload: value
+  });
+};
