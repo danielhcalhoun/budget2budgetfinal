@@ -43,8 +43,6 @@ class IdleWrapper extends Component {
       });
     }
 
-    console.log(now, lastActiveTime);
-
     return now >= lastActiveTime + this.state.session_timeout;
   }
 
@@ -89,7 +87,8 @@ class IdleWrapper extends Component {
 
   componentWillUnmount() {
     this.setState({
-      localStorage: null
+      localStorage: null,
+      remainingTime: 99999
     });
     this.props.destroyRemainingInterval();
   }
