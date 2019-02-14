@@ -37,12 +37,6 @@ class IdleWrapper extends Component {
     if (!lastActiveTime) return false;
     const now = Date.now();
 
-    if (now >= lastActiveTime + this.state.session_timeout - 1000 * 60) {
-      this.setState({
-        remainingTime: 0
-      });
-    }
-
     return now >= lastActiveTime + this.state.session_timeout;
   }
 
@@ -96,16 +90,16 @@ class IdleWrapper extends Component {
   render() {
     return (
       <React.Fragment>
-        {this.state.remainingTime < 1000 * 60 ? (
-          <Modal modalHeader="Are you still there?" startOpen="true">
-            <Message
-              info
-              icon="bullhorn"
-              content="You've been inactive for some time. You will be automatically logged
-              out in 1 minute."
-            />
-          </Modal>
-        ) : null}
+        {/*{this.state.remainingTime < 1000 * 60 ? (*/}
+        {/*<Modal modalHeader="Are you still there?" startOpen="true">*/}
+        {/*<Message*/}
+        {/*info*/}
+        {/*icon="bullhorn"*/}
+        {/*content="You've been inactive for some time. You will be automatically logged*/}
+        {/*out in 1 minute."*/}
+        {/*/>*/}
+        {/*</Modal>*/}
+        {/*) : null}*/}
       </React.Fragment>
     );
   }
