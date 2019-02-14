@@ -20,7 +20,7 @@ import Modal from "./Modal";
 class IdleWrapper extends Component {
   state = {
     localStorage: null,
-    session_timeout: 1000 * 60 * 1,
+    session_timeout: 1000 * 60 * 15,
     remainingTime: 1000 * 60,
     remainingInterval: null
   };
