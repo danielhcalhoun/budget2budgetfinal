@@ -13,13 +13,12 @@ import {
 } from "../actions/types";
 
 const initialState = {
-  timeout: 1000 * 60 * 2,
+  timeout: 1000 * 60 * 15,
   remaining: 99999999,
   isIdle: false,
   lastActive: null,
   elapsed: null,
-  remainingInterval: null,
-  localStorage: window.localStorage
+  remainingInterval: null
 };
 
 export default function(state = initialState, action) {
@@ -27,9 +26,7 @@ export default function(state = initialState, action) {
     case SET_LAST_ACTIVE_TIME:
       return {
         ...state,
-        localStorage: {
-          lastActive: action.payload
-        }
+        lastActive: action.payload
       };
     case SET_REMAINING_INTERVAL:
       return {
@@ -39,7 +36,7 @@ export default function(state = initialState, action) {
     case DESTROY_REMAINING_INTERVAL:
       return {
         ...state,
-        remainingInterval: clearInterval(state.remainingInterval)
+        remainingInterval: null
       };
     case ON_ACTIVE:
       return {
@@ -68,7 +65,12 @@ export default function(state = initialState, action) {
       };
     case RESET_IDLE_TIMER:
       return {
-        state: initialState
+        ...state,
+        isIdle: false,
+        remaining: initialState.remaining,
+        timeout: initialState.timeout,
+        elapsed: initialState.elapsed,
+        remainingInterval: initialState.remainingInterval
       };
     case PAUSE_IDLE_TIMER:
       return {

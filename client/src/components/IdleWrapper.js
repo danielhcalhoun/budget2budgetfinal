@@ -10,7 +10,6 @@ import {
   resetIdleTimer,
   resumeIdleTimer,
   setElapsed,
-  setLastActiveTime,
   setRemaining,
   setRemainingInterval
 } from "../actions/idleActions";
@@ -19,35 +18,55 @@ import { Message } from "semantic-ui-react";
 import Modal from "./Modal";
 
 class IdleWrapper extends Component {
+  state = {
+    localStorage: null,
+    session_timeout: 1000 * 60 * 1,
+    remainingTime: 1000 * 60,
+    remainingInterval: null
+  };
+
   constructor(props) {
     super(props);
+
     this.watchActiveSession = this.watchActiveSession.bind(this);
     this.checkActiveSession = this.checkActiveSession.bind(this);
   }
 
   isSessionExpired() {
-    const { timeout, localStorage } = this.props;
-
-    const lastActiveTime = Number(localStorage.lastActive) || 0;
+    const lastActiveTime = Number(this.state.localStorage.lastActiveTime) || 0;
     if (!lastActiveTime) return false;
     const now = Date.now();
 
-    if (now >= lastActiveTime + timeout - 1000 * 60) {
-      this.props.setRemaining(0);
+    if (now >= lastActiveTime + this.state.session_timeout - 1000 * 60) {
+      this.setState({
+        remainingTime: 0
+      });
     }
 
-    return now >= lastActiveTime + timeout;
+    return now >= lastActiveTime + this.state.session_timeout;
   }
 
   checkActiveSession() {
     if (this.isSessionExpired()) this.endSession();
-    else this.props.setLastActiveTime(Date.now());
+    else
+      this.setState({
+        localStorage: {
+          ...this.state.localStorage,
+          lastActiveTime: Date.now()
+        }
+      });
   }
 
   endSession() {
+    this.setState({
+      localStorage: {
+        ...this.state.localStorage,
+        lastActiveTime: null
+      }
+    });
     this.props.logoutUser();
     this.props.closeModal();
-    this.props.resetIdleTimer();
+    // code to end the active session
   }
 
   watchActiveSession() {
@@ -60,17 +79,24 @@ class IdleWrapper extends Component {
   }
 
   componentDidMount() {
+    this.setState({
+      localStorage: window.localStorage
+    });
     this.props.setRemainingInterval(this.watchActiveSession());
   }
 
   componentWillUnmount() {
+    this.setState({
+      localStorage: null,
+      remainingTime: 99999
+    });
     this.props.destroyRemainingInterval();
   }
 
   render() {
     return (
       <React.Fragment>
-        {this.props.remaining < 1000 * 60 ? (
+        {this.state.remainingTime < 1000 * 60 ? (
           <Modal modalHeader="Are you still there?" startOpen="true">
             <Message
               info
@@ -86,17 +112,7 @@ class IdleWrapper extends Component {
 }
 
 function mapStateToProps({ auth, idleTimer }) {
-  return {
-    auth,
-    idleTimer,
-    timeout: idleTimer.timeout,
-    remaining: idleTimer.remaining,
-    isIdle: idleTimer.isIdle,
-    lastActive: idleTimer.lastActive,
-    elapsed: idleTimer.elapsed,
-    remainingInterval: idleTimer.remainingInterval,
-    localStorage: idleTimer.localStorage
-  };
+  return { auth, idleTimer };
 }
 
 export default connect(mapStateToProps, {
@@ -111,6 +127,5 @@ export default connect(mapStateToProps, {
   setRemainingInterval,
   logoutUser,
   destroyRemainingInterval,
-  setLastActiveTime,
   closeModal
 })(IdleWrapper);
