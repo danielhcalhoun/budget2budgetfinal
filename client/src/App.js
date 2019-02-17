@@ -11,6 +11,8 @@ import AddPaycheck from "./components/pages/AddPaycheck";
 import ThankYou from "./components/pages/ThankYou";
 import AddExpense from "./components/pages/AddExpense";
 import IdleWrapper from "./components/IdleWrapper";
+import NotFound from "./components/pages/NotFound";
+import { Switch } from "react-router";
 
 const PrivateRoute = ({ component: Component, auth, ...rest }) => {
   return (
@@ -46,49 +48,52 @@ class App extends Component {
             verticalAlign="middle"
           >
             <Grid.Column>
-              <Route exact path="/" component={Landing} />
-              <PrivateRoute
-                exact
-                path="/calendar"
-                component={Calendars}
-                auth={auth}
-              />
-              <PrivateRoute
-                exact
-                path="/add-paycheck"
-                component={AddPaycheck}
-                auth={auth}
-              />
-              <PrivateRoute
-                exact
-                path="/edit-paycheck/:id"
-                component={AddPaycheck}
-                auth={auth}
-              />
-              <PrivateRoute
-                exact
-                path="/add-expense"
-                component={AddExpense}
-                auth={auth}
-              />
-              <PrivateRoute
-                exact
-                path="/edit-expense/:id"
-                component={AddExpense}
-                auth={auth}
-              />
-              <PrivateRoute
-                exact
-                path="/thank-you"
-                component={ThankYou}
-                auth={auth}
-              />
-              <PrivateRoute
-                exact
-                path="/profile"
-                component={Profile}
-                auth={auth}
-              />
+              <Switch>
+                <Route exact path="/" component={Landing} />
+                <PrivateRoute
+                  exact
+                  path="/calendar"
+                  component={Calendars}
+                  auth={auth}
+                />
+                <PrivateRoute
+                  exact
+                  path="/add-paycheck"
+                  component={AddPaycheck}
+                  auth={auth}
+                />
+                <PrivateRoute
+                  exact
+                  path="/edit-paycheck/:id"
+                  component={AddPaycheck}
+                  auth={auth}
+                />
+                <PrivateRoute
+                  exact
+                  path="/add-expense"
+                  component={AddExpense}
+                  auth={auth}
+                />
+                <PrivateRoute
+                  exact
+                  path="/edit-expense/:id"
+                  component={AddExpense}
+                  auth={auth}
+                />
+                <PrivateRoute
+                  exact
+                  path="/thank-you"
+                  component={ThankYou}
+                  auth={auth}
+                />
+                <PrivateRoute
+                  exact
+                  path="/profile"
+                  component={Profile}
+                  auth={auth}
+                />
+                <Route component={NotFound} />
+              </Switch>
             </Grid.Column>
           </Grid>
         </div>
