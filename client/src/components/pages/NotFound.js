@@ -17,7 +17,7 @@ class NotFound extends Component {
         />
         <br />
         <Link to="/">
-          <Button className="basic">Go Back</Button>
+          <Button className="positive">Go Back</Button>
         </Link>
       </Container>
     );
