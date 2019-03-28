@@ -8,6 +8,7 @@ class NotFound extends Component {
       <Container>
         <h1>Sorry, we couldn't find that page!</h1>
         <iframe
+          title="notfound"
           src="https://giphy.com/embed/11j6oiwfuzwu9G"
           width="480"
           height="270"

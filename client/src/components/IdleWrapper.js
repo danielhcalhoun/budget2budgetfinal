@@ -14,12 +14,11 @@ import {
   setRemainingInterval
 } from "../actions/idleActions";
 import { closeModal, logoutUser } from "../actions";
-import { Message } from "semantic-ui-react";
 import Modal from "./Modal";
+import Message from "semantic-ui-react/dist/commonjs/collections/Message/Message";
 
 class IdleWrapper extends Component {
   state = {
-    localStorage: null,
     session_timeout: 1000 * 60 * 15,
     remainingTime: 1000 * 60,
     remainingInterval: null
@@ -27,13 +26,14 @@ class IdleWrapper extends Component {
 
   constructor(props) {
     super(props);
+    this.localStorage = window.localStorage;
 
     this.watchActiveSession = this.watchActiveSession.bind(this);
     this.checkActiveSession = this.checkActiveSession.bind(this);
   }
 
   isSessionExpired() {
-    const lastActiveTime = Number(this.state.localStorage.lastActiveTime) || 0;
+    const lastActiveTime = Number(this.localStorage.lastActiveTime) || 0;
     if (!lastActiveTime) return false;
     const now = Date.now();
 
@@ -42,25 +42,13 @@ class IdleWrapper extends Component {
 
   checkActiveSession() {
     if (this.isSessionExpired()) this.endSession();
-    else
-      this.setState({
-        localStorage: {
-          ...this.state.localStorage,
-          lastActiveTime: Date.now()
-        }
-      });
+    else this.localStorage.lastActiveTime = Date.now();
   }
 
   endSession() {
-    this.setState({
-      localStorage: {
-        ...this.state.localStorage,
-        lastActiveTime: null
-      }
-    });
+    this.localStorage.removeItem("lastActiveTime");
     this.props.logoutUser();
     this.props.closeModal();
-    // code to end the active session
   }
 
   watchActiveSession() {
@@ -73,17 +61,10 @@ class IdleWrapper extends Component {
   }
 
   componentDidMount() {
-    this.setState({
-      localStorage: window.localStorage
-    });
     this.props.setRemainingInterval(this.watchActiveSession());
   }
 
   componentWillUnmount() {
-    this.setState({
-      localStorage: null,
-      remainingTime: 99999
-    });
     this.props.destroyRemainingInterval();
   }
 
